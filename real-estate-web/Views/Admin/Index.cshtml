@@ -1,0 +1,29 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Admin";
+}
+  
+@{
+  await Html.RenderPartialAsync("~/Views/Admin/_Header.cshtml",null);
+}
+  
+  @{
+  await Html.RenderPartialAsync("~/Views/Admin/_Sidebar.cshtml",null);
+}
+
+  <main style="margin-top: 70px;margin-bottom: 70px;" id="main" class="main">
+    <section class="section dashboard">
+      <div class="row">
+        <h1>merhaba dashboard</h1>
+      </div>
+
+    </section>
+    
+  </main><!-- End #main -->
+
+  @{
+  await Html.RenderPartialAsync("~/Views/Admin/_Footer.cshtml",null);
+}

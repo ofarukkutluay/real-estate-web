@@ -1,0 +1,83 @@
+@model RegisterUserVM
+
+@{
+    ViewData["Title"] = "Admin - Danışman Ekle";
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Header.cshtml", null);
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Sidebar.cshtml", null);
+}
+
+<main style="margin-top: 70px;margin-bottom: 70px;" id="main" class="main">
+    <section class="section dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Danışman Ekle</h5>
+                        <form class="row g-3 needs-validation" novalidate asp-controller="Auth" asp-action="Register" method="post">
+                            <div class="col-12">
+                                <label for="yourFirstName" class="form-label">Adı</label>
+                                <input type="text" asp-for="FirstName" name="firstName" class="form-control"
+                                    id="yourFirstName" required>
+                                <div class="invalid-feedback">Lütfen adınızı giriniz!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="yourLastName" class="form-label">Soyadı</label>
+                                <input type="text" asp-for="LastName" name="lastName" class="form-control"
+                                    id="yourLastName" required>
+                                <div class="invalid-feedback">Lütfen soyadınızı giriniz!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="yourEmail" class="form-label">Email</label>
+                                <input type="email" asp-for="Email" name="email" class="form-control" id="yourEmail"
+                                    required>
+                                <div class="invalid-feedback">Lütfen email adresinizi giriniz!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="yourMobileNumber" class="form-label">Cep Telefonu</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="inputGroupPrepend">+90</span>
+                                    <input type="text" asp-for="MobileNumber" name="mobileNumber" class="form-control"
+                                        id="yourMobileNumber" required>
+                                    <div class="invalid-feedback">Lütfen cep telefonu numaranızı giriniz.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="yourPassword" class="form-label">Şifre</label>
+                                <input type="password" asp-for="Password" name="password" class="form-control"
+                                    id="yourPassword" required>
+                                <div class="invalid-feedback">Lütfen şifrenizi giriniz!</div>
+                            </div>
+                            <div class="col-12"> <label class="col-sm-2 col-form-label">İş Tanımı</label>
+                                <div class="col-sm-10"> <select asp-for="JobTitleId"
+                                        asp-items="@ViewData["JobTitles"] as IEnumerable<SelectListItem>"
+                                        class="form-select">
+                                        <option selected="" disabled>-- İş Tanımı --</option>
+                                    </select></div>
+                            </div>
+                            <div class="col-12">
+                                <div class="col-sm-10"> <button type="submit" class="btn btn-primary">Güncelle</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Footer.cshtml", null);
+}

@@ -1,0 +1,108 @@
+@model AgentVM
+
+@{
+    ViewData["Title"] = "Admin - Danışman Güncelle";
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Header.cshtml", null);
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Sidebar.cshtml", null);
+}
+
+<main style="margin-top: 70px;margin-bottom: 70px;" id="main" class="main">
+    <section class="section dashboard">
+        <div class="container">
+            <div class="row">
+                <h3>Danışman Güncelle</h3>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ayarlar</h5>
+                        <form asp-action="UpdateAgent" method="post" enctype="multipart/form-data">
+                            <input asp-for="Id" class="form-control" hidden>
+                            <div class="row mb-3"> <label for="inputFirstName"
+                                    class="col-sm-2 col-form-label">İsim</label>
+                                <div class="col-sm-10"> <input type="FirstName" asp-for="FirstName"
+                                        class="form-control"></div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputLastName" class="col-sm-2 col-form-label">Soy
+                                    İsim</label>
+                                <div class="col-sm-10"> <input type="text" asp-for="LastName" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10"> <input type="text" asp-for="Email" class="form-control"></div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputMobileNumber" class="col-sm-2 col-form-label">Cep
+                                    Telefonu</label>
+                                <div class="col-sm-10"> <input type="text" asp-for="MobileNumber" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputPhoneNumber" class="col-sm-2 col-form-label">Sabit
+                                    Telefon</label>
+                                <div class="col-sm-10"> <input type="text" asp-for="PhoneNumber" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <label for="inpuDescipriton" class="col-sm-2 col-form-label">Kısa
+                                    Özgeçmiş</label>
+                                <div class="col-sm-10"><textarea asp-for="Description" class="form-control"
+                                        style="height: 100px"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputFile" class="col-sm-2 col-form-label">Profile Photo
+                                    Upload</label>
+                                <div class="col-sm-10"> <input asp-for="ProfilePhoto" class="form-control" type="file" id="formFile"></div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputFacebook" class="col-sm-2 col-form-label">Facebook
+                                    Link</label>
+                                <div class="col-sm-10"> <input type="text" asp-for="FacebookLink" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputTwitter" class="col-sm-2 col-form-label">Twitter
+                                    Link</label>
+                                <div class="col-sm-10"> <input type="text" asp-for="TwitterLink" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputInstagram" class="col-sm-2 col-form-label">Instagram
+                                    Link</label>
+                                <div class="col-sm-10"> <input type="text" asp-for="InstagramLink" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputLinkedin" class="col-sm-2 col-form-label">LinkedIn
+                                    Link</label>
+                                <div class="col-sm-10"> <input type="text" asp-for="LinkedinLink" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <label for="inputYoutube" class="col-sm-2 col-form-label">YouTube
+                                    Link</label>
+                                <div class="col-sm-10"> <input type="text" asp-for="YoutubeLink" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <label class="col-sm-2 col-form-label">İş Tanımı</label>
+                                <div class="col-sm-10"> <select asp-for="JobTitleId"
+                                        asp-items="@ViewData["JobTitles"] as IEnumerable<SelectListItem>"
+                                        class="form-select">
+                                        <option selected="" disabled>-- İş Tanımı --</option>
+                                    </select></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-10"> <button type="submit" class="btn btn-primary">Güncelle</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Footer.cshtml", null);
+}
