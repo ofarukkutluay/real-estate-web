@@ -20,6 +20,7 @@
             </div>
             <div class="row">
                 <div class="card">
+
                     <div class="card-body">
                         <h5 class="card-title">Ayarlar</h5>
                         <form asp-action="UpdateAgent" method="post" enctype="multipart/form-data">
@@ -53,9 +54,17 @@
                                         style="height: 100px"></textarea>
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="profilephoto" class="col-sm-2 col-form-label">Mevcut Fotoğraf</label>
+                                <div class="col-sm-10">
+                                    <img id="profilephoto" src="@Model.ProfilePhotoPath" class="img-fluid img-thumbnail"
+                                        width="350" height="350" alt="...">
+                                </div>
+                            </div>
                             <div class="row mb-3"> <label for="inputFile" class="col-sm-2 col-form-label">Profile Photo
                                     Upload</label>
-                                <div class="col-sm-10"> <input asp-for="ProfilePhoto" class="form-control" type="file" id="formFile"></div>
+                                <div class="col-sm-10"> <input asp-for="ProfilePhoto" class="form-control" type="file"
+                                        id="formFile" ></div>
                             </div>
                             <div class="row mb-3"> <label for="inputFacebook" class="col-sm-2 col-form-label">Facebook
                                     Link</label>
@@ -80,6 +89,15 @@
                             <div class="row mb-3"> <label for="inputYoutube" class="col-sm-2 col-form-label">YouTube
                                     Link</label>
                                 <div class="col-sm-10"> <input type="text" asp-for="YoutubeLink" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0">Favori mi?</legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check"> <input class="form-check-input" asp-for="IsFavoritUser"
+                                            id="gridCheck1"> <label class="form-check-label" for="gridCheck1"> Favori <p
+                                                class="text-danger">( Maksimum 3 danışman favori olabilir! )</p>
+                                        </label></div>
                                 </div>
                             </div>
                             <div class="row mb-3"> <label class="col-sm-2 col-form-label">İş Tanımı</label>

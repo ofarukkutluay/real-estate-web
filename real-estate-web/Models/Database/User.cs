@@ -8,7 +8,7 @@
         public string MobileNumber { get; set; }
         public byte[] PassSalt { get; set; }
         public byte[] PassHash { get; set; } 
-        public string ProfilePhotoPath { get; set; } = "profile-img.jpg";
+        public string ProfilePhotoPath { get; set; } = "/img/profile-img.jpg";
         public string Role { get; set; } = Database.Role.User;
         public string? RefreshToken { get; set; }
         public DateTime? RefresTokenExpireDate { get; set; }

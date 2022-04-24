@@ -35,7 +35,6 @@ namespace real_estate_web.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("BodyContentB")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("BodyTitle")
@@ -88,6 +87,9 @@ namespace real_estate_web.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsFavoritUser")
+                        .HasColumnType("boolean");
+
                     b.Property<int?>("JobTitle")
                         .HasColumnType("integer");
 
@@ -103,9 +105,11 @@ namespace real_estate_web.Migrations
                         .HasColumnType("text");
 
                     b.Property<byte[]>("PassHash")
+                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<byte[]>("PassSalt")
+                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<string>("PhoneNumber")

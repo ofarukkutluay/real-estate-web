@@ -5,7 +5,7 @@ namespace real_estate_web.Data.Common
 {
     public interface IEntityRepository<T> where T : BaseEntity
     {
-        Task<bool> AddAsync(T model);
+        Task<T> AddAsync(T model);
         Task<bool> AddRangeAsync(List<T> datas);
         bool Remove(T model);
         bool RemoveRange(List<T> datas);

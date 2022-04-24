@@ -8,7 +8,7 @@ namespace real_estate_web.Models.Database
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
     }
 }

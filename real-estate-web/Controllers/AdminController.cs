@@ -23,11 +23,20 @@ namespace real_estate_web.Controllers
         private readonly IPropertyTypeRepository _propertyTypeRepository;
         private readonly IStatusRepository _statusRepository;
         private readonly IUsingStatusRepository _usingStatusRepository;
+        private readonly IPropertyRepository _propertyRepository;
+        private readonly IPropertyPhotoRepository _propertyPhotoRepository;
+        private readonly ICityRepository _cityRepository;
+        private readonly IDistrictRepository _districtRepository;
+        private readonly INeighborhoodRepository _neighborhoodRepository;
+        private readonly IStreetRepository _streetRepository;
+        private readonly IFrontRepository _frontRepository;
         private readonly IMapper _mapper;
         public AdminController(IJobTitleRepository jobTitleRepository, IAboutRepository aboutRepository,
                                     IContactRepository contactRepository, IAgentRepository agentRepository, IDeedStatusRepository deedStatusRepository,
                                     IHeatingTypeRepository heatingTypeRepository, IInternetTypeRepository internetTypeRepository, IPropertyTypeRepository propertyTypeRepository,
-                                    IStatusRepository statusRepository, IUsingStatusRepository usingStatusRepository,IMapper mapper)
+                                    IStatusRepository statusRepository, IUsingStatusRepository usingStatusRepository, IPropertyRepository propertyRepository,
+                                    IPropertyPhotoRepository propertyPhotoRepository, ICityRepository cityRepository, IDistrictRepository districtRepository,
+                                    INeighborhoodRepository neighborhoodRepository, IStreetRepository streetRepository, IFrontRepository frontRepository, IMapper mapper)
         {
             _jobTitleRepository = jobTitleRepository;
             _aboutRepository = aboutRepository;
@@ -39,6 +48,13 @@ namespace real_estate_web.Controllers
             _propertyTypeRepository = propertyTypeRepository;
             _statusRepository = statusRepository;
             _usingStatusRepository = usingStatusRepository;
+            _propertyRepository = propertyRepository;
+            _propertyPhotoRepository = propertyPhotoRepository;
+            _cityRepository = cityRepository;
+            _districtRepository = districtRepository;
+            _neighborhoodRepository = neighborhoodRepository;
+            _streetRepository = streetRepository;
+            _frontRepository = frontRepository;
             _mapper = mapper;
         }
 
@@ -240,7 +256,7 @@ namespace real_estate_web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Contact",model);
+                return View("Contact", model);
             }
 
             Contact contact = await _contactRepository.GetAsync(x => x.Id == model.Id);
@@ -267,7 +283,7 @@ namespace real_estate_web.Controllers
 
         public IActionResult AgentAdd()
         {
-            SelectItemInitialize();
+            SelectItemInitializeAgent();
             return View();
         }
 
@@ -281,7 +297,7 @@ namespace real_estate_web.Controllers
 
         public IActionResult AgentUpdate(int? id)
         {
-            SelectItemInitialize();
+            SelectItemInitializeAgent();
             if (id is not null)
             {
                 AgentDto agent = _agentRepository.GetAgentDto(id);
@@ -296,11 +312,17 @@ namespace real_estate_web.Controllers
         public async Task<IActionResult> UpdateAgent(AgentVM model)
         {
             Agent agent = await _agentRepository.GetAsync(x => x.Id == model.Id);
-            if (model.ProfilePhoto == null)
+            if (model.ProfilePhoto != null)
             {
-                model.ProfilePhoto = new FormFile(null, -1, -1, "&&NotFound&&", "&&NotFound&&");
+                if (agent.ProfilePhotoPath.Contains("/img/"))
+                {
+                    agent.ProfilePhotoPath = FileHelper.Add(model.ProfilePhoto);
+                }
+                else
+                {
+                    agent.ProfilePhotoPath = FileHelper.Update(agent.ProfilePhotoPath, model.ProfilePhoto);
+                }
             }
-            agent.ProfilePhotoPath = FileHelper.Add(model.ProfilePhoto);
             agent.FirstName = model.FirstName;
             agent.LastName = model.LastName;
             agent.Email = model.Email;
@@ -313,15 +335,45 @@ namespace real_estate_web.Controllers
             agent.LinkedinLink = model.LinkedinLink;
             agent.TwitterLink = model.TwitterLink;
             agent.YoutubeLink = model.YoutubeLink;
+            if (await _agentRepository.GetCountAsync(x => x.IsFavoritUser) <= 3)
+            {
+                agent.IsFavoritUser = model.IsFavoritUser;
+            }
             await _agentRepository.SaveAsync();
             SuccessAlert("Güncellendi");
             return RedirectToAction("Agent");
         }
 
+        //Propety Mülk sayfası
+        public async Task<IActionResult> Property()
+        {
+            IEnumerable<PropertyDto> properties = _propertyRepository.GetListPropertyDto();
+            IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM>>(properties);
+            return View(vm);
+        }
+
+        public IActionResult PropertyAdd()
+        {
+            SelectItemInitializeProperty();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProperty(Property model)
+        {
+            var entity = await _propertyRepository.AddAsync(model);
+            var save = await _propertyRepository.SaveAsync();
+            return RedirectToAction("PropertyPhoto", new {id=entity.Id} );
+        }
+
+        public async Task<IActionResult> PropertyPhoto(int id){
+            return View(id);
+        }
+
 
 
         // başlangıç yükleme fonksiyonları
-        private void SelectItemInitialize()
+        private void SelectItemInitializeAgent()
         {
             var jobTitles = _jobTitleRepository.GetList();
             IEnumerable<SelectListItem> selectJobTitles = jobTitles.Select(x => new SelectListItem
@@ -330,6 +382,100 @@ namespace real_estate_web.Controllers
                 Text = x.Name
             });
             ViewData.Add("JobTitles", selectJobTitles);
+        }
+
+        private void SelectItemInitializeProperty()
+        {
+            IEnumerable<SelectListItem> selectIl = _cityRepository.GetList().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+
+            IEnumerable<SelectListItem> selectPropertyType = _propertyTypeRepository.GetList().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            IEnumerable<SelectListItem> selectStatus = _statusRepository.GetList().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            IEnumerable<SelectListItem> selectHeatingType = _heatingTypeRepository.GetList().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            IEnumerable<SelectListItem> selectInternetType = _internetTypeRepository.GetList().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            IEnumerable<SelectListItem> selecFront = _frontRepository.GetList().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            IEnumerable<SelectListItem> selectUseStatus = _usingStatusRepository.GetList().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            IEnumerable<SelectListItem> selectDeedStatus = _deedStatusRepository.GetList().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            IEnumerable<SelectListItem> selectAgent = _agentRepository.GetListAgentDto().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = $"{x.FirstName} {x.LastName}"
+            });
+
+            ViewData.Add("Cities", selectIl);
+            ViewData.Add("PropertyTypes", selectPropertyType);
+            ViewData.Add("Statuses", selectStatus);
+            ViewData.Add("HeatingTypes", selectHeatingType);
+            ViewData.Add("InternetTypes", selectInternetType);
+            ViewData.Add("Fronts", selecFront);
+            ViewData.Add("UsingStatus", selectUseStatus);
+            ViewData.Add("DeedStatus", selectDeedStatus);
+            ViewData.Add("Agents", selectAgent);
+
+        }
+
+        public IActionResult SelectItemDistrict(int id)
+        {
+            int key = _cityRepository.Get(x=>x.Id==id).Key;
+            IEnumerable<SelectListItem> selectIlce = _districtRepository.GetList(x => x.IlKey == key).Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            return Json(selectIlce);
+        }
+
+        public IActionResult SelectItemNeighborhood(int id)
+        {
+            int key = _districtRepository.Get(x=>x.Id==id).Key;
+            IEnumerable<SelectListItem> selectMahalle = _neighborhoodRepository.GetList(x => x.IlceKey == key).Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            return Json(selectMahalle);
+
+        }
+        public IActionResult SelectItemStreet(int id)
+        {
+            int key = _neighborhoodRepository.Get(x=>x.Id==id).Key;
+            IEnumerable<SelectListItem> selectSokak = _streetRepository.GetList(x => x.MahalleKey == key).Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            return Json(selectSokak);
         }
     }
 }

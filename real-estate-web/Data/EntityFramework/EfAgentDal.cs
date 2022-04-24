@@ -32,7 +32,10 @@ namespace real_estate_web.Data.EntityFramework
                              LinkedinLink = a.LinkedinLink,
                              InstagramLink = a.InstagramLink,
                              YoutubeLink = a.YoutubeLink,
-                             JobTitleName = jt.Name
+                             JobTitleId = jt.Id,
+                             JobTitleName = jt.Name,
+                             ProfilePhotoPath = a.ProfilePhotoPath,
+                             IsFavoritUser = a.IsFavoritUser
                          };
 
             return result;
@@ -60,7 +63,9 @@ namespace real_estate_web.Data.EntityFramework
                              InstagramLink = a.InstagramLink,
                              YoutubeLink = a.YoutubeLink,
                              JobTitleId = jt.Id,
-                             JobTitleName = jt.Name
+                             JobTitleName = jt.Name,
+                             ProfilePhotoPath = a.ProfilePhotoPath,
+                             IsFavoritUser = a.IsFavoritUser
                          };
 
             return result.FirstOrDefault();

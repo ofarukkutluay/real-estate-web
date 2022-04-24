@@ -18,21 +18,43 @@ namespace real_estate_web.Tools.Helper
             File.Move(sourcepath, @"wwwroot" + result);
             return result;
         }
+
+        public static async Task<List<string>> AddAllAsync(List<IFormFile> files)
+        {
+            var sourcepath = Path.GetTempFileName();
+            List<string> results = new List<string>();
+            if (files.Count > 0)
+            {
+                foreach (var file in files)
+                {
+                    using (var stream = new FileStream(sourcepath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    var result = newPath(file);
+                    File.Move(sourcepath, @"wwwroot" + result);
+                    results.Add(result);
+                }
+            }
+            return results;
+        }
         public static void Delete(string path)
         {
-            File.Delete(path);
+            File.Delete(Environment.CurrentDirectory + @"\wwwroot" + path);
         }
-        public static string Update(string sourcePath, IFormFile file)
+        public static string Update(string oldSourcePath, IFormFile file)
         {
-            var result = newPath(file);
-            if (sourcePath.Length > 0)
+            var sourcePath = Path.GetTempFileName();
+            if (file.Length > 0)
             {
-                using (var stream = new FileStream(result, FileMode.Create))
+                using (var stream = new FileStream(sourcePath, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }
             }
-            File.Delete(sourcePath);
+            var result = newPath(file);
+            File.Move(sourcePath, @"wwwroot" + result);
+            File.Delete(Environment.CurrentDirectory + @"\wwwroot" + oldSourcePath);
             return result;
         }
         public static string newPath(IFormFile file)

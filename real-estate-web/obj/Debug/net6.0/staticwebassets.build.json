@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lsUk0DP50fRCDirtEUlfQ2C3CY0/gYaMfU6Lghsxqj8=",
+  "Hash": "J7McYnGUA/4Vl/P+PB2wCeOa7TPVhVG5IPC5lBjtcuA=",
   "Source": "real-estate-web",
   "BasePath": "_content/real-estate-web",
   "Mode": "Default",
@@ -1953,6 +1953,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\jquery\\dist\\jquery-3.6.0.js",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "lib/jquery/dist/jquery-3.6.0.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery-3.6.0.js"
     },
     {
       "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
@@ -5559,12 +5576,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\tinymce\\tinymce.min.js"
     },
     {
-      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\upload-images\\9bd3398f-cbcd-4a1f-b507-9e39c3ef0d4e_4_19_2022.png",
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\upload-images\\268b5c99-9385-479b-b415-46218ef3be54_4_23_2022.png",
       "SourceId": "real-estate-web",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
       "BasePath": "_content/real-estate-web",
-      "RelativePath": "upload-images/9bd3398f-cbcd-4a1f-b507-9e39c3ef0d4e_4_19_2022.png",
+      "RelativePath": "upload-images/268b5c99-9385-479b-b415-46218ef3be54_4_23_2022.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -5573,7 +5590,75 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\upload-images\\9bd3398f-cbcd-4a1f-b507-9e39c3ef0d4e_4_19_2022.png"
+      "OriginalItemSpec": "wwwroot\\upload-images\\268b5c99-9385-479b-b415-46218ef3be54_4_23_2022.png"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\upload-images\\977f2a90-f86a-437d-9720-4f6bba252dfc_4_23_2022.jpg",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "upload-images/977f2a90-f86a-437d-9720-4f6bba252dfc_4_23_2022.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\upload-images\\977f2a90-f86a-437d-9720-4f6bba252dfc_4_23_2022.jpg"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\upload-images\\c25b8301-6509-4016-b496-b1d837035499_4_23_2022.png",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "upload-images/c25b8301-6509-4016-b496-b1d837035499_4_23_2022.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\upload-images\\c25b8301-6509-4016-b496-b1d837035499_4_23_2022.png"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\upload-images\\cbacb66d-bc12-454e-b3ad-0a5f981636f2_4_23_2022.png",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "upload-images/cbacb66d-bc12-454e-b3ad-0a5f981636f2_4_23_2022.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\upload-images\\cbacb66d-bc12-454e-b3ad-0a5f981636f2_4_23_2022.png"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\upload-images\\f1d8fd7d-3ad3-406c-8966-2a58eeabd5e4_4_23_2022.png",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "upload-images/f1d8fd7d-3ad3-406c-8966-2a58eeabd5e4_4_23_2022.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\upload-images\\f1d8fd7d-3ad3-406c-8966-2a58eeabd5e4_4_23_2022.png"
     }
   ]
 }

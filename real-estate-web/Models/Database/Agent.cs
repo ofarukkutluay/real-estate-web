@@ -10,5 +10,6 @@
         public string? InstagramLink { get; set; }
         public string? YoutubeLink { get; set; }
         public int? JobTitle { get; set; }
+        public bool IsFavoritUser { get; set; } = false;
     }
 }

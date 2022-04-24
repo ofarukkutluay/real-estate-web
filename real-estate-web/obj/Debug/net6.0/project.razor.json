@@ -16343,6 +16343,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Admin\\PropertyAdd.cshtml",
+      "TargetPath": "Views\\Admin\\PropertyAdd.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Shared\\_Header.cshtml",
       "TargetPath": "Views\\Shared\\_Header.cshtml",
       "FileKind": "mvc"
@@ -16378,6 +16383,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Agent\\All.cshtml",
+      "TargetPath": "Views\\Agent\\All.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Contact\\Index.cshtml",
       "TargetPath": "Views\\Contact\\Index.cshtml",
       "FileKind": "mvc"
@@ -16403,6 +16413,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Agent\\Index.cshtml",
+      "TargetPath": "Views\\Agent\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
@@ -16418,8 +16433,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Admin\\PropertyPhoto.cshtml",
+      "TargetPath": "Views\\Admin\\PropertyPhoto.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Admin\\Property.cshtml",
+      "TargetPath": "Views\\Admin\\Property.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -16475,6 +16500,11 @@
     {
       "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Admin\\Contact.cshtml",
       "TargetPath": "Views\\Admin\\Contact.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Property\\Index.cshtml",
+      "TargetPath": "Views\\Property\\Index.cshtml",
       "FileKind": "mvc"
     },
     {

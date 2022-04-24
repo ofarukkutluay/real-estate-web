@@ -1,0 +1,43 @@
+@model PropertyPhotoVM
+
+@{
+    ViewData["Title"] = "Admin - Mülk Fotoğraf";
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Header.cshtml", null);
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Sidebar.cshtml", null);
+}
+
+
+<main style="margin-top: 70px;margin-bottom: 70px;" id="main" class="main">
+    <section class="section dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Mülk Fotograf</h5>
+                        <form asp-action="AddProperty" method="post" enctype="multipart/form-data">
+                            <div class="row mb-3"> <label for="inputFile" class="col-sm-2 col-form-label">Photo
+                                    Upload</label>
+                                <div class="col-sm-10"> <input asp-for="PropertyPhotos" class="form-control" type="file"
+                                        id="formFile" multiple></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-10"> <button type="submit" class="btn btn-primary">Ekle</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Footer.cshtml", null);
+}

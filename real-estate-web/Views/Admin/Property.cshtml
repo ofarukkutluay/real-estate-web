@@ -1,0 +1,111 @@
+@model IEnumerable<PropertyVM>
+
+@{
+    ViewData["Title"] = "Admin - Mülkler";
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Header.cshtml", null);
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Sidebar.cshtml", null);
+}
+
+<main style="margin-top: 70px;margin-bottom: 70px;" id="main" class="main">
+    <section class="section dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <h3>Mülkler</h3>
+                </div>
+                <div class="col-1">
+
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                    <div class="dataTable-top row">
+                        <div class="dataTable-dropdown col-5"><label><select class="dataTable-selector">
+                                    <option value="5">5</option>
+                                    <option value="10" selected="">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                </select> entries per page</label></div>
+                        <div class="dataTable-search col-7"><input class="dataTable-input" placeholder="Search..."
+                                type="text"></div>
+                    </div>
+                    <div class="dataTable-container">
+                        <table class="table datatable dataTable-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" data-sortable="" style="width: 5.70885%;"><a href="#"
+                                            class="dataTable-sorter">#</a>
+                                    </th>
+
+                                    <th scope="col" data-sortable=""><a href="#" class="dataTable-sorter">Başlık</a>
+                                    </th>
+                                    <th scope="col" data-sortable=""><a href="#" class="dataTable-sorter">İl / İlçe</a>
+                                    </th>
+                                    <th scope="col" data-sortable=""><a href="#" class="dataTable-sorter">Tipi</a></th>
+                                    <th scope="col" data-sortable=""><a href="#" class="dataTable-sorter">Durumu</a>
+                                    </th>
+                                    <th scope="col" data-sortable=""><a href="#" class="dataTable-sorter">Fiyat</a></th>
+                                    <th scope="col" data-sortable=""><a href="#" class="dataTable-sorter">Danışman</a>
+                                    </th>
+                                    <th scope="col" data-sortable="">Edit / Delete
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row">@item.Id</th>
+                                            <td>@item.Title</td>
+                                            <td>@item.Il / @item.Ilce</td>
+                                            <td>@item.PropertyType</td>
+                                            <td>@item.Status</td>
+                                            <td>@item.Price</td>
+                                            <td>@item.Agent</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" role="group">
+                                                    <a type="button" class="btn btn-info" asp-controller="Admin"
+                                                asp-action="PropertyUpdate" asp-route-Id="@item.Id">Edit</a>
+                                                    <a type="button" class="btn btn-danger" asp-controller="Admin"
+                                                asp-action="RemoveProperty" asp-route-Id="@item.Id">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="dataTable-bottom">
+                        <div class="dataTable-info">Showing 1 to 5 of 5 entries</div>
+                        <nav class="dataTable-pagination">
+                            <ul class="dataTable-pagination-list"></ul>
+                        </nav>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+</main>
+
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Footer.cshtml", null);
+}

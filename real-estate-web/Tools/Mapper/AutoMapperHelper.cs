@@ -11,6 +11,7 @@ namespace real_estate_web.Tools.Mapper
         {
             CreateMap<AgentDto,AgentVM>();
             CreateMap<AgentVM,Agent>().ForMember(dest=> dest.JobTitle, mem=> mem.MapFrom(src=>src.JobTitleId));
+            CreateMap<PropertyDto,PropertyVM>();
         }
     }
 }

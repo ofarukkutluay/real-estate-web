@@ -18,10 +18,13 @@ namespace real_estate_web.Data.EntityFramework.Common
         }
 
         public DbSet<TEntity> Table => Context.Set<TEntity>();
-        public async Task<bool> AddAsync(TEntity model)
+        public async Task<TEntity> AddAsync(TEntity model)
         {
             EntityEntry<TEntity> entityEntry = await Table.AddAsync(model);
-            return entityEntry.State == EntityState.Added;
+            if(entityEntry.State == EntityState.Added){
+                return entityEntry.Entity;
+            }
+            return null;
         }
         public async Task<bool> AddRangeAsync(List<TEntity> datas)
         {

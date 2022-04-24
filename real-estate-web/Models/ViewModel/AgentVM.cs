@@ -18,5 +18,7 @@ namespace real_estate_web.Models.ViewModel
         public string? JobTitleName { get; set; }
 
         public IFormFile? ProfilePhoto { get; set; }
+        public string ProfilePhotoPath { get; set; }
+        public bool IsFavoritUser { get; set; }
     }
 }

@@ -45,6 +45,8 @@
         el.addEventListener('scroll', listener)
     }
 
+    
+
     /**
      * Toggle .navbar-reduce
      */
