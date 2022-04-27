@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using real_estate_web.Data.EntityFramework;
@@ -11,9 +12,10 @@ using real_estate_web.Data.EntityFramework;
 namespace real_estate_web.Migrations
 {
     [DbContext(typeof(RealEstateDbContext))]
-    partial class RealEstateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220427172643_propertyphoto-update")]
+    partial class propertyphotoupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -457,10 +459,6 @@ namespace real_estate_web.Migrations
 
                     b.Property<bool>("KirediyeUygunMu")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("KonumIFrame")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<int>("KullanimDurumuId")
                         .HasColumnType("integer");

@@ -1,3 +1,5 @@
+using real_estate_web.Models.Database.Dtos;
+
 namespace real_estate_web.Models.ViewModel
 {
     public class PropertyVM
@@ -27,7 +29,7 @@ namespace real_estate_web.Models.ViewModel
         public string InternetTipi { get; set; }
         public string Cephe { get; set; }
         public string? Manzara { get; set; }
-        public bool? AkilliEvMi { get; set; }
+        public bool AkilliEvMi { get; set; }
         public bool EsyaliMi { get; set; }
         public bool SiteIcerisindeMi { get; set; }
         public string? SiteAdi { get; set; }
@@ -50,9 +52,11 @@ namespace real_estate_web.Models.ViewModel
         public int KullanimDurumuId { get; set; }
         public int TapuDurumuId { get; set; }
         public int AgentId { get; set; }
-
-        public IEnumerable<IFormFile>? PropertyPhotos { get; set; }
-        public IEnumerable<string>? PropertyPhotoPaths { get; set; }
+        public string KonumIFrame { get; set; }
+        public int PhotoCount { get; set; }
+        public string BasePhotoPath { get; set; }
+        public IEnumerable<string> PropertyPhotoPaths { get; set; }
+        public AgentDto AgentDto { get; set; }
 
     }
 }

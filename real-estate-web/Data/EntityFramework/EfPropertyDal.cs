@@ -73,7 +73,10 @@ namespace real_estate_web.Data.EntityFramework
                                 KirediyeUygunMu = p.KirediyeUygunMu,
                                 YoutubeLink = p.YoutubeLink,
                                 Agent = $"{a.FirstName} {a.LastName}",
-                                AgentId = p.AgentId
+                                AgentId = p.AgentId,
+                                KonumIFrame = p.KonumIFrame,
+                                BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x=>x.BasePhoto).Path,
+                                PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count()
                             };
 
             return result;
@@ -142,7 +145,10 @@ namespace real_estate_web.Data.EntityFramework
                                 KirediyeUygunMu = p.KirediyeUygunMu,
                                 YoutubeLink = p.YoutubeLink,
                                 Agent = $"{a.FirstName} {a.LastName}",
-                                AgentId = p.AgentId
+                                AgentId = p.AgentId,
+                                KonumIFrame = p.KonumIFrame,
+                                BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x=>x.BasePhoto).Path,
+                                PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count()
                             };
 
             return result.FirstOrDefault();
@@ -211,7 +217,10 @@ namespace real_estate_web.Data.EntityFramework
                                 KirediyeUygunMu = p.KirediyeUygunMu,
                                 YoutubeLink = p.YoutubeLink,
                                 Agent = $"{a.FirstName} {a.LastName}",
-                                AgentId = p.AgentId
+                                AgentId = p.AgentId,
+                                KonumIFrame = p.KonumIFrame,
+                                BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x=>x.BasePhoto).Path,
+                                PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count()
                             };
 
             return result;

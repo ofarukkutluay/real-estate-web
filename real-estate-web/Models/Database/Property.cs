@@ -37,6 +37,7 @@
         public bool KirediyeUygunMu { get; set; }
         public string? YoutubeLink { get; set; }
         public int AgentId { get; set; }
+        public string KonumIFrame { get; set; } = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192697.79327595135!2d28.8720964464606!3d41.00549580940238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1651089326725!5m2!1str!2str";
 
     }
 }

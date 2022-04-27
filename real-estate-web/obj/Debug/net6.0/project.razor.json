@@ -16313,6 +16313,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Property\\All.cshtml",
+      "TargetPath": "Views\\Property\\All.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\About\\Index.cshtml",
       "TargetPath": "Views\\About\\Index.cshtml",
       "FileKind": "mvc"

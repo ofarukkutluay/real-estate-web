@@ -19,7 +19,7 @@ namespace real_estate_web.Tools.Helper
             return result;
         }
 
-        public static async Task<List<string>> AddAllAsync(List<IFormFile> files)
+        public static async Task<List<string>> AddAllAsync(List<IFormFile> files,string subDirectoryName)
         {
             var sourcepath = Path.GetTempFileName();
             List<string> results = new List<string>();
@@ -31,7 +31,7 @@ namespace real_estate_web.Tools.Helper
                     {
                         await file.CopyToAsync(stream);
                     }
-                    var result = newPath(file);
+                    var result = newMultiplePath(file,subDirectoryName);
                     File.Move(sourcepath, @"wwwroot" + result);
                     results.Add(result);
                 }
@@ -63,6 +63,21 @@ namespace real_estate_web.Tools.Helper
             string fileExtension = ff.Extension;
 
             string path =  @"\upload-images"; //Environment.CurrentDirectory +
+            var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
+
+            string result = $@"{path}\{newPath}";
+            return result;
+        }
+
+        public static string newMultiplePath(IFormFile file,string subDirectoryName)
+        {
+            FileInfo ff = new FileInfo(file.FileName);
+            string fileExtension = ff.Extension;
+            
+            string path =  $@"\upload-images\{subDirectoryName}"; 
+            if(!Directory.Exists($@"{Environment.CurrentDirectory}\wwwroot{path}")){
+                Directory.CreateDirectory($@"{Environment.CurrentDirectory}\wwwroot{path}");
+            }
             var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
 
             string result = $@"{path}\{newPath}";

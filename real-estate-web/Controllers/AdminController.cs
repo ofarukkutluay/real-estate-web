@@ -363,11 +363,44 @@ namespace real_estate_web.Controllers
         {
             var entity = await _propertyRepository.AddAsync(model);
             var save = await _propertyRepository.SaveAsync();
-            return RedirectToAction("PropertyPhoto", new {id=entity.Id} );
+            return RedirectToAction("PropertyPhoto", new { id = entity.Id });
         }
 
-        public async Task<IActionResult> PropertyPhoto(int id){
-            return View(id);
+        public async Task<IActionResult> PropertyPhoto(int id)
+        {
+            PropertyPhotoVM model = new PropertyPhotoVM();
+            model.PropertyId = id;
+            return View(model);
+        }
+
+        public async Task<IActionResult> RemoveProperty(int id)
+        {
+            await _propertyRepository.RemoveAsync(id);
+            await _propertyRepository.SaveAsync();
+            SuccessAlert("Silindi");
+            return RedirectToAction("Property");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPropertyPhoto(PropertyPhotoVM model){
+            List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos,model.PropertyId.ToString());
+            List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
+            foreach (var item in paths)
+            {   
+                PropertyPhoto propertyPhoto = new PropertyPhoto(){
+                    PropertyId = model.PropertyId,
+                    Path = item
+                };
+                propertyPhotos.Add(propertyPhoto);
+            }
+            if (await _propertyPhotoRepository.GetCountAsync(x=>x.PropertyId==model.PropertyId) == 0)
+            {
+                propertyPhotos[0].BasePhoto = true;
+            }
+            await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
+            await _propertyPhotoRepository.SaveAsync();
+            SuccessAlert("Resimler eklendi");
+            return RedirectToAction("Property");
         }
 
 
@@ -447,7 +480,7 @@ namespace real_estate_web.Controllers
 
         public IActionResult SelectItemDistrict(int id)
         {
-            int key = _cityRepository.Get(x=>x.Id==id).Key;
+            int key = _cityRepository.Get(x => x.Id == id).Key;
             IEnumerable<SelectListItem> selectIlce = _districtRepository.GetList(x => x.IlKey == key).Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
@@ -458,7 +491,7 @@ namespace real_estate_web.Controllers
 
         public IActionResult SelectItemNeighborhood(int id)
         {
-            int key = _districtRepository.Get(x=>x.Id==id).Key;
+            int key = _districtRepository.Get(x => x.Id == id).Key;
             IEnumerable<SelectListItem> selectMahalle = _neighborhoodRepository.GetList(x => x.IlceKey == key).Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
@@ -469,7 +502,7 @@ namespace real_estate_web.Controllers
         }
         public IActionResult SelectItemStreet(int id)
         {
-            int key = _neighborhoodRepository.Get(x=>x.Id==id).Key;
+            int key = _neighborhoodRepository.Get(x => x.Id == id).Key;
             IEnumerable<SelectListItem> selectSokak = _streetRepository.GetList(x => x.MahalleKey == key).Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
