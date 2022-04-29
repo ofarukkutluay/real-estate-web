@@ -1,4 +1,4 @@
-﻿@model Property
+﻿@model PropertyVM
 
 @{
     ViewData["Title"] = "Admin - Mülk Ekle";
@@ -40,7 +40,7 @@
         $("#inputNeighborhood").change(function () {
             var val = $(this).val();
             console.log("Neighborhood : " + val)
-            var subItems="";
+            var subItems="<option></option>";
             $.get("@Url.Action("SelectItemStreet","Admin")", {id:val},function(data,status){
                 $.each(data,function(index,item){
                     subItems+="<option value='"+item.value+"'>"+item.text+"</option>"
@@ -59,6 +59,12 @@
                     <div class="card-body">
                         <h5 class="card-title">Mülk ekle</h5>
                         <form asp-action="AddProperty" method="post" enctype="multipart/form-data">
+                            <div class="row mb-3"> 
+                                <label for="inputFile" class="col-sm-2 col-form-label">Photo Upload</label>
+                                <div class="col-sm-10"> 
+                                    <input asp-for="PropertyPhotos" class="form-control" type="file" id="formFile" multiple>
+                                </div>
+                            </div>
                             <div class="row mb-3">
                                 <label for="inputPropertyType" class="col-sm-2 col-form-label">Mülk Tipi : </label>
                                 <div class="col-md-2">
@@ -148,26 +154,23 @@
                                                     placeholder="Salon">
                                             </div>
                                         </div>
+                                        <div class="col-sm-2"> <input type="number" asp-for="ToplamKat"
+                                                class="form-control" placeholder="Toplam kat"></div>
+                                        <div class="col-sm-2"> <input type="number" asp-for="BulunduguKat"
+                                                class="form-control" placeholder="Bulunduğu kat"></div>
+                                        
+                                    </div>
+                                    <div class="row mb-3">
                                         <div class="col-sm-2"> <input type="number" asp-for="BanyoSayisi"
                                                 class="form-control" placeholder="Banyo"></div>
                                         <div class="col-sm-2"> <input type="number" asp-for="BalkonSayisi"
                                                 class="form-control" placeholder="Balkon"></div>
-                                    </div>
-                                    <div class="row mb-3">
                                         <div class="col-sm-2"> <input type="number" asp-for="OtoparkSayisi"
                                                 class="form-control" placeholder="Otopark"></div>
 
                                         <div class="col-sm-2"> <input type="text" asp-for="Manzara" class="form-control"
                                                 placeholder="Manzara"></div>
-                                        <div class="col-sm-2">
-                                            <select id="inputFlat" class="form-select" asp-for="CepheId" asp-items="@ViewData["Fronts"] as IEnumerable<SelectListItem>">
-                                                <option selected disabled>Cephe</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <select id="inputUseStatus" class="form-select" asp-for="KullanimDurumuId" asp-items="@ViewData["UsingStatus"] as IEnumerable<SelectListItem>">
-                                                <option selected disabled>Kullanım Durumu</option>                                            </select>
-                                        </div>
+                                        
                                         <div class="col-sm-2">
                                             <select id="inputHeatingType" class="form-select" asp-for="IsitmaTipiId" asp-items="@ViewData["HeatingTypes"] as IEnumerable<SelectListItem>">
                                                 <option selected disabled>Isıtma Tipi</option>
@@ -180,6 +183,15 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
+                                        <div class="col-sm-2">
+                                            <select id="inputFlat" class="form-select" asp-for="CepheId" asp-items="@ViewData["Fronts"] as IEnumerable<SelectListItem>">
+                                                <option selected disabled>Cephe</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <select id="inputUseStatus" class="form-select" asp-for="KullanimDurumuId" asp-items="@ViewData["UsingStatus"] as IEnumerable<SelectListItem>">
+                                                <option selected disabled>Kullanım Durumu</option>                                            </select>
+                                        </div>
                                         <div class="col-sm-2">
                                             <select id="inputDeedStatus" class="form-select" asp-for="TapuDurumuId" asp-items="@ViewData["DeedStatus"] as IEnumerable<SelectListItem>">
                                                 <option selected disabled>Tapu Durumu</option>
@@ -202,6 +214,12 @@
                                         </div>
                                     </div>
 
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputKonumIFrame" class="col-sm-2 col-form-label">Google iFrame Url</label>
+                                <div class="col-sm-10">
+                                    <input type="text" asp-for="KonumIFrame" class="form-control" placeholder="Google iFrame Url">
                                 </div>
                             </div>
                             <div class="row mb-3">

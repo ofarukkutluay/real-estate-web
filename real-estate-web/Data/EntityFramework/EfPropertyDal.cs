@@ -16,7 +16,6 @@ namespace real_estate_web.Data.EntityFramework
                             join c in Context.Cities on p.IlId equals c.Id 
                             join d in Context.Districts on p.IlceId equals d.Id 
                             join nb in Context.Neighborhoods on p.MahalleId equals nb.Id
-                            join s in Context.Streets on p.SokakId equals s.Id
                             join pt in Context.PropertyTypes on p.PropertyTypeId equals pt.Id
                             join a in Context.Agents on p.AgentId equals a.Id
                             join st in Context.Statuses on p.StatusId equals st.Id
@@ -33,7 +32,7 @@ namespace real_estate_web.Data.EntityFramework
                                 IlceId = p.IlceId,
                                 Mahalle = nb.Name,
                                 MahalleId = p.MahalleId,
-                                Sokak = s.Name,
+                                Sokak = (from s in Context.Streets where p.SokakId == s.Id select s).First().Name,
                                 SokakId = p.SokakId,
                                 Title = p.Title,
                                 Description = p.Description,
@@ -87,7 +86,6 @@ namespace real_estate_web.Data.EntityFramework
                             join c in Context.Cities on p.IlId equals c.Id 
                             join d in Context.Districts on p.IlceId equals d.Id 
                             join nb in Context.Neighborhoods on p.MahalleId equals nb.Id
-                            join s in Context.Streets on p.SokakId equals s.Id
                             join pt in Context.PropertyTypes on p.PropertyTypeId equals pt.Id
                             join a in Context.Agents on p.AgentId equals a.Id
                             join st in Context.Statuses on p.StatusId equals st.Id
@@ -105,7 +103,7 @@ namespace real_estate_web.Data.EntityFramework
                                 IlceId = p.IlceId,
                                 Mahalle = nb.Name,
                                 MahalleId = p.MahalleId,
-                                Sokak = s.Name,
+                                Sokak = (from s in Context.Streets where p.SokakId == s.Id select s).First().Name,
                                 SokakId = p.SokakId,
                                 Title = p.Title,
                                 Description = p.Description,
@@ -159,7 +157,6 @@ namespace real_estate_web.Data.EntityFramework
                             join c in Context.Cities on p.IlId equals c.Id 
                             join d in Context.Districts on p.IlceId equals d.Id 
                             join nb in Context.Neighborhoods on p.MahalleId equals nb.Id
-                            join s in Context.Streets on p.SokakId equals s.Id
                             join pt in Context.PropertyTypes on p.PropertyTypeId equals pt.Id
                             join a in Context.Agents on p.AgentId equals a.Id
                             join st in Context.Statuses on p.StatusId equals st.Id
@@ -177,7 +174,7 @@ namespace real_estate_web.Data.EntityFramework
                                 IlceId = p.IlceId,
                                 Mahalle = nb.Name,
                                 MahalleId = p.MahalleId,
-                                Sokak = s.Name,
+                                Sokak = (from s in Context.Streets where p.SokakId == s.Id select s).First().Name,
                                 SokakId = p.SokakId,
                                 Title = p.Title,
                                 Description = p.Description,

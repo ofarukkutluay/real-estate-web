@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using real_estate_web.Data.EntityFramework;
@@ -11,9 +12,10 @@ using real_estate_web.Data.EntityFramework;
 namespace real_estate_web.Migrations
 {
     [DbContext(typeof(RealEstateDbContext))]
-    partial class RealEstateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220429185943_property-update-2")]
+    partial class propertyupdate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -543,6 +545,8 @@ namespace real_estate_web.Migrations
 
                     b.HasIndex("PropertyTypeId");
 
+                    b.HasIndex("SokakId");
+
                     b.HasIndex("StatusId");
 
                     b.HasIndex("TapuDurumuId");
@@ -738,6 +742,10 @@ namespace real_estate_web.Migrations
                         .HasForeignKey("PropertyTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("real_estate_web.Models.Database.Street", null)
+                        .WithMany()
+                        .HasForeignKey("SokakId");
 
                     b.HasOne("real_estate_web.Models.Database.Status", null)
                         .WithMany()

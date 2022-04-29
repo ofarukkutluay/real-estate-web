@@ -7,7 +7,7 @@
         public int IlId { get; set; }
         public int IlceId { get; set; }
         public int MahalleId { get; set; }
-        public int SokakId { get; set; }
+        public int? SokakId { get; set; }
         public double? LocationLat { get; set; }
         public double? LocationLon { get; set; }
         public int PropertyTypeId { get; set; }

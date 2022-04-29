@@ -359,20 +359,39 @@ namespace real_estate_web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddProperty(Property model)
+        public async Task<IActionResult> AddProperty(PropertyVM model)
         {
-            var entity = await _propertyRepository.AddAsync(model);
+            // property add
+            Property property = _mapper.Map<Property>(model);
+            if (property.KonumIFrame is null)
+            {
+                property.KonumIFrame = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192697.79327595135!2d28.8720964464606!3d41.00549580940238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1651089326725!5m2!1str!2str";
+
+            }
+            var entity = await _propertyRepository.AddAsync(property);
             var save = await _propertyRepository.SaveAsync();
-            return RedirectToAction("PropertyPhoto", new { id = entity.Id });
-        }
 
-        public async Task<IActionResult> PropertyPhoto(int id)
-        {
-            PropertyPhotoVM model = new PropertyPhotoVM();
-            model.PropertyId = id;
-            return View(model);
+            // propety photos add
+            List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos, entity.Id.ToString());
+            List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
+            foreach (var item in paths)
+            {
+                PropertyPhoto propertyPhoto = new PropertyPhoto()
+                {
+                    PropertyId = entity.Id,
+                    Path = item
+                };
+                propertyPhotos.Add(propertyPhoto);
+            }
+            if (await _propertyPhotoRepository.GetCountAsync(x => x.PropertyId == entity.Id) == 0)
+            {
+                propertyPhotos[0].BasePhoto = true;
+            }
+            await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
+            await _propertyPhotoRepository.SaveAsync();
+            SuccessAlert("Mülk eklendi");
+            return RedirectToAction("Property");
         }
-
         public async Task<IActionResult> RemoveProperty(int id)
         {
             await _propertyRepository.RemoveAsync(id);
@@ -381,27 +400,38 @@ namespace real_estate_web.Controllers
             return RedirectToAction("Property");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddPropertyPhoto(PropertyPhotoVM model){
-            List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos,model.PropertyId.ToString());
-            List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
-            foreach (var item in paths)
-            {   
-                PropertyPhoto propertyPhoto = new PropertyPhoto(){
-                    PropertyId = model.PropertyId,
-                    Path = item
-                };
-                propertyPhotos.Add(propertyPhoto);
-            }
-            if (await _propertyPhotoRepository.GetCountAsync(x=>x.PropertyId==model.PropertyId) == 0)
-            {
-                propertyPhotos[0].BasePhoto = true;
-            }
-            await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
-            await _propertyPhotoRepository.SaveAsync();
-            SuccessAlert("Resimler eklendi");
-            return RedirectToAction("Property");
-        }
+
+        ////// Sayfa property add içine gömüldü 
+        // public async Task<IActionResult> PropertyPhoto(int id)
+        // {
+        //     PropertyPhotoVM model = new PropertyPhotoVM();
+        //     model.PropertyId = id;
+        //     return View(model);
+        // }
+
+
+
+        // [HttpPost]
+        // public async Task<IActionResult> AddPropertyPhoto(PropertyPhotoVM model){
+        //     List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos,model.PropertyId.ToString());
+        //     List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
+        //     foreach (var item in paths)
+        //     {   
+        //         PropertyPhoto propertyPhoto = new PropertyPhoto(){
+        //             PropertyId = model.PropertyId,
+        //             Path = item
+        //         };
+        //         propertyPhotos.Add(propertyPhoto);
+        //     }
+        //     if (await _propertyPhotoRepository.GetCountAsync(x=>x.PropertyId==model.PropertyId) == 0)
+        //     {
+        //         propertyPhotos[0].BasePhoto = true;
+        //     }
+        //     await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
+        //     await _propertyPhotoRepository.SaveAsync();
+        //     SuccessAlert("Resimler eklendi");
+        //     return RedirectToAction("Property");
+        // }
 
 
 

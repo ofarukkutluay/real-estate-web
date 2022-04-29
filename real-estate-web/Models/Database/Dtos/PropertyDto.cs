@@ -41,7 +41,7 @@ namespace real_estate_web.Models.Database.Dtos
         public int IlId { get; set; }
         public int IlceId { get; set; }
         public int MahalleId { get; set; }
-        public int SokakId { get; set; }
+        public int? SokakId { get; set; }
         public int PropertyTypeId { get; set; }
         public int StatusId { get; set; }
         public int IsitmaTipiId { get; set; }

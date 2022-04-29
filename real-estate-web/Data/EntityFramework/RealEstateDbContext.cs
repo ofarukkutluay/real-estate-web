@@ -20,7 +20,7 @@ namespace real_estate_web.Data.EntityFramework
             modelBuilder.Entity<Property>().HasOne<City>().WithMany().HasForeignKey(x => x.IlId);
             modelBuilder.Entity<Property>().HasOne<District>().WithMany().HasForeignKey(x => x.IlceId);
             modelBuilder.Entity<Property>().HasOne<Neighborhood>().WithMany().HasForeignKey(x => x.MahalleId);
-            modelBuilder.Entity<Property>().HasOne<Street>().WithMany().HasForeignKey(x => x.SokakId);
+            //modelBuilder.Entity<Property>().HasOne<Street>().WithMany().HasForeignKey(x => x.SokakId);
             modelBuilder.Entity<Property>().HasOne<PropertyType>().WithMany().HasForeignKey(x => x.PropertyTypeId);
             modelBuilder.Entity<Property>().HasOne<Status>().WithMany().HasForeignKey(x => x.StatusId);
             modelBuilder.Entity<Property>().HasOne<HeatingType>().WithMany().HasForeignKey(x => x.IsitmaTipiId);
