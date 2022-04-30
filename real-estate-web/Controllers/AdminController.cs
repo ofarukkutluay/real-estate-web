@@ -394,6 +394,17 @@ namespace real_estate_web.Controllers
         }
         public async Task<IActionResult> RemoveProperty(int id)
         {
+            var photoPaths = await _propertyPhotoRepository.GetListAsync(x => x.PropertyId == id);
+            if (photoPaths is not null)
+            {
+                foreach (var item in photoPaths)
+                {
+                    FileHelper.Delete(item.Path);
+                    await _propertyPhotoRepository.RemoveAsync(item.Id);
+                    await _propertyPhotoRepository.SaveAsync();
+                }
+            }
+
             await _propertyRepository.RemoveAsync(id);
             await _propertyRepository.SaveAsync();
             SuccessAlert("Silindi");

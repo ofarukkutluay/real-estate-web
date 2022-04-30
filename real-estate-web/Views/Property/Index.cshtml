@@ -88,27 +88,26 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="title-box-d section-t4">
-                      <h3 class="title-d">Quick Summary</h3>
+                      <h3 class="title-d">Kısa Özet</h3>
                     </div>
                   </div>
                 </div>
                 <div class="summary-list">
                   <ul class="list">
                     <li class="d-flex justify-content-between">
-                      <strong>Property ID:</strong>
+                      <strong>İlan ID:</strong>
                       <span>@Model.Id</span>
                     </li>
                     <li class="d-flex justify-content-between">
                       <strong>Adres:</strong>
-                      <span>@Model.Il / @Model.Ilce / @if (@Model.SiteIcerisindeMi)
-                        {
-                          @Model.SiteAdi
-                        }
-                        @if (!@Model.SiteIcerisindeMi)
-                        {
-                          @Model.Mahalle
-                        }
-                      </span>
+                      @if(@Model.SiteIcerisindeMi){
+                        <span>@Model.Il ili / @Model.Ilce ilçesi / @Model.SiteAdi sitesi  </span>
+                      }
+                       @if (!@Model.SiteIcerisindeMi){
+                          <span>@Model.Il ili / @Model.Ilce ilçesi / @Model.Mahalle mh. </span>
+                       }
+
+                     
                     </li>
                     <li class="d-flex justify-content-between">
                       <strong>Mülk Tipi:</strong>
@@ -134,7 +133,13 @@
                     </li>
                     <li class="d-flex justify-content-between">
                       <strong>Otopark:</strong>
-                      <span>@Model.OtoparkSayisi</span>
+                      @if (@Model.OtoparkSayisi==0 || @Model.OtoparkSayisi == null)
+                      {
+                        <span>Yok</span>
+                      }else
+                      {
+                        <span>@Model.OtoparkSayisi</span>
+                      }
                     </li>
                   </ul>
                 </div>
@@ -150,7 +155,7 @@
               </div>
               <div class="property-description">
                 <p class="description color-text-a">
-                  @Model.Description
+                  @Html.Raw(@Model.Description)
                 </p>
                 @* <p class="description color-text-a no-margin">
                   Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget

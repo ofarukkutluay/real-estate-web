@@ -63,7 +63,7 @@
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a href="#">@item.Il / @item.Ilce
+                      <a href="/property/@item.Id">@item.Il / @item.Ilce
                         <br /> @item.Title</a>
                     </h2>
                   </div>
@@ -93,7 +93,13 @@
                       </li>
                       <li>
                         <h4 class="card-info-title">Otopark</h4>
+                         @if (@item.OtoparkSayisi==0 || @item.OtoparkSayisi == null)
+                      {
+                        <span>Yok</span>
+                      }else
+                      {
                         <span>@item.OtoparkSayisi</span>
+                      }
                       </li>
                     </ul>
                   </div>
