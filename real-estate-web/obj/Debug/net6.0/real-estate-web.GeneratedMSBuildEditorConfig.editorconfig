@@ -103,6 +103,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvcGVydHlUeXBlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/Projects/CSharp/source/repos/real-estate-web/real-estate-web/Views/Admin/PropertyUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvcGVydHlVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/Projects/CSharp/source/repos/real-estate-web/real-estate-web/Views/Admin/Status.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3RhdHVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

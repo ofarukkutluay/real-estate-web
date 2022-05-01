@@ -411,6 +411,63 @@ namespace real_estate_web.Controllers
             return RedirectToAction("Property");
         }
 
+        public IActionResult PropertyUpdate(int id)
+        {
+
+            SelectItemInitializeProperty();
+            PropertyDto property = _propertyRepository.GetPropertyDto(id);
+            PropertyVM vm = _mapper.Map<PropertyVM>(property);
+            return View(vm);
+
+        }
+
+        public async Task<IActionResult> UpdateProperty(PropertyVM model)
+        {
+
+            Property property = await _propertyRepository.GetAsync(x => x.Id == model.Id);
+            property.Title = model.Title;
+            property.Description = model.Description;
+            property.IlId = model.IlId != 0 ? model.IlId : property.IlId;
+            property.IlceId = model.IlceId != 0 ? model.IlceId : property.IlceId;
+            property.MahalleId = model.MahalleId != 0 ? model.MahalleId : property.MahalleId;
+            property.SokakId = model.SokakId != 0 ? model.SokakId : property.SokakId;
+            property.LocationLat = model.LocationLat;
+            property.LocationLon = model.LocationLon;
+            property.PropertyTypeId = model.PropertyTypeId;
+            property.StatusId = model.StatusId;
+            property.BrutMetre = model.BrutMetre;
+            property.NetMetre = model.NetMetre;
+            property.ToplamKat = model.ToplamKat;
+            property.BulunduguKat = model.BulunduguKat;
+            property.BinaYasi = model.BinaYasi;
+            property.OdaSayisi = model.OdaSayisi;
+            property.SalonSayisi = model.SalonSayisi;
+            property.BanyoSayisi = model.BanyoSayisi;
+            property.OtoparkSayisi = model.OtoparkSayisi;
+            property.BalkonSayisi = model.BalkonSayisi;
+            property.IsitmaTipiId = model.IsitmaTipiId;
+            property.InternetTipiId = model.InternetTipiId;
+            property.CepheId = model.CepheId;
+            property.Manzara = model.Manzara;
+            property.AkilliEvMi = model.AkilliEvMi;
+            property.EsyaliMi = model.EsyaliMi;
+            property.SiteIcerisindeMi = model.SiteIcerisindeMi;
+            property.SiteAdi = model.SiteAdi;
+            property.KullanimDurumuId = model.KullanimDurumuId;
+            property.TapuDurumuId = model.TapuDurumuId;
+            property.Price = model.Price;
+            property.Aidat = model.Aidat;
+            property.KirediyeUygunMu = model.KirediyeUygunMu;
+            property.YoutubeLink = model.YoutubeLink;
+            property.AgentId = model.AgentId;
+            property.KonumIFrame = model.KonumIFrame;
+            await _propertyRepository.SaveAsync();
+            SuccessAlert("Güncellendi");
+            return RedirectToAction("Property");
+        }
+
+
+
 
         ////// Sayfa property add içine gömüldü 
         // public async Task<IActionResult> PropertyPhoto(int id)
@@ -551,5 +608,7 @@ namespace real_estate_web.Controllers
             });
             return Json(selectSokak);
         }
+
+
     }
 }

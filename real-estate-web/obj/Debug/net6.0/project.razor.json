@@ -16433,6 +16433,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Admin\\PropertyUpdate.cshtml",
+      "TargetPath": "Views\\Admin\\PropertyUpdate.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\Views\\Auth\\Register.cshtml",
       "TargetPath": "Views\\Auth\\Register.cshtml",
       "FileKind": "mvc"
