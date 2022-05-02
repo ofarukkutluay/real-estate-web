@@ -8,7 +8,7 @@
     <div class="swiper-wrapper">
 @foreach (var item in Model)
 {
-  item.BasePhotoPath = item.BasePhotoPath.Replace("\\","/");
+  item.BasePhotoPath = item.BasePhotoPath != null ? item.BasePhotoPath.Replace("\\","/") : "/img/property-1.jpg" ;
   <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(@item.BasePhotoPath)">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">

@@ -425,6 +425,27 @@ namespace real_estate_web.Controllers
         {
 
             Property property = await _propertyRepository.GetAsync(x => x.Id == model.Id);
+            
+            // propety photos add
+            List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos, model.Id.ToString());
+            List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
+            foreach (var item in paths)
+            {
+                PropertyPhoto propertyPhoto = new PropertyPhoto()
+                {
+                    PropertyId = model.Id,
+                    Path = item
+                };
+                propertyPhotos.Add(propertyPhoto);
+            }
+            if (await _propertyPhotoRepository.GetCountAsync(x => x.PropertyId == model.Id) == 0)
+            {
+                propertyPhotos[0].BasePhoto = true;
+            }
+            await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
+            await _propertyPhotoRepository.SaveAsync();
+
+
             property.Title = model.Title;
             property.Description = model.Description;
             property.IlId = model.IlId != 0 ? model.IlId : property.IlId;
@@ -466,6 +487,20 @@ namespace real_estate_web.Controllers
             return RedirectToAction("Property");
         }
 
+        public async Task<IActionResult> RemoveAllPorpertyPhoto(int propertyId)
+        {
+            var photoPaths = await _propertyPhotoRepository.GetListAsync(x => x.PropertyId == propertyId);
+            if (photoPaths is not null)
+            {
+                foreach (var item in photoPaths)
+                {
+                    FileHelper.Delete(item.Path);
+                    await _propertyPhotoRepository.RemoveAsync(item.Id);
+                    await _propertyPhotoRepository.SaveAsync();
+                }
+            }
+            return Ok( new { id = propertyId });
+        }
 
 
 
