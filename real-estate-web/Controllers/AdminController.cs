@@ -421,6 +421,7 @@ namespace real_estate_web.Controllers
 
         }
 
+        [HttpPost]
         public async Task<IActionResult> UpdateProperty(PropertyVM model)
         {
 
@@ -499,7 +500,7 @@ namespace real_estate_web.Controllers
                     await _propertyPhotoRepository.SaveAsync();
                 }
             }
-            return Ok( new { id = propertyId });
+            return Ok( new { complete = true });
         }
 
 

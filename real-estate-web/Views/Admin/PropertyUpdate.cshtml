@@ -72,6 +72,10 @@
 
         allDeletePhoto = function (id) {
             $.get("@Url.Action("RemoveAllPorpertyPhoto","Admin")", { propertyId: id }, function (data, status) {
+                if(data.complete == true){
+                    location.reload();
+                }
+                
             });
         }
 
@@ -101,8 +105,10 @@
                                         multiple>
                                 </div>
                                 <div class="col-sm-2">
-                                    <a type="button" class="btn btn-danger" onclick="allDeletePhoto(@Model.Id)">Tümünü
+                                    @if(@Model.PhotoCount > 0){
+                                        <a type="button" class="btn btn-danger" onclick="allDeletePhoto(@Model.Id)">Tümünü
                                         Sil</a>
+                                    }     
                                 </div>
                             </div>
                             <div class="row mb-3">

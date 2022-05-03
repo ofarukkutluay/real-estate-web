@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>E:\Projects\CSharp\publish\real-estate-web</_PublishTargetUrl>
+    <History>True|2022-05-02T19:26:02.4432434Z;True|2022-05-02T22:10:35.2165994+03:00;True|2022-05-02T21:53:07.9520979+03:00;True|2022-05-02T21:51:15.4844014+03:00;</History>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="PostgresSQL">
+      <Value>User ID=postgres%3bPassword=12345test%3bHost=localhost%3bPort=5432%3bDatabase=RealEstateDb%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="real_estate_web.Data.EntityFramework.RealEstateDbContext">
+      <Value>User ID=postgres%3bPassword=12345test%3bHost=localhost%3bPort=5432%3bDatabase=RealEstateDb%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
