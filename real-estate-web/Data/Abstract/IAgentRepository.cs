@@ -6,7 +6,8 @@ namespace real_estate_web.Data.Abstract
 {
     public interface IAgentRepository : IEntityRepository<Agent>
     {
+        IEnumerable<AgentDto> GetListAllAgentDto();
         IEnumerable<AgentDto> GetListAgentDto();
-        AgentDto GetAgentDto(int? id);
+        AgentDto GetAgentDto(int id);
     }
 }

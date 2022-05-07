@@ -12,7 +12,7 @@ namespace real_estate_web.Data.EntityFramework
         {
         }
 
-        public IEnumerable<AgentDto> GetListAgentDto()
+        public IEnumerable<AgentDto> GetListAllAgentDto()
         {
             var result = from a in Context.Agents
                         join jt in Context.JobTitles on a.JobTitle equals jt.Id
@@ -26,6 +26,7 @@ namespace real_estate_web.Data.EntityFramework
                              Email = a.Email,
                              MobileNumber = a.MobileNumber,
                              PhoneNumber = a.PhoneNumber,
+                             Role = a.Role,
                              Description = a.Description,
                              FacebookLink = a.FacebookLink,
                              TwitterLink = a.TwitterLink,
@@ -41,7 +42,35 @@ namespace real_estate_web.Data.EntityFramework
             return result;
         }
 
-        public AgentDto GetAgentDto(int? id)
+        public IEnumerable<AgentDto> GetListAgentDto()
+        {
+            var result = from a in Context.Agents
+                         join jt in Context.JobTitles on a.JobTitle equals jt.Id
+                         select new AgentDto()
+                         {
+                             Id = a.Id,
+                             FirstName = a.FirstName,
+                             LastName = a.LastName,
+                             Email = a.Email,
+                             MobileNumber = a.MobileNumber,
+                             PhoneNumber = a.PhoneNumber,
+                             Role = a.Role,
+                             Description = a.Description,
+                             FacebookLink = a.FacebookLink,
+                             TwitterLink = a.TwitterLink,
+                             LinkedinLink = a.LinkedinLink,
+                             InstagramLink = a.InstagramLink,
+                             YoutubeLink = a.YoutubeLink,
+                             JobTitleId = jt.Id,
+                             JobTitleName = jt.Name,
+                             ProfilePhotoPath = a.ProfilePhotoPath,
+                             IsFavoritUser = a.IsFavoritUser
+                         };
+
+            return result;
+        }
+
+        public AgentDto GetAgentDto(int id)
         {
             var result = from a in Context.Agents
                         join jt in Context.JobTitles on a.JobTitle equals jt.Id
@@ -56,7 +85,8 @@ namespace real_estate_web.Data.EntityFramework
                              Email = a.Email,
                              MobileNumber = a.MobileNumber,
                              PhoneNumber = a.PhoneNumber,
-                             Description = a.Description,
+                            Role = a.Role,
+                            Description = a.Description,
                              FacebookLink = a.FacebookLink,
                              TwitterLink = a.TwitterLink,
                              LinkedinLink = a.LinkedinLink,

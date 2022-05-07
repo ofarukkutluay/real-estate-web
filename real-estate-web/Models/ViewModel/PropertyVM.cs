@@ -58,8 +58,8 @@ namespace real_estate_web.Models.ViewModel
         public string BasePhotoPath { get; set; }
         public IEnumerable<string> PropertyPhotoPaths { get; set; }
         public AgentDto AgentDto { get; set; }
-        public bool BasePhoto { get; set; }
         public List<IFormFile> PropertyPhotos { get; set; }
+        public IFormFile BasePhoto { get; set; }
 
     }
 }

@@ -8,5 +8,6 @@
         public string MobileNumber { get; set; }
         public string Password { get; set; }
         public int? JobTitleId { get; set; }
+        public string Role { get; set; }
     }
 }

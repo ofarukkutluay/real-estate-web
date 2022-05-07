@@ -69,8 +69,6 @@ namespace real_estate_web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserVM model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
 
             byte[] passHash, passSalt;
             Agent agent = await _agentRepository.GetAsync(x => x.Email == model.Email);
@@ -85,11 +83,18 @@ namespace real_estate_web.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                MobileNumber = model.MobileNumber,
+                MobileNumber = "90"+model.MobileNumber,
                 JobTitle = model.JobTitleId,
+                Role = model.Role,
                 PassHash = passHash,
                 PassSalt = passSalt,
             };
+
+            if(await _agentRepository.GetCountAsync(x=>x.Role == Role.Admin) <= 0)
+            {
+                agent.Role = Role.Admin;
+            }
+
             await _agentRepository.AddAsync(agent);
             int result = await _agentRepository.SaveAsync();
             SuccessAlert("Kayıt Başarılı!");

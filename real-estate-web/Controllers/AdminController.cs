@@ -276,7 +276,7 @@ namespace real_estate_web.Controllers
         // Agent Danışman veya kullanıcı sayfası
         public IActionResult Agent()
         {
-            var agents = _agentRepository.GetListAgentDto();
+            var agents = _agentRepository.GetListAllAgentDto();
             IEnumerable<AgentVM> vm = _mapper.Map<IEnumerable<AgentVM>>(agents);
             return View(vm);
         }
@@ -295,17 +295,14 @@ namespace real_estate_web.Controllers
             return RedirectToAction("Agent");
         }
 
-        public IActionResult AgentUpdate(int? id)
+        public IActionResult AgentUpdate(int id)
         {
             SelectItemInitializeAgent();
-            if (id is not null)
-            {
-                AgentDto agent = _agentRepository.GetAgentDto(id);
-                AgentVM vm = _mapper.Map<AgentVM>(agent);
 
-                return View(vm);
-            }
-            return View();
+            AgentDto agent = _agentRepository.GetAgentDto(id);
+            AgentVM vm = _mapper.Map<AgentVM>(agent);
+
+            return View(vm);
         }
 
         [HttpPost]
@@ -335,6 +332,7 @@ namespace real_estate_web.Controllers
             agent.LinkedinLink = model.LinkedinLink;
             agent.TwitterLink = model.TwitterLink;
             agent.YoutubeLink = model.YoutubeLink;
+            agent.Role = model.Role;
             if (await _agentRepository.GetCountAsync(x => x.IsFavoritUser) <= 3)
             {
                 agent.IsFavoritUser = model.IsFavoritUser;
@@ -363,11 +361,19 @@ namespace real_estate_web.Controllers
         {
             // property add
             Property property = _mapper.Map<Property>(model);
-            if (property.KonumIFrame is null)
-            {
+            if (model.KonumIFrame is null)
                 property.KonumIFrame = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192697.79327595135!2d28.8720964464606!3d41.00549580940238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1651089326725!5m2!1str!2str";
 
+            if (!model.YoutubeLink.Contains("embed"))
+            {
+                if (model.YoutubeLink.Contains("watch?v="))
+                    property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf("watch?v="));
+                else if (model.YoutubeLink.Contains("https://youtu.be/"))
+                    property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf(".be/"));
             }
+            else property.YoutubeLink = model.YoutubeLink;
+
+
             var entity = await _propertyRepository.AddAsync(property);
             var save = await _propertyRepository.SaveAsync();
 
@@ -383,10 +389,9 @@ namespace real_estate_web.Controllers
                 };
                 propertyPhotos.Add(propertyPhoto);
             }
-            if (await _propertyPhotoRepository.GetCountAsync(x => x.PropertyId == entity.Id) == 0)
-            {
-                propertyPhotos[0].BasePhoto = true;
-            }
+            string basePath = FileHelper.Add(model.BasePhoto, entity.Id.ToString());
+            propertyPhotos.Add(new PropertyPhoto() { PropertyId = entity.Id, Path = basePath, BasePhoto = true });
+
             await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
             await _propertyPhotoRepository.SaveAsync();
             SuccessAlert("Mülk eklendi");
@@ -426,25 +431,30 @@ namespace real_estate_web.Controllers
         {
 
             Property property = await _propertyRepository.GetAsync(x => x.Id == model.Id);
-            
-            // propety photos add
-            List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos, model.Id.ToString());
-            List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
-            foreach (var item in paths)
+
+            if (model.PropertyPhotos != null)
             {
-                PropertyPhoto propertyPhoto = new PropertyPhoto()
+                // propety photos add
+                List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos, model.Id.ToString());
+                List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
+                foreach (var item in paths)
                 {
-                    PropertyId = model.Id,
-                    Path = item
-                };
-                propertyPhotos.Add(propertyPhoto);
+                    PropertyPhoto propertyPhoto = new PropertyPhoto()
+                    {
+                        PropertyId = model.Id,
+                        Path = item
+                    };
+                    propertyPhotos.Add(propertyPhoto);
+                }
+                if (await _propertyPhotoRepository.GetCountAsync(x => x.PropertyId == model.Id && x.BasePhoto == true) == 0)
+                {
+                    string basePath = FileHelper.Add(model.BasePhoto, model.Id.ToString());
+                    propertyPhotos.Add(new PropertyPhoto() { PropertyId = model.Id, Path = basePath, BasePhoto = true });
+                }
+
+                await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
+                await _propertyPhotoRepository.SaveAsync();
             }
-            if (await _propertyPhotoRepository.GetCountAsync(x => x.PropertyId == model.Id) == 0)
-            {
-                propertyPhotos[0].BasePhoto = true;
-            }
-            await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
-            await _propertyPhotoRepository.SaveAsync();
 
 
             property.Title = model.Title;
@@ -480,9 +490,18 @@ namespace real_estate_web.Controllers
             property.Price = model.Price;
             property.Aidat = model.Aidat;
             property.KirediyeUygunMu = model.KirediyeUygunMu;
-            property.YoutubeLink = model.YoutubeLink;
             property.AgentId = model.AgentId;
             property.KonumIFrame = model.KonumIFrame;
+
+            if (!model.YoutubeLink.Contains("embed"))
+            {
+                if (model.YoutubeLink.Contains("watch?v="))
+                    property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf("watch?v=") + 8);
+                else if (model.YoutubeLink.Contains("https://youtu.be/"))
+                    property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf(".be/") + 4);
+            }
+            else property.YoutubeLink = model.YoutubeLink;
+
             await _propertyRepository.SaveAsync();
             SuccessAlert("Güncellendi");
             return RedirectToAction("Property");
@@ -500,7 +519,7 @@ namespace real_estate_web.Controllers
                     await _propertyPhotoRepository.SaveAsync();
                 }
             }
-            return Ok( new { complete = true });
+            return Ok(new { complete = true });
         }
 
 
@@ -548,6 +567,12 @@ namespace real_estate_web.Controllers
                 Value = x.Id.ToString(),
                 Text = x.Name
             });
+            IEnumerable<SelectListItem> selectRoles = new List<SelectListItem> {
+                new SelectListItem { Value = Role.Admin, Text = Role.Admin },
+                new SelectListItem { Value = Role.User, Text = Role.User }
+             };
+
+            ViewData.Add("Roles", selectRoles);
             ViewData.Add("JobTitles", selectJobTitles);
         }
 

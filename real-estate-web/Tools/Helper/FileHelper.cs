@@ -19,6 +19,21 @@ namespace real_estate_web.Tools.Helper
             return result;
         }
 
+        public static string Add(IFormFile file, string subDirectoryName)
+        {
+            var sourcepath = Path.GetTempFileName();
+            if (file.Length > 0)
+            {
+                using (var stream = new FileStream(sourcepath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+            }
+            var result = newSubDirectoryPath(file,subDirectoryName);
+            File.Move(sourcepath, @"wwwroot" + result);
+            return result;
+        }
+
         public static async Task<List<string>> AddAllAsync(List<IFormFile> files,string subDirectoryName)
         {
             var sourcepath = Path.GetTempFileName();
@@ -31,7 +46,7 @@ namespace real_estate_web.Tools.Helper
                     {
                         await file.CopyToAsync(stream);
                     }
-                    var result = newMultiplePath(file,subDirectoryName);
+                    var result = newSubDirectoryPath(file,subDirectoryName);
                     File.Move(sourcepath, @"wwwroot" + result);
                     results.Add(result);
                 }
@@ -40,7 +55,7 @@ namespace real_estate_web.Tools.Helper
         }
         public static void Delete(string path)
         {
-            File.Delete(Environment.CurrentDirectory + @"\wwwroot" + path);
+            File.Delete(Environment.CurrentDirectory + @"/wwwroot" + path);
         }
         public static string Update(string oldSourcePath, IFormFile file)
         {
@@ -54,7 +69,7 @@ namespace real_estate_web.Tools.Helper
             }
             var result = newPath(file);
             File.Move(sourcePath, @"wwwroot" + result);
-            File.Delete(Environment.CurrentDirectory + @"\wwwroot" + oldSourcePath);
+            File.Delete(Environment.CurrentDirectory + @"/wwwroot" + oldSourcePath);
             return result;
         }
         public static string newPath(IFormFile file)
@@ -62,25 +77,25 @@ namespace real_estate_web.Tools.Helper
             FileInfo ff = new FileInfo(file.FileName);
             string fileExtension = ff.Extension;
 
-            string path =  @"\upload-images"; //Environment.CurrentDirectory +
+            string path =  @"/upload-images"; //Environment.CurrentDirectory +
             var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
 
-            string result = $@"{path}\{newPath}";
+            string result = $@"{path}/{newPath}";
             return result;
         }
 
-        public static string newMultiplePath(IFormFile file,string subDirectoryName)
+        public static string newSubDirectoryPath(IFormFile file,string subDirectoryName)
         {
             FileInfo ff = new FileInfo(file.FileName);
             string fileExtension = ff.Extension;
             
-            string path =  $@"\upload-images\{subDirectoryName}"; 
-            if(!Directory.Exists($@"{Environment.CurrentDirectory}\wwwroot{path}")){
-                Directory.CreateDirectory($@"{Environment.CurrentDirectory}\wwwroot{path}");
+            string path =  $@"/upload-images/{subDirectoryName}"; 
+            if(!Directory.Exists($@"{Environment.CurrentDirectory}/wwwroot{path}")){
+                Directory.CreateDirectory($@"{Environment.CurrentDirectory}/wwwroot{path}");
             }
             var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
 
-            string result = $@"{path}\{newPath}";
+            string result = $@"{path}/{newPath}";
             return result;
         }
     }

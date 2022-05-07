@@ -99,7 +99,13 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputFile" class="col-sm-2 col-form-label">Photo Upload</label>
+                                <label for="formBaseFile" class="col-sm-2 col-form-label">Base Photo Upload</label>
+                                <div class="col-sm-6">
+                                    <input asp-for="BasePhoto" class="form-control" type="file" id="formBaseFile">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="formFile" class="col-sm-2 col-form-label">Other Photo Upload</label>
                                 <div class="col-sm-6">
                                     <input asp-for="PropertyPhotos" class="form-control" type="file" id="formFile"
                                         multiple>
@@ -293,6 +299,13 @@
                                 <div class="col-sm-10">
                                     <input type="text" asp-for="KonumIFrame" class="form-control"
                                         placeholder="Google iFrame Url">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputYoutubeIFrame" class="col-sm-2 col-form-label">Youtube iFrame Url</label>
+                                <div class="col-sm-10">
+                                    <input type="text" asp-for="YoutubeLink" class="form-control"
+                                        placeholder="Youtube iFrame Url">
                                 </div>
                             </div>
                             <div class="row mb-3">

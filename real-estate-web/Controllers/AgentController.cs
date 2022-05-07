@@ -9,20 +9,24 @@ namespace real_estate_web.Controllers
     public class AgentController : BaseController
     {
         private readonly IAgentRepository _agentRepository;
+        private readonly IPropertyRepository _propertyRepository;
         private readonly IMapper _mapper;
 
-        public AgentController(IAgentRepository agentRepository,IMapper mapper)
+        public AgentController(IAgentRepository agentRepository, IPropertyRepository propertyRepository,IMapper mapper)
         {
             _agentRepository = agentRepository;
+            _propertyRepository = propertyRepository;
             _mapper = mapper;
         }
 
         [HttpGet("agent/{id}")]
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(int id)
         {
             AgentDto agent = _agentRepository.GetAgentDto(id);
             AgentVM vm = _mapper.Map<AgentVM>(agent);
-            return View(vm);
+            IEnumerable<PropertyDto> agentProperties = _propertyRepository.GetListAgentIdPropertyDto(id);
+            IEnumerable<PropertyVM> agentPropertyVm = _mapper.Map<IEnumerable<PropertyVM>>(agentProperties);
+            return View(Tuple.Create<AgentVM,IEnumerable<PropertyVM>>(vm,agentPropertyVm));
         }
 
         [HttpGet("/agents")]
