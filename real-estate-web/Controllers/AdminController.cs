@@ -593,6 +593,13 @@ namespace real_estate_web.Controllers
             }
         }
 
+        public async Task<IActionResult> RemoveBlog(int id)
+        {
+            await _blogRepository.RemoveAsync(id);
+            await _blogRepository.SaveAsync();
+            return RedirectToAction("Blog");
+        }
+
 
 
         // başlangıç yükleme fonksiyonları
