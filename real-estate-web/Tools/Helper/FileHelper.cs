@@ -72,6 +72,23 @@ namespace real_estate_web.Tools.Helper
             File.Delete(Environment.CurrentDirectory + @"/wwwroot" + oldSourcePath);
             return result;
         }
+
+        public static string Update(string oldSourcePath, IFormFile file, string subDirectoryName)
+        {
+            var sourcePath = Path.GetTempFileName();
+            if (file.Length > 0)
+            {
+                using (var stream = new FileStream(sourcePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+            }
+            var result = newSubDirectoryPath(file, subDirectoryName);
+            File.Move(sourcePath, @"wwwroot" + result);
+            File.Delete(Environment.CurrentDirectory + @"/wwwroot" + oldSourcePath);
+            return result;
+        }
+
         public static string newPath(IFormFile file)
         {
             FileInfo ff = new FileInfo(file.FileName);

@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model Tuple<IEnumerable<AgentVM>,IEnumerable<PropertyVM>>
+@model Tuple<IEnumerable<AgentVM>,IEnumerable<PropertyVM>,IEnumerable<Blog>>
 <!-- Navbar ve search -->
 @{
     await Html.RenderPartialAsync("_Header", null);
@@ -198,7 +198,7 @@
                 <div class="col-md-12">
                     <div class="title-wrap d-flex justify-content-between">
                         <div class="title-box">
-                            <h2 class="title-a">En İyi Danışmanlarımız</h2>
+                            <h2 class="title-a">En İyi Danışmanlar</h2>
                         </div>
                         <div class="title-link">
                             <a href="/agents">
@@ -288,7 +288,7 @@
                             <h2 class="title-a">Son Haberler</h2>
                         </div>
                         <div class="title-link">
-                            <a href="blog-grid.html">
+                            <a href="/blogs">
                                 Tüm Haberler
                                 <span class="bi bi-chevron-right"></span>
                             </a>
@@ -300,109 +300,33 @@
             <div id="news-carousel" class="swiper">
                 <div class="swiper-wrapper">
 
-                    <div class="carousel-item-c swiper-slide">
+                    @foreach (var item in @Model.Item3)
+                    {
+                        <div class="carousel-item-c swiper-slide">
                         <div class="card-box-b card-shadow news-box">
                             <div class="img-box-b">
-                                <img src="img/post-2.jpg" alt="" class="img-b img-fluid">
+                                <img src="@item.BasePhotoPath" alt="" class="img-b img-fluid">
                             </div>
                             <div class="card-overlay">
                                 <div class="card-header-b">
                                     <div class="card-category-b">
-                                        <a href="#" class="category-b">House</a>
+                                        <a href="#" class="category-b">@item.Category</a>
                                     </div>
                                     <div class="card-title-b">
                                         <h2 class="title-2">
-                                            <a href="blog-single.html">
-                                                House is comming
-                                                <br> new
+                                            <a href="/blog/@item.Id">
+                                                @item.Title
                                             </a>
                                         </h2>
                                     </div>
                                     <div class="card-date">
-                                        <span class="date-b">18 Sep. 2017</span>
+                                        <span class="date-b">@item.Date</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div><!-- End carousel item -->
-
-                    <div class="carousel-item-c swiper-slide">
-                        <div class="card-box-b card-shadow news-box">
-                            <div class="img-box-b">
-                                <img src="img/post-5.jpg" alt="" class="img-b img-fluid">
-                            </div>
-                            <div class="card-overlay">
-                                <div class="card-header-b">
-                                    <div class="card-category-b">
-                                        <a href="#" class="category-b">Travel</a>
-                                    </div>
-                                    <div class="card-title-b">
-                                        <h2 class="title-2">
-                                            <a href="blog-single.html">
-                                                Travel is comming
-                                                <br> new
-                                            </a>
-                                        </h2>
-                                    </div>
-                                    <div class="card-date">
-                                        <span class="date-b">18 Sep. 2017</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End carousel item -->
-
-                    <div class="carousel-item-c swiper-slide">
-                        <div class="card-box-b card-shadow news-box">
-                            <div class="img-box-b">
-                                <img src="img/post-7.jpg" alt="" class="img-b img-fluid">
-                            </div>
-                            <div class="card-overlay">
-                                <div class="card-header-b">
-                                    <div class="card-category-b">
-                                        <a href="#" class="category-b">Park</a>
-                                    </div>
-                                    <div class="card-title-b">
-                                        <h2 class="title-2">
-                                            <a href="blog-single.html">
-                                                Park is comming
-                                                <br> new
-                                            </a>
-                                        </h2>
-                                    </div>
-                                    <div class="card-date">
-                                        <span class="date-b">18 Sep. 2017</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End carousel item -->
-
-                    <div class="carousel-item-c swiper-slide">
-                        <div class="card-box-b card-shadow news-box">
-                            <div class="img-box-b">
-                                <img src="img/post-3.jpg" alt="" class="img-b img-fluid">
-                            </div>
-                            <div class="card-overlay">
-                                <div class="card-header-b">
-                                    <div class="card-category-b">
-                                        <a href="#" class="category-b">Travel</a>
-                                    </div>
-                                    <div class="card-title-b">
-                                        <h2 class="title-2">
-                                            <a href="#">
-                                                Travel is comming
-                                                <br> new
-                                            </a>
-                                        </h2>
-                                    </div>
-                                    <div class="card-date">
-                                        <span class="date-b">18 Sep. 2017</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End carousel item -->
+                    }
 
                 </div>
             </div>

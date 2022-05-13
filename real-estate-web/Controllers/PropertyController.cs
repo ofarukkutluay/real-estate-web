@@ -32,7 +32,7 @@ namespace real_estate_web.Controllers
             return View(vm);
         }
 
-        [HttpGet("/properties")]
+        [HttpGet("properties")]
         public async Task<IActionResult> All()
         {
             IEnumerable<PropertyDto> Propertys = _propertyRepository.GetListPropertyDto();

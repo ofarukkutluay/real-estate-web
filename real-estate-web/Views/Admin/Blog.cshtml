@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Blog>
+
+@{
+    ViewData["Title"] = "Admin - Blogs";
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Header.cshtml", null);
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Sidebar.cshtml", null);
+}
+
+<main style="margin-top: 70px;margin-bottom: 70px;" id="main" class="main">
+    <section class="section dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <h3>Bloglar</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Başlık</th>
+                            <th scope="col">Yazar</th>
+                            <th scope="col">Kategori</th>
+                            <th scope="col">Tarih</th>
+                            <th scope="col">Edit/Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@item.Id</th>
+                                <td>@item.Title</td>
+                                <td>@item.Author</td>
+                                <td>@item.Category</td>
+                                <td>@item.Date</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a type="button" class="btn btn-primary" asp-controller="Admin"
+                                        asp-action="BlogAddOrUpdate" asp-route-Id="@item.Id">Edit</a>
+                                        <a type="button" class="btn btn-danger" asp-controller="Admin"
+                                        asp-action="RemoveBlog" asp-route-Id="@item.Id">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+
+@{
+    await Html.RenderPartialAsync("~/Views/Admin/_Footer.cshtml", null);
+}
+

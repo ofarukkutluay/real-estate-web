@@ -38,6 +38,7 @@ builder.Services.AddScoped<IStreetRepository, EfStreetDal>();
 builder.Services.AddScoped<IUsingStatusRepository, EfUsingStatusDal>();
 builder.Services.AddScoped<IAboutRepository,EfAboutDal>();
 builder.Services.AddScoped<IContactRepository,EfContactDal>();
+builder.Services.AddScoped<IBlogRepository,EfBlogDal>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
@@ -58,6 +59,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 
 var app = builder.Build();
+
+//dateonly datayý kaydederken -infinity veri olarak kaydetmesini önlemek için eklendi.
+AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
 
 using (var scope = app.Services.CreateScope())
 {

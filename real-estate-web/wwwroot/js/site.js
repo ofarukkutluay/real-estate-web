@@ -50,14 +50,14 @@
    */
   var link = window.location.pathname;
   let navlink;
-  console.log(link);
+  //console.log(link);
   if (link.length == 1) {
     navlink = select("#homenavlink");
   }
   else {
     navlink = select("[href^='" + link + "']");
   }
-  console.log(navlink);
+  //console.log(navlink);
   if (navlink) {
     if(link.match("admin")){
       navlink.classList.remove("collapsed");

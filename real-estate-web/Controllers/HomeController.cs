@@ -4,6 +4,7 @@ using real_estate_web.Models.ViewModel;
 using real_estate_web.Data.Abstract;
 using real_estate_web.Models.Database.Dtos;
 using AutoMapper;
+using real_estate_web.Models.Database;
 
 namespace real_estate_web.Controllers
 {
@@ -12,13 +13,15 @@ namespace real_estate_web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IAgentRepository _agentRepository;
         private readonly IPropertyRepository _propertyRepository;
+        private readonly IBlogRepository _blogRepository;
         private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, IAgentRepository agentRepository, IPropertyRepository propertyRepository, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, IAgentRepository agentRepository, IPropertyRepository propertyRepository,IBlogRepository blogRepository, IMapper mapper)
         {
             _logger = logger;
             _agentRepository = agentRepository;
             _propertyRepository = propertyRepository;
+            _blogRepository = blogRepository;
             _mapper = mapper;
         }
 
@@ -28,7 +31,8 @@ namespace real_estate_web.Controllers
             IEnumerable<AgentVM> agentVMs = _mapper.Map<IEnumerable<AgentVM>>(allAgents);
             IEnumerable<PropertyDto> allPoperty = _propertyRepository.GetListPropertyDto();
             IEnumerable<PropertyVM> propertyVMs = _mapper.Map<IEnumerable<PropertyVM>>(allPoperty);
-            return View(Tuple.Create<IEnumerable<AgentVM>, IEnumerable<PropertyVM>>(agentVMs, propertyVMs));
+            IEnumerable<Blog> blogs = await _blogRepository.GetListAsync();
+            return View(Tuple.Create<IEnumerable<AgentVM>, IEnumerable<PropertyVM>, IEnumerable<Blog>>(agentVMs, propertyVMs,blogs));
         }
 
         public IActionResult Privacy()

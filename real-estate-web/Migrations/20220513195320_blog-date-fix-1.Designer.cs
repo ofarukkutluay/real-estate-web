@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using real_estate_web.Data.EntityFramework;
@@ -11,9 +12,10 @@ using real_estate_web.Data.EntityFramework;
 namespace real_estate_web.Migrations
 {
     [DbContext(typeof(RealEstateDbContext))]
-    partial class RealEstateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220513195320_blog-date-fix-1")]
+    partial class blogdatefix1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

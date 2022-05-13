@@ -13,6 +13,8 @@ namespace real_estate_web.Tools.Mapper
             CreateMap<AgentVM,Agent>().ForMember(dest=> dest.JobTitle, mem=> mem.MapFrom(src=>src.JobTitleId));
             CreateMap<PropertyDto,PropertyVM>();
             CreateMap<PropertyVM,Property>();
+            CreateMap<Blog,BlogVM>().ForMember(dest=>dest.Date,mem=>mem.MapFrom(src=>src.Date.ToDateTime(new TimeOnly(01,01))));
+            CreateMap<BlogVM,Blog>().ForMember(dest => dest.Date, mem => mem.MapFrom(src => DateOnly.FromDateTime(src.Date)));
         }
     }
 }

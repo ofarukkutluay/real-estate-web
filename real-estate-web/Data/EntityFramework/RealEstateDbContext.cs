@@ -50,6 +50,7 @@ namespace real_estate_web.Data.EntityFramework
         public DbSet<DeedStatus> DeedStatuses { get; set; }
         public DbSet<About> About { get; set; }
         public DbSet<Contact> Contact { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

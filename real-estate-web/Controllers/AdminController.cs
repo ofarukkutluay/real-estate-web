@@ -30,13 +30,15 @@ namespace real_estate_web.Controllers
         private readonly INeighborhoodRepository _neighborhoodRepository;
         private readonly IStreetRepository _streetRepository;
         private readonly IFrontRepository _frontRepository;
+        private readonly IBlogRepository _blogRepository;
         private readonly IMapper _mapper;
         public AdminController(IJobTitleRepository jobTitleRepository, IAboutRepository aboutRepository,
                                     IContactRepository contactRepository, IAgentRepository agentRepository, IDeedStatusRepository deedStatusRepository,
                                     IHeatingTypeRepository heatingTypeRepository, IInternetTypeRepository internetTypeRepository, IPropertyTypeRepository propertyTypeRepository,
                                     IStatusRepository statusRepository, IUsingStatusRepository usingStatusRepository, IPropertyRepository propertyRepository,
                                     IPropertyPhotoRepository propertyPhotoRepository, ICityRepository cityRepository, IDistrictRepository districtRepository,
-                                    INeighborhoodRepository neighborhoodRepository, IStreetRepository streetRepository, IFrontRepository frontRepository, IMapper mapper)
+                                    INeighborhoodRepository neighborhoodRepository, IStreetRepository streetRepository, IFrontRepository frontRepository,
+                                    IBlogRepository blogRepository, IMapper mapper)
         {
             _jobTitleRepository = jobTitleRepository;
             _aboutRepository = aboutRepository;
@@ -55,6 +57,7 @@ namespace real_estate_web.Controllers
             _neighborhoodRepository = neighborhoodRepository;
             _streetRepository = streetRepository;
             _frontRepository = frontRepository;
+            _blogRepository = blogRepository;
             _mapper = mapper;
         }
 
@@ -363,13 +366,15 @@ namespace real_estate_web.Controllers
             Property property = _mapper.Map<Property>(model);
             if (model.KonumIFrame is null)
                 property.KonumIFrame = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192697.79327595135!2d28.8720964464606!3d41.00549580940238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1651089326725!5m2!1str!2str";
-
-            if (!model.YoutubeLink.Contains("embed"))
+            if (model.YoutubeLink != null)
             {
-                if (model.YoutubeLink.Contains("watch?v="))
-                    property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf("watch?v="));
-                else if (model.YoutubeLink.Contains("https://youtu.be/"))
-                    property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf(".be/"));
+                if (!model.YoutubeLink.Contains("embed"))
+                {
+                    if (model.YoutubeLink.Contains("watch?v="))
+                        property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf("watch?v="));
+                    else if (model.YoutubeLink.Contains("https://youtu.be/"))
+                        property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf(".be/"));
+                }
             }
             else property.YoutubeLink = model.YoutubeLink;
 
@@ -493,12 +498,15 @@ namespace real_estate_web.Controllers
             property.AgentId = model.AgentId;
             property.KonumIFrame = model.KonumIFrame;
 
-            if (!model.YoutubeLink.Contains("embed"))
+            if (model.YoutubeLink != null)
             {
-                if (model.YoutubeLink.Contains("watch?v="))
-                    property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf("watch?v=") + 8);
-                else if (model.YoutubeLink.Contains("https://youtu.be/"))
-                    property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf(".be/") + 4);
+                if (!model.YoutubeLink.Contains("embed"))
+                {
+                    if (model.YoutubeLink.Contains("watch?v="))
+                        property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf("watch?v="));
+                    else if (model.YoutubeLink.Contains("https://youtu.be/"))
+                        property.YoutubeLink = "https://www.youtube.com/embed/" + model.YoutubeLink.Substring(model.YoutubeLink.IndexOf(".be/"));
+                }
             }
             else property.YoutubeLink = model.YoutubeLink;
 
@@ -523,38 +531,67 @@ namespace real_estate_web.Controllers
         }
 
 
+        //Blog Blog haberler sayfası
+        public async Task<IActionResult> Blog()
+        {
+            IEnumerable<Blog> blogs = await _blogRepository.GetListAsync();
+            return View(blogs);
+        }
 
-        ////// Sayfa property add içine gömüldü 
-        // public async Task<IActionResult> PropertyPhoto(int id)
-        // {
-        //     PropertyPhotoVM model = new PropertyPhotoVM();
-        //     model.PropertyId = id;
-        //     return View(model);
-        // }
+        [HttpGet("admin/blogadd")]
+        public async Task<IActionResult> BlogAddOrUpdate()
+        {
+            return View();
+        }
 
+        [HttpGet("admin/blogupdate/{id}")]
+        public async Task<IActionResult> BlogAddOrUpdate(int id)
+        {
+            Blog blog = await _blogRepository.GetAsync(x => x.Id == id);
+            BlogVM blogVM = _mapper.Map<BlogVM>(blog);
+            return View(blogVM);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> AddUpdateBlog(BlogVM model)
+        {
+            if (model.Id > 0)
+            {
+                Blog blog = await _blogRepository.GetAsync(x=>x.Id == model.Id);
 
-        // [HttpPost]
-        // public async Task<IActionResult> AddPropertyPhoto(PropertyPhotoVM model){
-        //     List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos,model.PropertyId.ToString());
-        //     List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
-        //     foreach (var item in paths)
-        //     {   
-        //         PropertyPhoto propertyPhoto = new PropertyPhoto(){
-        //             PropertyId = model.PropertyId,
-        //             Path = item
-        //         };
-        //         propertyPhotos.Add(propertyPhoto);
-        //     }
-        //     if (await _propertyPhotoRepository.GetCountAsync(x=>x.PropertyId==model.PropertyId) == 0)
-        //     {
-        //         propertyPhotos[0].BasePhoto = true;
-        //     }
-        //     await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
-        //     await _propertyPhotoRepository.SaveAsync();
-        //     SuccessAlert("Resimler eklendi");
-        //     return RedirectToAction("Property");
-        // }
+                if (model.BasePhoto != null)
+                {
+                    if (blog.BasePhotoPath.Contains("/img/"))
+                    {
+                        blog.BasePhotoPath = FileHelper.Add(model.BasePhoto, "blog-photo");
+                    }
+                    else
+                    {
+                        blog.BasePhotoPath = FileHelper.Update(blog.BasePhotoPath, model.BasePhoto,"blog-photo");
+                    }
+                }
+                blog.Title = model.Title;
+                blog.Author = model.Author;
+                blog.Subtitle = model.Subtitle;
+                blog.Category = model.Category;
+                blog.Content = model.Content;
+                blog.Date = DateOnly.FromDateTime(model.Date);
+                await _blogRepository.SaveAsync();
+                SuccessAlert("Güncellendi");
+                return RedirectToAction("Blog");
+
+            }
+            else
+            {
+                if (model.BasePhoto != null)
+                    model.BasePhotoPath = FileHelper.Add(model.BasePhoto, "blog-photo");
+                Blog blog = _mapper.Map<Blog>(model);
+                await _blogRepository.AddAsync(blog);
+                await _blogRepository.SaveAsync();
+                SuccessAlert("Kayıt Edildi");
+                return RedirectToAction("Blog");
+            }
+        }
 
 
 
