@@ -33,7 +33,7 @@ namespace real_estate_web.Controllers
         }
 
         [HttpGet("properties")]
-        public async Task<IActionResult> All()
+        public IActionResult All()
         {
             IEnumerable<PropertyDto> Propertys = _propertyRepository.GetListPropertyDto();
             IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM> >(Propertys);

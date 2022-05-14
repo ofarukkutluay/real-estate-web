@@ -7,6 +7,8 @@ using real_estate_web.Models.ViewModel;
 using real_estate_web.Models.Database.Dtos;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using real_estate_web.Tools.Helper;
+using System.Security.Claims;
+using real_estate_web.Tools.Hashing;
 
 namespace real_estate_web.Controllers
 {
@@ -346,7 +348,7 @@ namespace real_estate_web.Controllers
         }
 
         //Propety Mülk sayfası
-        public async Task<IActionResult> Property()
+        public IActionResult Property()
         {
             IEnumerable<PropertyDto> properties = _propertyRepository.GetListPropertyDto();
             IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM>>(properties);
@@ -539,7 +541,7 @@ namespace real_estate_web.Controllers
         }
 
         [HttpGet("admin/blogadd")]
-        public async Task<IActionResult> BlogAddOrUpdate()
+        public IActionResult BlogAddOrUpdate()
         {
             return View();
         }
@@ -557,7 +559,7 @@ namespace real_estate_web.Controllers
         {
             if (model.Id > 0)
             {
-                Blog blog = await _blogRepository.GetAsync(x=>x.Id == model.Id);
+                Blog blog = await _blogRepository.GetAsync(x => x.Id == model.Id);
 
                 if (model.BasePhoto != null)
                 {
@@ -567,7 +569,7 @@ namespace real_estate_web.Controllers
                     }
                     else
                     {
-                        blog.BasePhotoPath = FileHelper.Update(blog.BasePhotoPath, model.BasePhoto,"blog-photo");
+                        blog.BasePhotoPath = FileHelper.Update(blog.BasePhotoPath, model.BasePhoto, "blog-photo");
                     }
                 }
                 blog.Title = model.Title;
@@ -600,7 +602,56 @@ namespace real_estate_web.Controllers
             return RedirectToAction("Blog");
         }
 
+        //User account sayfası
+        [HttpGet("admin/user")]
+        public IActionResult UserViewOrUpdate()
+        {
+            int id = int.Parse(HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value);
+            AgentDto agentDto = _agentRepository.GetAgentDto(id);
+            AgentVM vm = _mapper.Map<AgentVM>(agentDto);
+            return View(vm);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(AgentVM model)
+        {
+            Agent agent = await _agentRepository.GetAsync(x => x.Id == model.Id);
+            if (model.ProfilePhoto != null)
+            {
+                if (agent.ProfilePhotoPath.Contains("/img/"))
+                {
+                    agent.ProfilePhotoPath = FileHelper.Add(model.ProfilePhoto);
+                }
+                else
+                {
+                    agent.ProfilePhotoPath = FileHelper.Update(agent.ProfilePhotoPath, model.ProfilePhoto);
+                }
+            }
+            agent.FirstName = model.FirstName;
+            agent.LastName = model.LastName;
+            agent.Email = model.Email;
+            agent.MobileNumber = model.MobileNumber;
+            agent.PhoneNumber = model.PhoneNumber;
+            agent.Description = model.Description;
+            agent.FacebookLink = model.FacebookLink;
+            agent.InstagramLink = model.InstagramLink;
+            agent.LinkedinLink = model.LinkedinLink;
+            agent.TwitterLink = model.TwitterLink;
+            agent.YoutubeLink = model.YoutubeLink;
+
+            if (model.NewPassword != null)
+            {
+                byte[] passHash, passSalt;
+                HashingHelper.CreatePasswordHash(model.NewPassword, out passSalt, out passHash);
+                agent.PassHash = passHash;
+                agent.PassSalt = passSalt;
+            }
+
+
+            await _agentRepository.SaveAsync();
+            SuccessAlert("Güncellendi");
+            return RedirectToAction("UserViewOrUpdate");
+        }
 
         // başlangıç yükleme fonksiyonları
         private void SelectItemInitializeAgent()

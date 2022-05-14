@@ -101,6 +101,9 @@ namespace real_estate_web.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
+
+        
+
         public IActionResult Logout(){
             HttpContext.Session.Remove("Token");
             return Redirect(Request.Headers["Referer"].ToString());

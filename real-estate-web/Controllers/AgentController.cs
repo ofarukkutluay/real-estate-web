@@ -20,7 +20,7 @@ namespace real_estate_web.Controllers
         }
 
         [HttpGet("agent/{id}")]
-        public async Task<IActionResult> Index(int id)
+        public IActionResult Index(int id)
         {
             AgentDto agent = _agentRepository.GetAgentDto(id);
             AgentVM vm = _mapper.Map<AgentVM>(agent);
@@ -30,7 +30,7 @@ namespace real_estate_web.Controllers
         }
 
         [HttpGet("/agents")]
-        public async Task<IActionResult> All()
+        public IActionResult All()
         {
             IEnumerable<AgentDto> agents = _agentRepository.GetListAgentDto();
             IEnumerable<AgentVM> vm = _mapper.Map<IEnumerable<AgentVM> >(agents);

@@ -21,5 +21,7 @@ namespace real_estate_web.Models.ViewModel
         public IFormFile? ProfilePhoto { get; set; }
         public string ProfilePhotoPath { get; set; }
         public bool IsFavoritUser { get; set; }
+
+        public string NewPassword { get; set; }
     }
 }
