@@ -33,8 +33,6 @@ namespace real_estate_web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginUserVM model)
         {
-            if (!ModelState.IsValid)
-                return View();
             Agent agent = await _agentRepository.GetAsync(x => x.Email == model.Email);
             if (agent is null)
             {
@@ -85,14 +83,16 @@ namespace real_estate_web.Controllers
                 Email = model.Email,
                 MobileNumber = "90"+model.MobileNumber,
                 JobTitle = model.JobTitleId,
-                Role = model.Role,
                 PassHash = passHash,
                 PassSalt = passSalt,
             };
 
-            if(await _agentRepository.GetCountAsync(x=>x.Role == Role.Admin) <= 0)
+            if(model.Role is not null)
+                agent.Role = model.Role;
+
+            if(await _agentRepository.GetCountAsync(x=>x.Role == Roles.Admin) <= 0)
             {
-                agent.Role = Role.Admin;
+                agent.Role = Roles.Admin;
             }
 
             await _agentRepository.AddAsync(agent);

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "x48fqO5bBTk3AFzCpprtlKSqQXqAaDnRKB+3ibnWeQ0=",
+  "Hash": "yj6TD0tqJ6cHyvJyIMgLdsmJv4Al/mvCR0cFCbAoMDI=",
   "Source": "real-estate-web",
   "BasePath": "_content/real-estate-web",
   "Mode": "Default",
@@ -238,12 +238,12 @@
       "OriginalItemSpec": "wwwroot\\img\\agent-7.jpg"
     },
     {
-      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\img\\apple-touch-icon.png",
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\img\\apple-touch-icon.jpg",
       "SourceId": "real-estate-web",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
       "BasePath": "_content/real-estate-web",
-      "RelativePath": "img/apple-touch-icon.png",
+      "RelativePath": "img/apple-touch-icon.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -252,7 +252,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\apple-touch-icon.png"
+      "OriginalItemSpec": "wwwroot\\img\\apple-touch-icon.jpg"
     },
     {
       "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\img\\author-1.jpg",
@@ -289,12 +289,12 @@
       "OriginalItemSpec": "wwwroot\\img\\author-2.jpg"
     },
     {
-      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\img\\favicon.png",
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\img\\favicon.jpg",
       "SourceId": "real-estate-web",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
       "BasePath": "_content/real-estate-web",
-      "RelativePath": "img/favicon.png",
+      "RelativePath": "img/favicon.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -303,7 +303,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\favicon.png"
+      "OriginalItemSpec": "wwwroot\\img\\favicon.jpg"
     },
     {
       "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\img\\mini-testimonial-1.jpg",

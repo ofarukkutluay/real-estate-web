@@ -23,7 +23,7 @@
                 <span>İlan Ekle</span>
             </a>
         </li><!-- End Property Add Nav -->
-        @if (Context.User.IsInRole(Role.Admin))
+        @if (Context.User.IsInRole(Roles.Admin))
         {
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -83,7 +83,7 @@
                         <i class="bi bi-circle"></i><span>Danışman Ekle</span>
                     </a>
                 </li>
-                @if (Context.User.IsInRole(Role.Admin))
+                @if (Context.User.IsInRole(Roles.Admin))
                 {
                     <li>
                         <a href="/admin/jobtitle">

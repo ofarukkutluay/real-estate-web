@@ -12,7 +12,7 @@ using real_estate_web.Tools.Hashing;
 
 namespace real_estate_web.Controllers
 {
-    [Authorize(Roles = Role.AdminOrUser)]
+    [Authorize(Roles = Roles.AdminOrUser)]
     public class AdminController : BaseController
     {
         private readonly IJobTitleRepository _jobTitleRepository;
@@ -663,8 +663,8 @@ namespace real_estate_web.Controllers
                 Text = x.Name
             });
             IEnumerable<SelectListItem> selectRoles = new List<SelectListItem> {
-                new SelectListItem { Value = Role.Admin, Text = Role.Admin },
-                new SelectListItem { Value = Role.User, Text = Role.User }
+                new SelectListItem { Value = Roles.Admin, Text = Roles.Admin },
+                new SelectListItem { Value = Roles.User, Text = Roles.User }
              };
 
             ViewData.Add("Roles", selectRoles);
