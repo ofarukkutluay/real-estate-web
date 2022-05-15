@@ -27,7 +27,7 @@ namespace real_estate_web.Controllers
             PropertyDto Property = _propertyRepository.GetPropertyDto(id);
             PropertyVM vm = _mapper.Map<PropertyVM>(Property);
             var photos = await _propertyPhotoRepository.GetListAsync(x=>x.PropertyId == id);
-            vm.PropertyPhotoPaths = photos.Select(x=>x.Path);
+            vm.PropertyPhotoPaths = photos.Where(x=>x.BasePhoto==false).Select(x=>x.Path);
             vm.AgentDto = _agentRepository.GetAgentDto(vm.AgentId);
             return View(vm);
         }

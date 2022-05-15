@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XziIIWfKS5u/XyuwL+tUhEs6t0lg3lnXEZe5ONzu8ws=",
+  "Hash": "x48fqO5bBTk3AFzCpprtlKSqQXqAaDnRKB+3ibnWeQ0=",
   "Source": "real-estate-web",
   "BasePath": "_content/real-estate-web",
   "Mode": "Default",
@@ -1921,6 +1921,40 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery-3.6.0.js"
     },
     {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\jquery\\dist\\jquery-3.6.0.min.js",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "lib/jquery/dist/jquery-3.6.0.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery-3.6.0.min.js"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\jquery\\dist\\jquery-3.6.0.min.map",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "lib/jquery/dist/jquery-3.6.0.min.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery-3.6.0.min.map"
+    },
+    {
       "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "real-estate-web",
       "SourceType": "Discovered",
@@ -2397,6 +2431,57 @@
       "OriginalItemSpec": "wwwroot\\lib\\remixicon\\remixicon.woff2"
     },
     {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\swiper\\swiper-bundle.css",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "lib/swiper/swiper-bundle.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\swiper\\swiper-bundle.css"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\swiper\\swiper-bundle.js",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "lib/swiper/swiper-bundle.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\swiper\\swiper-bundle.js"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\swiper\\swiper-bundle.js.map",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "lib/swiper/swiper-bundle.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\swiper\\swiper-bundle.js.map"
+    },
+    {
       "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\swiper\\swiper-bundle.min.css",
       "SourceId": "real-estate-web",
       "SourceType": "Discovered",
@@ -2429,6 +2514,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\swiper\\swiper-bundle.min.js"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\swiper\\swiper-bundle.min.js.map",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "lib/swiper/swiper-bundle.min.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\swiper\\swiper-bundle.min.js.map"
     },
     {
       "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\lib\\tinymce\\bower.json",
@@ -5780,23 +5882,6 @@
       "OriginalItemSpec": "wwwroot\\upload-images\\12\\d97e6d60-d28a-43fd-8c05-80861f9b957e_5_3_2022.jpg"
     },
     {
-      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\upload-images\\257ac570-8bb0-4a81-8708-6dc6ff07099d_5_3_2022.jpg",
-      "SourceId": "real-estate-web",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
-      "BasePath": "_content/real-estate-web",
-      "RelativePath": "upload-images/257ac570-8bb0-4a81-8708-6dc6ff07099d_5_3_2022.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\upload-images\\257ac570-8bb0-4a81-8708-6dc6ff07099d_5_3_2022.jpg"
-    },
-    {
       "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\upload-images\\26\\1aca61d5-69f5-4b45-8920-c779c5a82b45_5_7_2022.jpg",
       "SourceId": "real-estate-web",
       "SourceType": "Discovered",
@@ -6305,6 +6390,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\upload-images\\f6e19d3b-cbf7-4cf9-bdf2-f196fdf0809f_5_7_2022.jpg"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\upload-images\\f91f26ca-ad01-46f2-905d-1c0174a00be0_5_15_2022.png",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "upload-images/f91f26ca-ad01-46f2-905d-1c0174a00be0_5_15_2022.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\upload-images\\f91f26ca-ad01-46f2-905d-1c0174a00be0_5_15_2022.png"
     }
   ]
 }

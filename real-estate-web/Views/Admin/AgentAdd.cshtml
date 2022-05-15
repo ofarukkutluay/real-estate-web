@@ -62,8 +62,8 @@
                                 <div class="col-sm-10">
                                     <select asp-for="JobTitleId"
                                             asp-items="@ViewData["JobTitles"] as IEnumerable<SelectListItem>"
-                                            class="form-select">
-                                        <option selected="" disabled>-- İş Tanımı --</option>
+                                            class="form-select" required>
+                                        <option selected="" disabled value="">-- İş Tanımı --</option>
                                     </select>
                                 </div>
                             </div>

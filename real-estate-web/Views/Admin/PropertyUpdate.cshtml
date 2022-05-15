@@ -11,7 +11,6 @@
 @{
     await Html.RenderPartialAsync("~/Views/Admin/_Sidebar.cshtml", null);
 }
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -90,7 +89,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Mülk Güncelle</h5>
-                        <form asp-action="UpdateProperty" method="post" enctype="multipart/form-data">
+                        <form class="needs-validation" asp-action="UpdateProperty" method="post" enctype="multipart/form-data">
                             <input asp-for="Id" hidden>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Yüklü Toplam Fotoğraf sayısı</label>
@@ -121,20 +120,20 @@
                                 <label for="inputPropertyType" class="col-sm-2 col-form-label">Mülk Tipi : </label>
                                 <div class="col-md-2">
                                     <select id="inputPropertyType" class="form-select" asp-for="PropertyTypeId"
-                                        asp-items="@ViewData["PropertyTypes"] as IEnumerable<SelectListItem>">
-                                        <option selected disabled>Mülk Tipi</option>
+                                        asp-items="@ViewData["PropertyTypes"] as IEnumerable<SelectListItem>" required>
+                                        <option selected value="" disabled>Mülk Tipi</option>
                                     </select>
                                 </div>
                                 <label for="inputStatus" class="col-sm-1 col-form-label">Durum : </label>
                                 <div class="col-md-2">
                                     <select id="inputStatus" class="form-select" asp-for="StatusId"
-                                        asp-items="@ViewData["Statuses"] as IEnumerable<SelectListItem>">
-                                        <option selected disabled>Durumu</option>
+                                        asp-items="@ViewData["Statuses"] as IEnumerable<SelectListItem>" required>
+                                        <option selected value="" disabled>Durumu</option>
                                     </select>
                                 </div>
                                 <label for="inputPrice" class="col-sm-1 col-form-label">Fiyat :</label>
                                 <div class="col-md-2">
-                                    <input type="number" asp-for="Price" class="form-control" placeholder="Fiyat">
+                                    <input type="number" asp-for="Price" class="form-control" placeholder="Fiyat" required>
                                 </div>
                                 <label for="inputAidat" class="col-sm-1 col-form-label">Aidat :</label>
                                 <div class="col-md-1">
@@ -143,7 +142,7 @@
                             </div>
                             <div class="row mb-3">
                                 <label for="inputTitle" class="col-sm-2 col-form-label">Başlık</label>
-                                <div class="col-sm-10"> <input type="text" asp-for="Title" class="form-control"></div>
+                                <div class="col-sm-10"> <input type="text" asp-for="Title" class="form-control" required></div>
                             </div>
                             <div class="row mb-5">
                                 <label for="inputDescription" class="col-sm-2 col-form-label">Açıklama</label>
@@ -215,22 +214,22 @@
                                 <div class="col-sm-10">
                                     <div class="row mb-3">
                                         <div class="col-sm-2"> <input type="number" asp-for="BrutMetre"
-                                                class="form-control" placeholder="Brüt Metre"></div>
+                                                class="form-control" placeholder="Brüt Metre" required></div>
                                         <div class="col-sm-2"> <input type="number" asp-for="NetMetre"
-                                                class="form-control" placeholder="Net Metre"></div>
+                                                class="form-control" placeholder="Net Metre" required></div>
                                         <div class="col-sm-3">
                                             <div class="input-group md-3">
                                                 <input type="number" asp-for="OdaSayisi" class="form-control"
-                                                    placeholder="Oda">
+                                                    placeholder="Oda" required>
                                                 <span class="input-group-text">+</span>
                                                 <input type="number" asp-for="SalonSayisi" class="form-control"
-                                                    placeholder="Salon">
+                                                    placeholder="Salon" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-2"> <input type="number" asp-for="ToplamKat"
-                                                class="form-control" placeholder="Toplam kat"></div>
+                                                class="form-control" placeholder="Toplam kat" required></div>
                                         <div class="col-sm-2"> <input type="number" asp-for="BulunduguKat"
-                                                class="form-control" placeholder="Bulunduğu kat"></div>
+                                                class="form-control" placeholder="Bulunduğu kat" required></div>
 
                                     </div>
                                     <div class="row mb-3">
@@ -246,34 +245,34 @@
 
                                         <div class="col-sm-2">
                                             <select id="inputHeatingType" class="form-select" asp-for="IsitmaTipiId"
-                                                asp-items="@ViewData["HeatingTypes"] as IEnumerable<SelectListItem>">
-                                                <option selected disabled>Isıtma Tipi</option>
+                                                asp-items="@ViewData["HeatingTypes"] as IEnumerable<SelectListItem>" required>
+                                                <option selected value="" disabled>Isıtma Tipi</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
                                             <select id="inputInternetType" class="form-select" asp-for="InternetTipiId"
-                                                asp-items="@ViewData["InternetTypes"] as IEnumerable<SelectListItem>">
-                                                <option selected disabled>İnternet Tipi</option>
+                                                asp-items="@ViewData["InternetTypes"] as IEnumerable<SelectListItem>" required>
+                                                <option selected value="" disabled>İnternet Tipi</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-2">
                                             <select id="inputFlat" class="form-select" asp-for="CepheId"
-                                                asp-items="@ViewData["Fronts"] as IEnumerable<SelectListItem>">
-                                                <option selected disabled>Cephe</option>
+                                                asp-items="@ViewData["Fronts"] as IEnumerable<SelectListItem>" required>
+                                                <option selected value="" disabled>Cephe</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
                                             <select id="inputUseStatus" class="form-select" asp-for="KullanimDurumuId"
-                                                asp-items="@ViewData["UsingStatus"] as IEnumerable<SelectListItem>">
-                                                <option selected disabled>Kullanım Durumu</option>
+                                                asp-items="@ViewData["UsingStatus"] as IEnumerable<SelectListItem>" required>
+                                                <option selected value="" disabled>Kullanım Durumu</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
                                             <select id="inputDeedStatus" class="form-select" asp-for="TapuDurumuId"
-                                                asp-items="@ViewData["DeedStatus"] as IEnumerable<SelectListItem>">
-                                                <option selected disabled>Tapu Durumu</option>
+                                                asp-items="@ViewData["DeedStatus"] as IEnumerable<SelectListItem>" required>
+                                                <option selected value="" disabled>Tapu Durumu</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
@@ -312,8 +311,8 @@
                                 <label for="inputDaireProperties" class="col-sm-2 col-form-label">İlan Sahibi</label>
                                 <div class="col-sm-2">
                                     <select id="inputAgent" class="form-select" asp-for="AgentId"
-                                        asp-items="@ViewData["Agents"] as IEnumerable<SelectListItem>">
-                                        <option selected disabled>Danışman</option>
+                                        asp-items="@ViewData["Agents"] as IEnumerable<SelectListItem>" required>
+                                        <option selected value="" disabled>Danışman</option>
 
                                     </select>
                                 </div>

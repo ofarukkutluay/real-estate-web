@@ -100,7 +100,7 @@
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                 <!-- Profile Edit Form -->
-                                <form asp-action="UpdateUser" method="post" enctype="multipart/form-data">
+                                <form class="needs-validation" asp-action="UpdateUser" method="post" enctype="multipart/form-data">
                                     <input asp-for="@Model.Id" hidden />
                                     <div class="row mb-3">
                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
@@ -117,10 +117,10 @@
                                     <div class="row mb-3">
                                         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Ad Soyad </label>
                                         <div class="col-md-4 col-lg-3">
-                                            <input  type="text" class="form-control" id="firstName" asp-for="@Model.FirstName">
+                                            <input  type="text" class="form-control" id="firstName" asp-for="@Model.FirstName" required>
                                         </div>
                                         <div class="col-md-4 col-lg-3">
-                                            <input  type="text" class="form-control" id="lastName" asp-for="@Model.LastName">
+                                            <input  type="text" class="form-control" id="lastName" asp-for="@Model.LastName" required>
                                         </div>
                                     </div>
 
@@ -134,7 +134,7 @@
                                     <div class="row mb-3">
                                         <label for="mobile" class="col-md-4 col-lg-3 col-form-label">Mobile</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input  type="text" asp-for="@Model.MobileNumber" class="form-control" id="mobile">
+                                            <input  type="text" asp-for="@Model.MobileNumber" class="form-control" id="mobile" required>
                                         </div>
                                     </div>
 
@@ -148,7 +148,7 @@
                                     <div class="row mb-3">
                                         <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input  type="email" class="form-control" id="Email" asp-for="@Model.Email">
+                                            <input  type="email" class="form-control" id="Email" asp-for="@Model.Email" required>
                                         </div>
                                     </div>
 

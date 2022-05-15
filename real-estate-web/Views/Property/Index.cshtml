@@ -1,336 +1,370 @@
 @model PropertyVM
 
 @{
-  ViewData["Title"] = $"{Model.Title}";
+    ViewData["Title"] = $"{Model.Title}";
 }
 <!-- Navbar ve search -->
 @{
-  await Html.RenderPartialAsync("_Header", null);
+    await Html.RenderPartialAsync("_Header", null);
 }
 
 <main>
 
-  <!-- ======= Intro Single ======= -->
-  <section class="intro-single">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-lg-8">
-          <div class="title-single-box">
-            <h1 class="title-single">@Model.Title</h1>
-            <span class="color-text-a">@Model.Il / @Model.Ilce / @{
-                if (@Model.SiteIcerisindeMi)
-                {
-                  @Model.SiteAdi
-                }
-                else
-                {
-                  @Model.Mahalle
-                }
-              } </span>
-          </div>
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">@Model.Title</h1>
+                        <span class="color-text-a">
+                            @Model.Il / @Model.Ilce / @{
+                                if (@Model.SiteIcerisindeMi)
+                                {
+                                    @Model.SiteAdi
+                                }
+                                else
+                                {
+                                    @Model.Mahalle
+                                }
+                            }
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/properties">İlanlar</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                @Model.Title
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
-        <div class="col-md-12 col-lg-4">
-          <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a href="/">Home</a>
-              </li>
-              <li class="breadcrumb-item">
-                <a href="/properties">İlanlar</a>
-              </li>
-              <li class="breadcrumb-item active" aria-current="page">
-                @Model.Title
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </section><!-- End Intro Single-->
-
-  <!-- ======= Property Single ======= -->
-  <section class="property-single nav-arrow-b">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div id="property-single-carousel" class="swiper">
-            <div class="swiper-wrapper">
-              @{
-                foreach (var item in Model.PropertyPhotoPaths)
-                {
-                  <div class="carousel-item-b swiper-slide">
+    </section><!-- End Intro Single-->
+    <!-- ======= Property Single ======= -->
+    <section class="property-single nav-arrow-b">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    @*<div id="property-single-carousel" class="swiper">
+                    <div class="swiper-wrapper">
+                    @{
+                    foreach (var item in Model.PropertyPhotoPaths)
+                    {
+                    <div class="carousel-item-b swiper-slide">
                     <img src="@item" alt="">
-                  </div>
-                }
-              }
-            </div>
-          </div>
-          <div class="property-single-carousel-pagination carousel-pagination"></div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12">
-
-          <div class="row justify-content-between">
-            <div class="col-md-5 col-lg-4">
-              <div class="property-price d-flex justify-content-center foo">
-                <div class="card-header-c d-flex">
-                  <div class="card-box-ico">
-                    <span class="bi bi-cash">₺</span>
-                  </div>
-                  <div class="card-title-c align-self-center">
-                    <h5 class="title-c">@Model.Price</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="property-summary">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="title-box-d section-t4">
-                      <h3 class="title-d">Kısa Özet</h3>
                     </div>
-                  </div>
-                </div>
-                <div class="summary-list">
-                  <ul class="list">
-                    <li class="d-flex justify-content-between">
-                      <strong>İlan ID:</strong>
-                      <span>@Model.Id</span>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <strong>Adres:</strong>
-                      @if(@Model.SiteIcerisindeMi){
-                        <span>@Model.Il ili / @Model.Ilce ilçesi / @Model.SiteAdi sitesi  </span>
-                      }
-                       @if (!@Model.SiteIcerisindeMi){
-                          <span>@Model.Il ili / @Model.Ilce ilçesi / @Model.Mahalle mh. </span>
-                       }
+                    }
+                    }
+                    </div>
+                    </div>
+                    <div class="property-single-carousel-pagination carousel-pagination"></div>*@
+                    <div id="carouselProperty" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselProperty" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
+                            @for (int i = 1; i <= Model.PropertyPhotoPaths.Count(); i++)
+                            {
+                                <button type="button" data-bs-target="#carouselProperty" data-bs-slide-to="@i" aria-label="Slide @i"></button>
 
-                     
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <strong>Mülk Tipi:</strong>
-                      <span>@Model.PropertyType</span>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <strong>Durum:</strong>
-                      <span>@Model.Status</span>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <strong>Brüt Metre:</strong>
-                      <span>@Model.BrutMetre m
-                        <sup>2</sup>
-                      </span>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <strong>Oda:</strong>
-                      <span>@Model.OdaSayisi + @Model.SalonSayisi</span>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <strong>Banyo:</strong>
-                      <span>@Model.BanyoSayisi</span>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <strong>Otopark:</strong>
-                      @if (@Model.OtoparkSayisi==0 || @Model.OtoparkSayisi == null)
-                      {
-                        <span>Yok</span>
-                      }else
-                      {
-                        <span>@Model.OtoparkSayisi</span>
-                      }
-                    </li>
-                  </ul>
+                            }
+
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="@Model.BasePhotoPath" class="d-block w-100" alt="...">
+                            </div>
+                            @foreach (var item in Model.PropertyPhotoPaths)
+                            {
+                                <div class="carousel-item">
+                                    <img src="@item" class="d-block w-100" alt="...">
+                                </div>
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselProperty" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselProperty" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="col-md-7 col-lg-7 section-md-t3">
-              <div class="row">
+
+            <div class="row">
                 <div class="col-sm-12">
-                  <div class="title-box-d">
-                    <h3 class="title-d">Mülk Açıklaması</h3>
-                  </div>
+
+                    <div class="row justify-content-between">
+                        <div class="col-md-5 col-lg-4">
+                            <div class="property-price d-flex justify-content-center foo">
+                                <div class="card-header-c d-flex">
+                                    <div class="card-box-ico">
+                                        <span class="bi bi-cash">₺</span>
+                                    </div>
+                                    <div class="card-title-c align-self-center">
+                                        <h5 class="title-c">@Model.Price.ToString()</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-summary">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="title-box-d section-t4">
+                                            <h3 class="title-d">Kısa Özet</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="summary-list">
+                                    <ul class="list">
+                                        <li class="d-flex justify-content-between">
+                                            <strong>İlan ID:</strong>
+                                            <span>@Model.Id</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Adres:</strong>
+                                            @if (@Model.SiteIcerisindeMi)
+                                            {
+                                                <span>@Model.Il ili / @Model.Ilce ilçesi / @Model.SiteAdi sitesi  </span>
+                                            }
+                                            @if (!@Model.SiteIcerisindeMi)
+                                            {
+                                                <span>@Model.Il ili / @Model.Ilce ilçesi / @Model.Mahalle mh. </span>
+                                            }
+
+
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Mülk Tipi:</strong>
+                                            <span>@Model.PropertyType</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Durum:</strong>
+                                            <span>@Model.Status</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Brüt Metre:</strong>
+                                            <span>
+                                                @Model.BrutMetre m
+                                                <sup>2</sup>
+                                            </span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Oda:</strong>
+                                            <span>@Model.OdaSayisi + @Model.SalonSayisi</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Banyo:</strong>
+                                            <span>@Model.BanyoSayisi</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Otopark:</strong>
+                                            @if (@Model.OtoparkSayisi == 0 || @Model.OtoparkSayisi == null)
+                                            {
+                                                <span>Yok</span>
+                                            }
+                                            else
+                                            {
+                                                <span>@Model.OtoparkSayisi</span>
+                                            }
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-lg-7 section-md-t3">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="title-box-d">
+                                        <h3 class="title-d">Mülk Açıklaması</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-description">
+                                <p class="description color-text-a">
+                                    @Html.Raw(@Model.Description)
+                                </p>
+                                @* <p class="description color-text-a no-margin">
+                                Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget
+                                malesuada. Quisque velit nisi,
+                                pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
+                                </p> *@
+                            </div>
+                            <div class="row section-t3">
+                                <div class="col-sm-12">
+                                    <div class="title-box-d">
+                                        <h3 class="title-d">Özellikleri</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="amenities-list color-text-a">
+                                <ul class="list-a no-margin">
+                                    @if (@Model.BalkonSayisi > 0)
+                                    {
+                                        <li>@Model.BalkonSayisi Balkon</li>
+                                    }
+                                    @if (@Model.EsyaliMi)
+                                    {
+                                        <li>Eşyalı</li>
+                                    }
+                                    @if (@Model.KirediyeUygunMu)
+                                    {
+                                        <li>Krediye Uygun</li>
+                                    }
+                                    @if (@Model.AkilliEvMi)
+                                    {
+                                        <li>Akıllı Ev</li>
+                                    }
+                                    <li>@Model.InternetTipi</li>
+                                    <li>@Model.IsitmaTipi</li>
+                                    <li>@Model.KullanimDurumu durumda</li>
+                                    <li>@Model.BinaYasi Yaşında</li>
+                                    <li>@Model.Manzara manzaralı</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="property-description">
-                <p class="description color-text-a">
-                  @Html.Raw(@Model.Description)
-                </p>
-                @* <p class="description color-text-a no-margin">
-                  Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget
-                  malesuada. Quisque velit nisi,
-                  pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
-                  </p> *@
-              </div>
-              <div class="row section-t3">
-                <div class="col-sm-12">
-                  <div class="title-box-d">
-                    <h3 class="title-d">Özellikleri</h3>
-                  </div>
+                <div class="col-md-10 offset-md-1">
+                    <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-map-tab" data-bs-toggle="pill" href="#pills-map" role="tab"
+                               aria-controls="pills-map" aria-selected="true">Konum</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-video-tab" data-bs-toggle="pill" href="#pills-video" role="tab"
+                               aria-controls="pills-video" aria-selected="false">Video</a>
+                        </li>
+                        @* <li class="nav-item">
+                        <a class="nav-link" id="pills-plans-tab" data-bs-toggle="pill" href="#pills-plans" role="tab"
+                        aria-controls="pills-plans" aria-selected="false">Floor Plans</a>
+                        </li> *@
+
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
+                            <iframe src="@Model.KonumIFrame"
+                                    width="100%" height="460" frameborder="0" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="tab-pane fade " id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
+                            <iframe src="@Model.YoutubeLink" width="100%" height="460" frameborder="0"
+                                    webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        </div>
+                        @* <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
+                        <img src="/img/plan2.jpg" alt="" class="img-fluid">
+                        </div> *@
+
+                    </div>
                 </div>
-              </div>
-              <div class="amenities-list color-text-a">
-                <ul class="list-a no-margin">
-                  @if (@Model.BalkonSayisi>0)
-                  {
-                    <li>@Model.BalkonSayisi Balkon</li>
-                  }
-                  @if (@Model.EsyaliMi)
-                  {
-                    <li>Eşyalı</li>
-                  }
-                  @if(@Model.KirediyeUygunMu){
-                    <li>Krediye Uygun</li>
-                  }
-                  @if (@Model.AkilliEvMi)
-                  {
-                    <li>Akıllı Ev</li>
-                  }
-                  <li>@Model.InternetTipi</li>
-                  <li>@Model.IsitmaTipi</li>
-                  <li>@Model.KullanimDurumu durumda</li>
-                  <li>@Model.BinaYasi Yaşında</li>
-                  <li>@Model.Manzara manzaralı</li>
-                  
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-10 offset-md-1">
-          <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="pills-map-tab" data-bs-toggle="pill" href="#pills-map" role="tab"
-                aria-controls="pills-map" aria-selected="true">Konum</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="pills-video-tab" data-bs-toggle="pill" href="#pills-video" role="tab"
-                aria-controls="pills-video" aria-selected="false">Video</a>
-            </li>
-            @* <li class="nav-item">
-              <a class="nav-link" id="pills-plans-tab" data-bs-toggle="pill" href="#pills-plans" role="tab"
-                aria-controls="pills-plans" aria-selected="false">Floor Plans</a>
-            </li> *@
-            
-          </ul>
-          <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
-              <iframe
-                src="@Model.KonumIFrame"
-                width="100%" height="460" frameborder="0" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <div class="tab-pane fade " id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
-              <iframe src="@Model.YoutubeLink" width="100%" height="460" frameborder="0"
-                webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            </div>
-            @* <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
-              <img src="/img/plan2.jpg" alt="" class="img-fluid">
-            </div> *@
-            
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="row section-t3">
-            <div class="col-sm-12">
-              <div class="title-box-d">
-                <h3 class="title-d">Danışmanımız ile iletişime geçin</h3>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 col-lg-4">
-              <img src="@Model.AgentDto.ProfilePhotoPath" alt="" class="img-fluid">
-            </div>
-            <div class="col-md-6 col-lg-4">
-              <div class="property-agent">
-                <h4 class="title-agent">@Model.Agent</h4>
-                <p class="color-text-a">
-                  @Model.AgentDto.Description
-                </p>
-                <ul class="list-unstyled">
-                  <li class="d-flex justify-content-between">
-                    <strong>Sabit:</strong>
-                    <span class="color-text-a">@Model.AgentDto.PhoneNumber</span>
-                  </li>
-                  <li class="d-flex justify-content-between">
-                    <strong>Mobile:</strong>
-                    <span class="color-text-a">@Model.AgentDto.MobileNumber</span>
-                  </li>
-                  <li class="d-flex justify-content-between">
-                    <strong>Email:</strong>
-                    <span class="color-text-a">@Model.AgentDto.Email</span>
-                  </li>
-                  <li class="d-flex justify-content-between">
-                    <strong>WhatsApp:</strong>
-                    <span class="color-text-a"><a
-                        href="https://api.whatsapp.com/send?phone=@Model.AgentDto.MobileNumber">Tıklayınız</a></span>
-                  </li>
-                </ul>
-                <div class="socials-a">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <a href="@Model.AgentDto.FacebookLink">
-                        <i class="bi bi-facebook" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="@Model.AgentDto.TwitterLink">
-                        <i class="bi bi-twitter" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="@Model.AgentDto.InstagramLink">
-                        <i class="bi bi-instagram" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="@Model.AgentDto.LinkedinLink">
-                        <i class="bi bi-linkedin" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                  </ul>
+                <div class="col-md-12">
+                    <div class="row section-t3">
+                        <div class="col-sm-12">
+                            <div class="title-box-d">
+                                <h3 class="title-d">Danışmanımız ile iletişime geçin</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <img src="@Model.AgentDto.ProfilePhotoPath" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="property-agent">
+                                <h4 class="title-agent">@Model.Agent</h4>
+                                <p class="color-text-a">
+                                    @Model.AgentDto.Description
+                                </p>
+                                <ul class="list-unstyled">
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Sabit:</strong>
+                                        <span class="color-text-a">@Model.AgentDto.PhoneNumber</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Mobile:</strong>
+                                        <span class="color-text-a">@Model.AgentDto.MobileNumber</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Email:</strong>
+                                        <span class="color-text-a">@Model.AgentDto.Email</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>WhatsApp:</strong>
+                                        <span class="color-text-a">
+                                            <a href="https://api.whatsapp.com/send?phone=@Model.AgentDto.MobileNumber">Tıklayınız</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <div class="socials-a">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a href="@Model.AgentDto.FacebookLink">
+                                                <i class="bi bi-facebook" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="@Model.AgentDto.TwitterLink">
+                                                <i class="bi bi-twitter" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="@Model.AgentDto.InstagramLink">
+                                                <i class="bi bi-instagram" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="@Model.AgentDto.LinkedinLink">
+                                                <i class="bi bi-linkedin" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <div class="property-contact">
+                                <form class="form-a">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-1">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-lg form-control-a" id="inputName"
+                                                       placeholder="Name *" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-1">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control form-control-lg form-control-a" id="inputEmail1"
+                                                       placeholder="Email *" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-1">
+                                            <div class="form-group">
+                                                <textarea id="textMessage" class="form-control" placeholder="Comment *" name="message" cols="45"
+                                                          rows="8" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <button type="submit" class="btn btn-a">Send Message</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="col-md-12 col-lg-4">
-              <div class="property-contact">
-                <form class="form-a">
-                  <div class="row">
-                    <div class="col-md-12 mb-1">
-                      <div class="form-group">
-                        <input type="text" class="form-control form-control-lg form-control-a" id="inputName"
-                          placeholder="Name *" required>
-                      </div>
-                    </div>
-                    <div class="col-md-12 mb-1">
-                      <div class="form-group">
-                        <input type="email" class="form-control form-control-lg form-control-a" id="inputEmail1"
-                          placeholder="Email *" required>
-                      </div>
-                    </div>
-                    <div class="col-md-12 mb-1">
-                      <div class="form-group">
-                        <textarea id="textMessage" class="form-control" placeholder="Comment *" name="message" cols="45"
-                          rows="8" required></textarea>
-                      </div>
-                    </div>
-                    <div class="col-md-12 mt-3">
-                      <button type="submit" class="btn btn-a">Send Message</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section><!-- End Property Single-->
+    </section><!-- End Property Single-->
 
 </main><!-- End #main -->
-
-
 @{
-  await Html.RenderPartialAsync("_Footer", null);
+    await Html.RenderPartialAsync("_Footer", null);
 }
