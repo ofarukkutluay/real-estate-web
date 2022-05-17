@@ -1,4 +1,6 @@
-﻿namespace real_estate_web.Models.Database
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace real_estate_web.Models.Database
 {
     public class Property : BaseEntity
     {
@@ -32,6 +34,7 @@
         public string? SiteAdi { get; set; }
         public int KullanimDurumuId { get; set; }
         public int TapuDurumuId { get; set; }
+
         public double Price { get; set; }
         public double? Aidat { get; set; }
         public bool KirediyeUygunMu { get; set; }

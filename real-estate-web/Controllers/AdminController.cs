@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using real_estate_web.Tools.Helper;
 using System.Security.Claims;
 using real_estate_web.Tools.Hashing;
+using real_estate_web.Models.HelperEntities;
 
 namespace real_estate_web.Controllers
 {
@@ -294,10 +295,28 @@ namespace real_estate_web.Controllers
 
         public async Task<IActionResult> RemoveAgent(int id)
         {
+            Agent agent = await _agentRepository.GetAsync(x => x.Id == id);
+            if (agent.Role == Roles.Admin)
+            {
+                if (HttpContext.User.IsInRole(Roles.Admin))
+                {
+                    await _agentRepository.RemoveAsync(id);
+                    await _agentRepository.SaveAsync();
+                    SuccessAlert("Admin Silindi");
+                    return RedirectToAction("Agent");
+                }
+                else
+                {
+                    DangerAlert("Sadece admin, admin kullanıcısını silebilir");
+                    return RedirectToAction("Agent");
+                }
+            }
+
             await _agentRepository.RemoveAsync(id);
             await _agentRepository.SaveAsync();
             SuccessAlert("Silindi");
             return RedirectToAction("Agent");
+
         }
 
         public IActionResult AgentUpdate(int id)
@@ -337,7 +356,8 @@ namespace real_estate_web.Controllers
             agent.LinkedinLink = model.LinkedinLink;
             agent.TwitterLink = model.TwitterLink;
             agent.YoutubeLink = model.YoutubeLink;
-            agent.Role = model.Role;
+            if (model.Role is not null)
+                agent.Role = model.Role;
             if (await _agentRepository.GetCountAsync(x => x.IsFavoritUser) <= 3)
             {
                 agent.IsFavoritUser = model.IsFavoritUser;

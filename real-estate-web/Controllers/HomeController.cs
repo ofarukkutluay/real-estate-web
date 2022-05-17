@@ -5,6 +5,7 @@ using real_estate_web.Data.Abstract;
 using real_estate_web.Models.Database.Dtos;
 using AutoMapper;
 using real_estate_web.Models.Database;
+using real_estate_web.Models.HelperEntities;
 
 namespace real_estate_web.Controllers
 {
@@ -16,7 +17,8 @@ namespace real_estate_web.Controllers
         private readonly IBlogRepository _blogRepository;
         private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, IAgentRepository agentRepository, IPropertyRepository propertyRepository,IBlogRepository blogRepository, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, IAgentRepository agentRepository, IPropertyRepository propertyRepository, IBlogRepository blogRepository, 
+            IMapper mapper)
         {
             _logger = logger;
             _agentRepository = agentRepository;
@@ -32,7 +34,7 @@ namespace real_estate_web.Controllers
             IEnumerable<PropertyDto> allPoperty = _propertyRepository.GetListPropertyDto();
             IEnumerable<PropertyVM> propertyVMs = _mapper.Map<IEnumerable<PropertyVM>>(allPoperty);
             IEnumerable<Blog> blogs = await _blogRepository.GetListAsync();
-            return View(Tuple.Create<IEnumerable<AgentVM>, IEnumerable<PropertyVM>, IEnumerable<Blog>>(agentVMs, propertyVMs,blogs));
+            return View(Tuple.Create<IEnumerable<AgentVM>, IEnumerable<PropertyVM>, IEnumerable<Blog>>(agentVMs, propertyVMs, blogs));
         }
 
         public IActionResult Privacy()
@@ -43,7 +45,9 @@ namespace real_estate_web.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var error = new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
+            _logger.LogError($"Error({Activity.Current?.Id})", error);
+            return View(error);
         }
     }
 }

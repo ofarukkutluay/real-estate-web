@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using real_estate_web.Data.Abstract;
 using real_estate_web.Data.Common;
 using real_estate_web.Data.EntityFramework;
+using real_estate_web.Tools.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,9 +37,10 @@ builder.Services.AddScoped<ICityRepository, EfCityRepository>();
 builder.Services.AddScoped<IStatusRepository, EfStatusDal>();
 builder.Services.AddScoped<IStreetRepository, EfStreetDal>();
 builder.Services.AddScoped<IUsingStatusRepository, EfUsingStatusDal>();
-builder.Services.AddScoped<IAboutRepository,EfAboutDal>();
-builder.Services.AddScoped<IContactRepository,EfContactDal>();
-builder.Services.AddScoped<IBlogRepository,EfBlogDal>();
+builder.Services.AddScoped<IAboutRepository, EfAboutDal>();
+builder.Services.AddScoped<IContactRepository, EfContactDal>();
+builder.Services.AddScoped<IBlogRepository, EfBlogDal>();
+builder.Services.AddScoped<ILogRepository, EfLogDal>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
@@ -70,6 +72,8 @@ using (var scope = app.Services.CreateScope())
     DataGenerator.Initialize(services);
 }
 
+app.UseCustomExceptionMiddleware();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -89,7 +93,8 @@ app.Use(async (context, next) =>
     await next();
 });
 
-app.UseStatusCodePages(async context => {
+app.UseStatusCodePages(async context =>
+{
     var request = context.HttpContext.Request;
     var response = context.HttpContext.Response;
 

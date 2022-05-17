@@ -1,4 +1,5 @@
 using real_estate_web.Models.Database.Dtos;
+using System.ComponentModel.DataAnnotations;
 
 namespace real_estate_web.Models.ViewModel
 {
@@ -60,6 +61,7 @@ namespace real_estate_web.Models.ViewModel
         public AgentDto AgentDto { get; set; }
         public List<IFormFile> PropertyPhotos { get; set; }
         public IFormFile BasePhoto { get; set; }
+
 
     }
 }

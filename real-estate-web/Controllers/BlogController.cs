@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using real_estate_web.Data.Abstract;
+using real_estate_web.Models.Database;
 
 namespace real_estate_web.Controllers
 {
@@ -21,11 +22,15 @@ namespace real_estate_web.Controllers
         }
 
         [HttpGet("blogs")]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page= 0)
         {
-            var blogs = await _blogRepository.GetListAsync();
+            int pageSize = 9;
+            IEnumerable<Blog> blogs = await _blogRepository.GetListAsync();
+            int sumPage = blogs.Count() / pageSize;
+            sumPage = sumPage == 0 ? 1 : sumPage;
+            IEnumerable<Blog> sizedBlogs = blogs.Skip(page*pageSize).Take(pageSize);
 
-            return View(blogs);
+            return View(Tuple.Create<IEnumerable<Blog>,int>(sizedBlogs,sumPage));
         }
 
     }

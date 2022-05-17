@@ -1,4 +1,6 @@
-﻿namespace real_estate_web.Models.Database
+﻿using real_estate_web.Models.HelperEntities;
+
+namespace real_estate_web.Models.Database
 {
     public class User : BaseEntity
     {

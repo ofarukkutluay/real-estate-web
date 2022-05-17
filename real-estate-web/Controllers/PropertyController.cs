@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using real_estate_web.Data.Abstract;
 using real_estate_web.Models.Database.Dtos;
+using real_estate_web.Models.HelperEntities;
 using real_estate_web.Models.ViewModel;
 
 namespace real_estate_web.Controllers
@@ -33,11 +34,16 @@ namespace real_estate_web.Controllers
         }
 
         [HttpGet("properties")]
-        public IActionResult All()
+        public IActionResult All(int page=0)
         {
-            IEnumerable<PropertyDto> Propertys = _propertyRepository.GetListPropertyDto();
-            IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM> >(Propertys);
-            return View(vm);
+            int pageSize = 12;
+            IEnumerable<PropertyDto> properties = _propertyRepository.GetListPropertyDto().OrderBy(x=>x.Id);
+            int sumPage = properties.Count()/pageSize;
+            sumPage = sumPage==0 ? 1 : sumPage;
+            IEnumerable<PropertyDto> sizedProperties = properties.Skip(page * pageSize).Take(pageSize);
+            IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM> >(sizedProperties);
+            
+            return View(Tuple.Create<IEnumerable<PropertyVM>,int>(vm,sumPage));
         }
 
 

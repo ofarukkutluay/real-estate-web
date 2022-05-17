@@ -22,23 +22,23 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Ayarlar</h5>
-                        <form asp-action="UpdateContact" method="post">
+                        <form class="needs-validation" asp-action="UpdateContact" method="post">
                             <input asp-for="Id" class="form-control" hidden >
                             <div class="row mb-3"> <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10"> <input type="email" asp-for="Email" class="form-control"></div>
+                                <div class="col-sm-10"> <input type="email" asp-for="Email" class="form-control" required></div>
                             </div>
                             <div class="row mb-3"> <label for="inputPhoneNumber" class="col-sm-2 col-form-label">Telefon Numarası</label>
-                                <div class="col-sm-10"> <input type="text" asp-for="PhoneNumber" class="form-control"></div>
+                                <div class="col-sm-10"> <input type="text" asp-for="PhoneNumber" class="form-control" required></div>
                             </div>
                             <div class="row mb-3"> <label for="inputGoogleMap" class="col-sm-2 col-form-label">Google IFrame Url</label>
                                 <div class="col-sm-10"> <input type="text" asp-for="GoogleIFrameUrl" class="form-control"></div>
                             </div>
                             <div class="row mb-3"> <label for="inputAddress" class="col-sm-2 col-form-label">Adres</label>
-                                <div class="col-sm-10"> <input type="text" asp-for="Address" class="form-control"></div>
+                                <div class="col-sm-10"> <input type="text" asp-for="Address" class="form-control" required></div>
                             </div>
                             <div class="row mb-3"> <label for="inputHeader"
                                     class="col-sm-2 col-form-label">İçerik Başlık Açıklaması</label>
-                                <div class="col-sm-10"><textarea asp-for="HeaderDescription" class="form-control" sstyle="height: 100px"></textarea>
+                                <div class="col-sm-10"><textarea asp-for="HeaderDescription" class="form-control" sstyle="height: 100px" required></textarea>
                                 </div>
                                 <span class="text-danger" asp-validation-for="HeaderDescription"></span>
                             </div>

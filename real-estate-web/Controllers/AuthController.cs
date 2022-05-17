@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using real_estate_web.Data.Abstract;
 using real_estate_web.Models.Database;
+using real_estate_web.Models.HelperEntities;
 using real_estate_web.Models.ViewModel;
 using real_estate_web.Tools.Hashing;
 using real_estate_web.Tools.Results;

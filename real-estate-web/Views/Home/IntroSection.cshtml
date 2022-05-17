@@ -25,7 +25,7 @@
                       <br> @item.Title.ToUpper()
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="/property/@item.Id"><span class="price-a">@item.Status | ₺ @item.Price</span></a>
+                      <a href="/property/@item.Id"><span class="price-a">@item.Status | ₺ @item.Price.ToString("##,#")</span></a>
                     </p>
                   </div>
                 </div>
