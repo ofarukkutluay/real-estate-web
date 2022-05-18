@@ -39,11 +39,11 @@ namespace real_estate_web.Controllers
             int pageSize = 12;
             IEnumerable<PropertyDto> properties = _propertyRepository.GetListPropertyDto().OrderBy(x=>x.Id);
             int sumPage = properties.Count()/pageSize;
-            sumPage = sumPage==0 ? 1 : sumPage;
+            ViewBag.SumPage = sumPage==0 ? 1 : sumPage;
             IEnumerable<PropertyDto> sizedProperties = properties.Skip(page * pageSize).Take(pageSize);
             IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM> >(sizedProperties);
             
-            return View(Tuple.Create<IEnumerable<PropertyVM>,int>(vm,sumPage));
+            return View(vm);
         }
 
 

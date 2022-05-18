@@ -98,13 +98,13 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="formBaseFile" class="col-sm-2 col-form-label">Base Photo Upload</label>
+                                <label for="formBaseFile" class="col-sm-2 col-form-label">Baş Fotoğraf Yükle</label>
                                 <div class="col-sm-6">
                                     <input asp-for="BasePhoto" class="form-control" type="file" id="formBaseFile">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="formFile" class="col-sm-2 col-form-label">Other Photo Upload</label>
+                                <label for="formFile" class="col-sm-2 col-form-label">Diğer Fotoğrafları Yükle</label>
                                 <div class="col-sm-6">
                                     <input asp-for="PropertyPhotos" class="form-control" type="file" id="formFile"
                                         multiple>
@@ -226,10 +226,23 @@
                                                     placeholder="Salon" required>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2"> <input type="number" asp-for="ToplamKat"
-                                                class="form-control" placeholder="Toplam kat" required></div>
-                                        <div class="col-sm-2"> <input type="number" asp-for="BulunduguKat"
-                                                class="form-control" placeholder="Bulunduğu kat" required></div>
+                                        <div class="col-sm-3">
+                                            <div class="input-group md-3">
+                                                <input type="number" asp-for="BulunduguKat"
+                                                   class="form-control" placeholder="Katı" required>
+
+                                                <span class="input-group-text">/</span>
+                                                <input type="number" asp-for="ToplamKat"
+                                                   class="form-control" placeholder="Top. kat" required>
+
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-2">
+                                            <input type="number" asp-for="BinaYasi"
+                                                   class="form-control" placeholder="Yaşı" required>
+
+                                        </div>
 
                                     </div>
                                     <div class="row mb-3">

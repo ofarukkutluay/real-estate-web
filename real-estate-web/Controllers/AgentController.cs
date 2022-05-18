@@ -35,10 +35,10 @@ namespace real_estate_web.Controllers
             int pageSize = 9;
             IEnumerable<AgentDto> agents = _agentRepository.GetListAgentDto();
             int sumPage = agents.Count() / pageSize;
-            sumPage = sumPage == 0 ? 1 : sumPage;
+            ViewBag.SumPage = sumPage == 0 ? 1 : sumPage;
             IEnumerable<AgentDto> sizedAgentDtos = agents.Skip(page*pageSize).Take(pageSize);
             IEnumerable<AgentVM> vm = _mapper.Map<IEnumerable<AgentVM> >(sizedAgentDtos);
-            return View(Tuple.Create<IEnumerable<AgentVM>,int>(vm,sumPage));
+            return View(vm);
         }
 
 

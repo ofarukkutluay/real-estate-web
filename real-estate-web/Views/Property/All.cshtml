@@ -5,7 +5,7 @@
 @{
     await Html.RenderPartialAsync("_Header", null);
 }
-@model Tuple<IEnumerable<PropertyVM>,int>
+@model IEnumerable<PropertyVM>
 
 
 <main>
@@ -51,7 +51,7 @@
                         </form>
                     </div>
                 </div>
-                @foreach (var item in Model.Item1)
+                @foreach (var item in Model)
                 {
                     <div class="col-md-4">
                         <div class="card-box-a card-shadow">
@@ -63,8 +63,11 @@
                                     <div class="card-header-a">
                                         <h2 class="card-title-a">
                                             <a href="/property/@item.Id">
-                                                @item.Il / @item.Ilce
-                                                <br /> @item.Title
+                                                <p class="fs-6">
+                                                    @item.Mahalle MH, @item.Ilce
+                                                    <br> @item.Il
+                                                </p>
+                                                @item.Title
                                             </a>
                                         </h2>
                                     </div>
@@ -126,9 +129,9 @@
                             <li class="page-item">
                                 <a class="page-link" asp-action="All" asp-route-page="0">1</a>
                             </li>
-                            @if (Model.Item2 > 1)
+                            @if (ViewBag.SumPage > 1)
                             {
-                                @for (var i = 1; i < Model.Item2; i++)
+                                @for (var i = 1; i < ViewBag.SumPage; i++)
                                 {
                                     int a = i + 1;
                                     <li class="page-item">

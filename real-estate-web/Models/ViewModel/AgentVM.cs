@@ -17,6 +17,8 @@ namespace real_estate_web.Models.ViewModel
         public string? YoutubeLink { get; set; }
         public int? JobTitleId { get; set; }
         public string? JobTitleName { get; set; }
+        public int PropertyCount { get; set; }
+
 
         public IFormFile? ProfilePhoto { get; set; }
         public string ProfilePhotoPath { get; set; }

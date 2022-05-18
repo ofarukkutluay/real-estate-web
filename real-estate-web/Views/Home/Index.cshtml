@@ -134,8 +134,11 @@
                                         <div class="card-header-a">
                                             <h2 class="card-title-a">
                                                 <a href="/property/@item.Id">
-                                                    @item.Il / @item.Ilce
-                                                    <br /> @item.Title
+                                                    <p class="fs-6">
+                                                        @item.Mahalle MH, @item.Ilce
+                                                        <br> @item.Il
+                                                    </p>
+                                                    @item.Title
                                                 </a>
                                             </h2>
                                         </div>
@@ -303,29 +306,31 @@
                     @foreach (var item in @Model.Item3)
                     {
                         <div class="carousel-item-c swiper-slide">
-                        <div class="card-box-b card-shadow news-box">
-                            <div class="img-box-b">
-                                <img src="@item.BasePhotoPath" alt="" class="img-b img-fluid">
-                            </div>
-                            <div class="card-overlay">
-                                <div class="card-header-b">
-                                    <div class="card-category-b">
-                                        <a href="#" class="category-b">@item.Category</a>
-                                    </div>
-                                    <div class="card-title-b">
-                                        <h2 class="title-2">
-                                            <a href="/blog/@item.Id">
-                                                @item.Title
-                                            </a>
-                                        </h2>
-                                    </div>
-                                    <div class="card-date">
-                                        <span class="date-b">@item.Date</span>
+                            <div class="card-box-b card-shadow news-box">
+                                <div class="img-box-b">
+                                    <img src="@item.BasePhotoPath" alt="" class="img-b img-fluid">
+                                </div>
+                                <div class="card-overlay">
+                                    <div class="card-header-b">
+                                        <div class="card-category-b">
+                                            <a href="#" class="category-b">@item.Category</a>
+                                        </div>
+                                        <div class="card-title-b">
+                                            <h2 class="title-2">
+                                                <a href="/blog/@item.Id">
+                                                    @item.Title
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div class="card-date">
+                                            <span class="date-b">@item.Date</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div><!-- End carousel item -->
+
+                        <!-- End carousel item -->
                     }
 
                 </div>

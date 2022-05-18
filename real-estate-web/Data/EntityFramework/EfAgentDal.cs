@@ -36,8 +36,9 @@ namespace real_estate_web.Data.EntityFramework
                              JobTitleId = jt.Id,
                              JobTitleName = jt.Name,
                              ProfilePhotoPath = a.ProfilePhotoPath,
-                             IsFavoritUser = a.IsFavoritUser
-                         };
+                             IsFavoritUser = a.IsFavoritUser,
+                            PropertyCount = (from p in Context.Properties where p.AgentId == a.Id select p).Count()
+                        };
 
             return result;
         }
@@ -64,7 +65,8 @@ namespace real_estate_web.Data.EntityFramework
                              JobTitleId = jt.Id,
                              JobTitleName = jt.Name,
                              ProfilePhotoPath = a.ProfilePhotoPath,
-                             IsFavoritUser = a.IsFavoritUser
+                             IsFavoritUser = a.IsFavoritUser,
+                             PropertyCount = (from p in Context.Properties where p.AgentId == a.Id select p).Count()
                          };
 
             return result;
@@ -95,8 +97,9 @@ namespace real_estate_web.Data.EntityFramework
                              JobTitleId = jt.Id,
                              JobTitleName = jt.Name,
                              ProfilePhotoPath = a.ProfilePhotoPath,
-                             IsFavoritUser = a.IsFavoritUser
-                         };
+                             IsFavoritUser = a.IsFavoritUser,
+                            PropertyCount = (from p in Context.Properties where p.AgentId == a.Id select p).Count()
+                        };
 
             return result.FirstOrDefault();
         }

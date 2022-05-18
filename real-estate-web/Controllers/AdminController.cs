@@ -282,7 +282,7 @@ namespace real_estate_web.Controllers
         // Agent Danışman veya kullanıcı sayfası
         public IActionResult Agent()
         {
-            var agents = _agentRepository.GetListAllAgentDto();
+            var agents = _agentRepository.GetListAllAgentDto().OrderByDescending(x => x.Id);
             IEnumerable<AgentVM> vm = _mapper.Map<IEnumerable<AgentVM>>(agents);
             return View(vm);
         }
@@ -296,6 +296,12 @@ namespace real_estate_web.Controllers
         public async Task<IActionResult> RemoveAgent(int id)
         {
             Agent agent = await _agentRepository.GetAsync(x => x.Id == id);
+            int agentPropertyCount = await _propertyRepository.GetCountAsync(x=>x.AgentId == id);
+            if (agentPropertyCount > 0)
+            {
+                DangerAlert("İlanı olan danışmanı silemezsiniz!");
+                return RedirectToAction("Agent");
+            }
             if (agent.Role == Roles.Admin)
             {
                 if (HttpContext.User.IsInRole(Roles.Admin))
@@ -346,8 +352,8 @@ namespace real_estate_web.Controllers
             }
             agent.FirstName = model.FirstName;
             agent.LastName = model.LastName;
-            agent.Email = model.Email;
-            agent.MobileNumber = model.MobileNumber;
+            agent.Email = model.Email.Trim();
+            agent.MobileNumber = model.MobileNumber.Trim();
             agent.PhoneNumber = model.PhoneNumber;
             agent.Description = model.Description;
             agent.FacebookLink = model.FacebookLink;
@@ -370,7 +376,7 @@ namespace real_estate_web.Controllers
         //Propety Mülk sayfası
         public IActionResult Property()
         {
-            IEnumerable<PropertyDto> properties = _propertyRepository.GetListPropertyDto();
+            IEnumerable<PropertyDto> properties = _propertyRepository.GetListPropertyDto().OrderByDescending(x => x.Id);
             IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM>>(properties);
             return View(vm);
         }
@@ -386,9 +392,9 @@ namespace real_estate_web.Controllers
         {
             // property add
             Property property = _mapper.Map<Property>(model);
-            if (model.KonumIFrame is null)
+            if (model.KonumIFrame is null || model.KonumIFrame.Trim().Equals(""))
                 property.KonumIFrame = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192697.79327595135!2d28.8720964464606!3d41.00549580940238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1651089326725!5m2!1str!2str";
-            if (model.YoutubeLink != null)
+            if (model.YoutubeLink != null && !model.YoutubeLink.Trim().Equals(""))
             {
                 if (!model.YoutubeLink.Contains("embed"))
                 {
@@ -518,9 +524,11 @@ namespace real_estate_web.Controllers
             property.Aidat = model.Aidat;
             property.KirediyeUygunMu = model.KirediyeUygunMu;
             property.AgentId = model.AgentId;
-            property.KonumIFrame = model.KonumIFrame;
 
-            if (model.YoutubeLink != null)
+            if (model.KonumIFrame is null || model.KonumIFrame.Trim().Equals(""))
+                property.KonumIFrame = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192697.79327595135!2d28.8720964464606!3d41.00549580940238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1651089326725!5m2!1str!2str";
+            
+            if (model.YoutubeLink != null && !model.YoutubeLink.Trim().Equals(""))
             {
                 if (!model.YoutubeLink.Contains("embed"))
                 {
@@ -557,7 +565,7 @@ namespace real_estate_web.Controllers
         public async Task<IActionResult> Blog()
         {
             IEnumerable<Blog> blogs = await _blogRepository.GetListAsync();
-            return View(blogs);
+            return View(blogs.OrderBy(x=>x.Id));
         }
 
         [HttpGet("admin/blogadd")]
@@ -649,7 +657,7 @@ namespace real_estate_web.Controllers
             }
             agent.FirstName = model.FirstName;
             agent.LastName = model.LastName;
-            agent.Email = model.Email;
+            agent.Email = model.Email.Trim();
             agent.MobileNumber = model.MobileNumber;
             agent.PhoneNumber = model.PhoneNumber;
             agent.Description = model.Description;

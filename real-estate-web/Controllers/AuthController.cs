@@ -34,7 +34,7 @@ namespace real_estate_web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginUserVM model)
         {
-            Agent agent = await _agentRepository.GetAsync(x => x.Email == model.Email);
+            Agent agent = await _agentRepository.GetAsync(x => x.Email == model.Email.Trim());
             if (agent is null)
             {
                 DangerAlert("kullanıcı bulunamadı!");
@@ -70,19 +70,19 @@ namespace real_estate_web.Controllers
         {
 
             byte[] passHash, passSalt;
-            Agent agent = await _agentRepository.GetAsync(x => x.Email == model.Email);
+            Agent agent = await _agentRepository.GetAsync(x => x.Email == model.Email.Trim());
             if (agent is not null)
             {
                 DangerAlert("Kullanıcı zaten mevcut!");
-                return View();
+                return Redirect(Request.Headers["Referer"].ToString());
             }
             HashingHelper.CreatePasswordHash(model.Password, out passSalt, out passHash);
             agent = new Agent()
             {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                MobileNumber = "90"+model.MobileNumber,
+                FirstName = model.FirstName.Trim(),
+                LastName = model.LastName.Trim(),
+                Email = model.Email.Trim(),
+                MobileNumber = "90"+model.MobileNumber.Trim(),
                 JobTitle = model.JobTitleId,
                 PassHash = passHash,
                 PassSalt = passSalt,

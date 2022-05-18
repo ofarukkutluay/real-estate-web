@@ -27,10 +27,10 @@ namespace real_estate_web.Controllers
             int pageSize = 9;
             IEnumerable<Blog> blogs = await _blogRepository.GetListAsync();
             int sumPage = blogs.Count() / pageSize;
-            sumPage = sumPage == 0 ? 1 : sumPage;
+            ViewBag.SumPage = sumPage == 0 ? 1 : sumPage;
             IEnumerable<Blog> sizedBlogs = blogs.Skip(page*pageSize).Take(pageSize);
 
-            return View(Tuple.Create<IEnumerable<Blog>,int>(sizedBlogs,sumPage));
+            return View(sizedBlogs);
         }
 
     }

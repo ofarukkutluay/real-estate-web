@@ -19,5 +19,6 @@ namespace real_estate_web.Models.Database.Dtos
         public int? JobTitleId { get; set; }
         public string? JobTitleName { get; set; }
         public bool IsFavoritUser { get; set; }
+        public int PropertyCount { get; set; }
     }
 }
