@@ -2,13 +2,9 @@
     ViewData["Title"] = "Tüm Danışmanlar";
 }
 <!-- Navbar ve search -->
-@{
-    await Html.RenderPartialAsync("_Header", null);
-}
+
 @model IEnumerable<AgentVM>
 
-
-<main>
     <!-- =======Intro Single ======= -->
     <section class="intro-single">
         <div class="container">
@@ -137,12 +133,3 @@
             </div>
         </div>
     </section><!-- End Agents Grid-->
-
-</main><!-- End #main -->
-
-
-
-
-@{
-    await Html.RenderPartialAsync("_Footer", null);
-}

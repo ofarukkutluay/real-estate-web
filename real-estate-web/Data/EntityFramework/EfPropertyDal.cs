@@ -74,6 +74,8 @@ namespace real_estate_web.Data.EntityFramework
                                 Agent = $"{a.FirstName} {a.LastName}",
                                 AgentId = p.AgentId,
                                 KonumIFrame = p.KonumIFrame,
+                                CreatedDate = p.CreatedDate,
+                                UpdatedDate = p.UpdatedDate,
                                 BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x=>x.BasePhoto).Path,
                                 PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count()
                             };
@@ -145,6 +147,8 @@ namespace real_estate_web.Data.EntityFramework
                                 Agent = $"{a.FirstName} {a.LastName}",
                                 AgentId = p.AgentId,
                                 KonumIFrame = p.KonumIFrame,
+                                CreatedDate = p.CreatedDate,
+                                UpdatedDate = p.UpdatedDate,
                                 BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x=>x.BasePhoto).Path,
                                 PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count()
                             };
@@ -216,6 +220,8 @@ namespace real_estate_web.Data.EntityFramework
                                 Agent = $"{a.FirstName} {a.LastName}",
                                 AgentId = p.AgentId,
                                 KonumIFrame = p.KonumIFrame,
+                                CreatedDate = p.CreatedDate,
+                                UpdatedDate = p.UpdatedDate,
                                 BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x=>x.BasePhoto).Path,
                                 PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count()
                             };

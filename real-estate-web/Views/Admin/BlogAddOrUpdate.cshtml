@@ -4,21 +4,13 @@
     ViewData["Title"] = "Admin - Blog Ekle/Güncelle";
 }
 
-@{
-    await Html.RenderPartialAsync("~/Views/Admin/_Header.cshtml", null);
-}
 
-@{
-    await Html.RenderPartialAsync("~/Views/Admin/_Sidebar.cshtml", null);
-}
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
     $(function () {
 
 
-           var quill = new Quill('#quill', {
+           var quill = new Quill('#blog-quill', {
                placeholder: 'İçerik...',
                theme: 'snow'
            });
@@ -37,7 +29,6 @@
 </script>
 
 
-<main style="margin-top: 70px;margin-bottom: 70px;" id="main" class="main">
     <section class="section dashboard">
         <div class="container">
             <div class="row">
@@ -81,7 +72,7 @@
                                     <input asp-for="Content" class="form-control"
                                            name="content" id="content" hidden>
 
-                                    <div class="quill-editor-default" id="quill"></div>
+                                    <div class="quill-editor-default" id="blog-quill"></div>
 
                                 </div>
                             </div>
@@ -131,7 +122,4 @@
         </div>
     </section>
 
-</main><!-- End #main -->
-@{
-    await Html.RenderPartialAsync("~/Views/Admin/_Footer.cshtml", null);
-}
+

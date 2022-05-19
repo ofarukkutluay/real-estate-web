@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yj6TD0tqJ6cHyvJyIMgLdsmJv4Al/mvCR0cFCbAoMDI=",
+  "Hash": "9z/5f7TmqBn3aoA0k7Or8uUJafltHlYUXsUwRNeYUSM=",
   "Source": "real-estate-web",
   "BasePath": "_content/real-estate-web",
   "Mode": "Default",
@@ -797,6 +797,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\testimonial-2.jpg"
+    },
+    {
+      "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\js\\admin.js",
+      "SourceId": "real-estate-web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\",
+      "BasePath": "_content/real-estate-web",
+      "RelativePath": "js/admin.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\admin.js"
     },
     {
       "Identity": "E:\\Projects\\CSharp\\source\\repos\\real-estate-web\\real-estate-web\\wwwroot\\js\\site.js",

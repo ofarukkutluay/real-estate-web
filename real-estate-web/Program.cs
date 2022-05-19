@@ -72,7 +72,7 @@ using (var scope = app.Services.CreateScope())
     DataGenerator.Initialize(services);
 }
 
-app.UseCustomExceptionMiddleware();
+//app.UseCustomExceptionMiddleware();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

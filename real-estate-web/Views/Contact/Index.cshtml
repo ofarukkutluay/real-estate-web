@@ -3,13 +3,7 @@
 }
 @model Contact
 
-<!-- Navbar ve search -->
-@{
-  await Html.RenderPartialAsync("_Header", null);
-}
 
-
-  <main>
 
     <!-- ======= Intro Single ======= -->
     <section class="intro-single">
@@ -164,10 +158,3 @@
         </div>
       </div>
     </section><!-- End Contact Single-->
-
-  </main><!-- End #main -->
-
-
-  @{
-  await Html.RenderPartialAsync("_Footer", null);
-}

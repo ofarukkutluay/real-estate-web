@@ -4,13 +4,7 @@
     ViewData["Title"] = "Admin - Mülk Güncelle";
 }
 
-@{
-    await Html.RenderPartialAsync("~/Views/Admin/_Header.cshtml", null);
-}
 
-@{
-    await Html.RenderPartialAsync("~/Views/Admin/_Sidebar.cshtml", null);
-}
 
 <script type="text/javascript">
     $(function () {
@@ -82,7 +76,6 @@
     });
 </script>
 
-<main style="margin-top: 70px;margin-bottom: 70px;" id="main" class="main">
     <section class="section dashboard">
         <div class="container">
             <div class="row">
@@ -342,7 +335,3 @@
         </div>
     </section>
 
-</main><!-- End #main -->
-@{
-    await Html.RenderPartialAsync("~/Views/Admin/_Footer.cshtml", null);
-}

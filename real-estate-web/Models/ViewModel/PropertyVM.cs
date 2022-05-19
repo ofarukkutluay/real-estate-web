@@ -61,7 +61,8 @@ namespace real_estate_web.Models.ViewModel
         public AgentDto AgentDto { get; set; }
         public List<IFormFile> PropertyPhotos { get; set; }
         public IFormFile BasePhoto { get; set; }
-
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
 
     }
 }

@@ -4,12 +4,9 @@
 @model Tuple<About,IEnumerable<AgentVM>>
 
 
-<!-- Navbar ve search -->
-@{
-    await Html.RenderPartialAsync("_Header", null);
-}
 
-<main>
+
+
 
     <!-- ======= Intro Single ======= -->
     <section class="intro-single">
@@ -168,7 +165,3 @@
         </div>
     </section><!-- End About Section-->
 
-</main><!-- End #main -->
-@{
-    await Html.RenderPartialAsync("_Footer", null);
-}

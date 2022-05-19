@@ -15,37 +15,34 @@
     <link href="~/img/apple-touch-icon.jpg" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
 
 
-    <link href="~/lib/animate.css/animate.min.css" rel="stylesheet">
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/lib/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="~/lib/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/lib/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/lib/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/lib/remixicon/remixicon.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="~/css/realestatestyle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/adminstyle.css" asp-append-version="true" />
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery/dist/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-    <!-- Navbar ve search -->
-    @{
-        await Html.RenderPartialAsync("_Header", null);
-    }
-
-    <main id="main">
-        @RenderBody()
-    </main>
-    @{
-        await Html.RenderPartialAsync("_Footer", null);
-    }
 
 
-    <script src="~/lib/swiper/swiper-bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <main>
+    @RenderBody()
+    </main><!-- End #main -->
+
+
+    <script src="~/lib/quill/quill.js"></script>
+    <script src="~/js/admin.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

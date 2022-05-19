@@ -66,10 +66,14 @@ namespace real_estate_web.Controllers
 
 
         //Admin welcome panel
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-
-            return View();
+            ViewBag.PropertyCount = await _propertyRepository.GetCountAsync();
+            ViewBag.AgentCount = await _agentRepository.GetCountAsync();
+            ViewBag.BlogCount = await _blogRepository.GetCountAsync();
+            IEnumerable<PropertyDto> propertyDtos = _propertyRepository.GetListPropertyDto().OrderByDescending(x=>x.CreatedDate).Take(5);
+            IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM>>(propertyDtos);
+            return View(vm);
         }
 
 

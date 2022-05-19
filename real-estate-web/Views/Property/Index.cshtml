@@ -3,12 +3,7 @@
 @{
     ViewData["Title"] = $"{Model.Title}";
 }
-<!-- Navbar ve search -->
-@{
-    await Html.RenderPartialAsync("_Header", null);
-}
 
-<main>
 
     <!-- ======= Intro Single ======= -->
     <section class="intro-single">
@@ -364,7 +359,3 @@
         </div>
     </section><!-- End Property Single-->
 
-</main><!-- End #main -->
-@{
-    await Html.RenderPartialAsync("_Footer", null);
-}

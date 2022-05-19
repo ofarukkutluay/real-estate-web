@@ -1,14 +1,9 @@
 @{
     ViewData["Title"] = "Tüm Mülkler";
 }
-<!-- Navbar ve search -->
-@{
-    await Html.RenderPartialAsync("_Header", null);
-}
+
 @model IEnumerable<PropertyVM>
 
-
-<main>
 
     <!-- ======= Intro Single ======= -->
     <section class="intro-single">
@@ -152,7 +147,3 @@
         </div>
     </section><!-- End Property Grid Single-->
 
-</main><!-- End #main -->
-@{
-    await Html.RenderPartialAsync("_Footer", null);
-}
