@@ -62,7 +62,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 var app = builder.Build();
 
-//dateonly datayý kaydederken -infinity veri olarak kaydetmesini önlemek için eklendi.
+//dateonly veri tipindeki datayý kaydederken -infinity veri olarak kaydetmesini önlemek için eklendi.
 AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 
 
