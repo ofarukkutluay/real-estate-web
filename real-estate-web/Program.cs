@@ -1,14 +1,22 @@
 using System.Net;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using NpgsqlTypes;
 using real_estate_web.Data.Abstract;
 using real_estate_web.Data.Common;
 using real_estate_web.Data.EntityFramework;
+using real_estate_web.Tools.Logger;
 using real_estate_web.Tools.Middlewares;
+using Serilog;
+using Serilog.Context;
+using Serilog.Core;
+using Serilog.Sinks.PostgreSQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +50,36 @@ builder.Services.AddScoped<IContactRepository, EfContactDal>();
 builder.Services.AddScoped<IBlogRepository, EfBlogDal>();
 builder.Services.AddScoped<ILogRepository, EfLogDal>();
 
+Logger log = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File(Path.Combine("logs","log.txt"))
+    .WriteTo.PostgreSQL(builder.Configuration.GetConnectionString("PostgersSQL"),"logs",needAutoCreateTable:true,
+    columnOptions: new Dictionary<string, ColumnWriterBase>
+        {
+            {"message", new RenderedMessageColumnWriter(NpgsqlDbType.Text)},
+            {"message_template", new MessageTemplateColumnWriter(NpgsqlDbType.Text)},
+            {"level", new LevelColumnWriter(true , NpgsqlDbType.Varchar)},
+            {"time_stamp", new TimestampColumnWriter(NpgsqlDbType.Timestamp)},
+            {"exception", new ExceptionColumnWriter(NpgsqlDbType.Text)},
+            {"log_event", new LogEventSerializedColumnWriter(NpgsqlDbType.Json)},
+            {"user_id", new UserIdColumnWriter()},
+            {"remote_ip",new RemoteIpColumnWriter()},
+        })
+    .Enrich.FromLogContext()
+    .MinimumLevel.Information()
+    .CreateLogger();
+
+builder.Host.UseSerilog(log);
+
+builder.Services.AddHttpLogging(logging =>
+{
+    logging.LoggingFields = HttpLoggingFields.All;
+    logging.RequestHeaders.Add("sec-ch-ua");
+    logging.MediaTypeOptions.AddText("application/javascript");
+    logging.RequestBodyLogLimit = 4096;
+    logging.ResponseBodyLogLimit = 4096;
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
     opt.TokenValidationParameters = new TokenValidationParameters
@@ -56,8 +94,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ClockSkew = TimeSpan.Zero
     };
 });
-
-
 
 
 var app = builder.Build();
@@ -81,6 +117,10 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSerilogRequestLogging();
+
+app.UseHttpLogging();
 
 app.UseSession();
 app.Use(async (context, next) =>
@@ -108,6 +148,7 @@ app.UseStatusCodePages(async context =>
     }
 });
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -124,5 +165,14 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Use(async (context, next) =>
+{
+    var userid = context.User?.Identity?.IsAuthenticated == true ? context.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier)?.Value : null;
+    LogContext.PushProperty("user_id", userid);
+    var remoteIp = context.Connection.RemoteIpAddress?.ToString();
+    LogContext.PushProperty("remote_ip", remoteIp);
+    await next();
+});
 
 app.Run();
