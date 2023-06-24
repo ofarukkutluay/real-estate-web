@@ -10,6 +10,7 @@ using real_estate_web.Tools.Helper;
 using System.Security.Claims;
 using real_estate_web.Tools.Hashing;
 using real_estate_web.Models.HelperEntities;
+using System.Text.RegularExpressions;
 
 namespace real_estate_web.Controllers
 {
@@ -354,10 +355,19 @@ namespace real_estate_web.Controllers
                     agent.ProfilePhotoPath = FileHelper.Update(agent.ProfilePhotoPath, model.ProfilePhoto);
                 }
             }
+
+            model.MobileNumber = model.MobileNumber.Trim().Replace(" ", "");
+
+            if (!Regex.IsMatch(model.MobileNumber, @"^([5]{1})([0-9]{9})$"))
+            {
+                DangerAlert("Cep telefonunu hatalı girdiniz");
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+
             agent.FirstName = model.FirstName;
             agent.LastName = model.LastName;
             agent.Email = model.Email.Trim();
-            agent.MobileNumber = model.MobileNumber.Trim();
+            agent.MobileNumber = model.MobileNumber;
             agent.PhoneNumber = model.PhoneNumber;
             agent.Description = model.Description;
             agent.FacebookLink = model.FacebookLink;
@@ -419,15 +429,18 @@ namespace real_estate_web.Controllers
             List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
             foreach (var item in paths)
             {
+                int i = 1;
                 PropertyPhoto propertyPhoto = new PropertyPhoto()
                 {
                     PropertyId = entity.Id,
-                    Path = item
+                    Path = item,
+                    SortIndex = i
                 };
                 propertyPhotos.Add(propertyPhoto);
+                i++;
             }
             string basePath = FileHelper.Add(model.BasePhoto, entity.Id.ToString());
-            propertyPhotos.Add(new PropertyPhoto() { PropertyId = entity.Id, Path = basePath, BasePhoto = true });
+            propertyPhotos.Add(new PropertyPhoto() { PropertyId = entity.Id, Path = basePath, BasePhoto = true, SortIndex =0 });
 
             await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
             await _propertyPhotoRepository.SaveAsync();
@@ -502,28 +515,28 @@ namespace real_estate_web.Controllers
             property.SokakId = model.SokakId != 0 ? model.SokakId : property.SokakId;
             property.LocationLat = model.LocationLat;
             property.LocationLon = model.LocationLon;
-            property.PropertyTypeId = model.PropertyTypeId;
-            property.StatusId = model.StatusId;
+            property.PropertyType = model.PropertyType;
+            property.Status = model.Status;
             property.BrutMetre = model.BrutMetre;
             property.NetMetre = model.NetMetre;
             property.ToplamKat = model.ToplamKat;
-            property.BulunduguKat = model.BulunduguKat;
+            property.BulunduguKat = string.IsNullOrEmpty(model.BulunduguKat) ? property.BulunduguKat : model.BulunduguKat;
             property.BinaYasi = model.BinaYasi;
             property.OdaSayisi = model.OdaSayisi;
             property.SalonSayisi = model.SalonSayisi;
             property.BanyoSayisi = model.BanyoSayisi;
             property.OtoparkSayisi = model.OtoparkSayisi;
             property.BalkonSayisi = model.BalkonSayisi;
-            property.IsitmaTipiId = model.IsitmaTipiId;
-            property.InternetTipiId = model.InternetTipiId;
-            property.CepheId = model.CepheId;
+            property.IsitmaTipi = model.IsitmaTipi;
+            property.InternetTipi = model.InternetTipi;
+            property.Cephe = model.Cephe;
             property.Manzara = model.Manzara;
             property.AkilliEvMi = model.AkilliEvMi;
             property.EsyaliMi = model.EsyaliMi;
             property.SiteIcerisindeMi = model.SiteIcerisindeMi;
             property.SiteAdi = model.SiteAdi;
-            property.KullanimDurumuId = model.KullanimDurumuId;
-            property.TapuDurumuId = model.TapuDurumuId;
+            property.KullanimDurumu = model.KullanimDurumu;
+            property.TapuDurumu = model.TapuDurumu;
             property.Price = model.Price;
             property.Aidat = model.Aidat;
             property.KirediyeUygunMu = model.KirediyeUygunMu;
@@ -713,37 +726,37 @@ namespace real_estate_web.Controllers
 
             IEnumerable<SelectListItem> selectPropertyType = _propertyTypeRepository.GetList().Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
+                Value = x.Name,
                 Text = x.Name
             });
             IEnumerable<SelectListItem> selectStatus = _statusRepository.GetList().Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
+                Value = x.Name,
                 Text = x.Name
             });
             IEnumerable<SelectListItem> selectHeatingType = _heatingTypeRepository.GetList().Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
+                Value = x.Name,
                 Text = x.Name
             });
             IEnumerable<SelectListItem> selectInternetType = _internetTypeRepository.GetList().Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
+                Value = x.Name,
                 Text = x.Name
             });
             IEnumerable<SelectListItem> selecFront = _frontRepository.GetList().Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
+                Value = x.Name,
                 Text = x.Name
             });
             IEnumerable<SelectListItem> selectUseStatus = _usingStatusRepository.GetList().Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
+                Value = x.Name,
                 Text = x.Name
             });
             IEnumerable<SelectListItem> selectDeedStatus = _deedStatusRepository.GetList().Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
+                Value = x.Name,
                 Text = x.Name
             });
             IEnumerable<SelectListItem> selectAgent = _agentRepository.GetListAgentDto().Select(x => new SelectListItem

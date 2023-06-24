@@ -1,183 +1,185 @@
 @model Tuple<AgentVM,IEnumerable<PropertyVM>>
 
 @{
-  ViewData["Title"] = $"{Model.Item1.FirstName} {Model.Item1.LastName}";
+    ViewData["Title"] = $"{Model.Item1.FirstName} {Model.Item1.LastName}";
 }
 
-  <!-- ======= Intro Single ======= -->
-  <section class="intro-single">
+<!-- ======= Intro Single ======= -->
+<section class="intro-single">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-lg-8">
-          <div class="title-single-box">
-            <h1 class="title-single">@Model.Item1.FirstName @Model.Item1.LastName</h1>
-            <span class="color-text-a">@Model.Item1.JobTitleName</span>
-          </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-8">
+                <div class="title-single-box">
+                    <h1 class="title-single">@Model.Item1.FirstName @Model.Item1.LastName</h1>
+                    <span class="color-text-a">@Model.Item1.JobTitleName</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/agents">Danışmanlar</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            @Model.Item1.FirstName @Model.Item1.LastName
+                        </li>
+                    </ol>
+                </nav>
+            </div>
         </div>
-        <div class="col-md-12 col-lg-4">
-          <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a href="/">Home</a>
-              </li>
-              <li class="breadcrumb-item">
-                <a href="/agents">Danışmanlar</a>
-              </li>
-              <li class="breadcrumb-item active" aria-current="page">
-                @Model.Item1.FirstName @Model.Item1.LastName
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
     </div>
-  </section><!-- End Intro Single -->
-
-  <!-- ======= Agent Single ======= -->
-  <section class="agent-single">
+</section><!-- End Intro Single -->
+<!-- ======= Agent Single ======= -->
+<section class="agent-single">
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="agent-avatar-box">
-                <img src="@Model.Item1.ProfilePhotoPath" alt="" class="agent-avatar img-fluid">
-              </div>
-            </div>
-            <div class="col-md-5 section-md-t3">
-              <div class="agent-info-box">
-                <div class="agent-title">
-                  <div class="title-box-d">
-                    <h3 class="title-d">@Model.Item1.FirstName
-                      <br> @Model.Item1.LastName
-                    </h3>
-                  </div>
-                </div>
-                <div class="agent-content mb-3">
-                  <p class="content-d color-text-a">
-                    @Model.Item1.Description
-                  </p>
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>Phone: </strong>
-                      <span class="color-text-a"> @Model.Item1.PhoneNumber </span>
-                    </p>
-                    <p>
-                      <strong>Mobile: </strong>
-                      <span class="color-text-a"> @Model.Item1.MobileNumber </span>
-                    </p>
-                    <p>
-                      <strong>Email: </strong>
-                      <span class="color-text-a"> @Model.Item1.Email </span>
-                    </p>
-                  </div>
-                </div>
-                <div class="socials-footer">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <a href="@Model.Item1.FacebookLink" class="link-one">
-                        <i class="bi bi-facebook" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="@Model.Item1.TwitterLink" class="link-one">
-                        <i class="bi bi-twitter" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="@Model.Item1.InstagramLink" class="link-one">
-                        <i class="bi bi-instagram" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="@Model.Item1.LinkedinLink" class="link-one">
-                        <i class="bi bi-linkedin" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12 section-t8">
-          <div class="title-box-d">
-            <h3 class="title-d">Tüm ilanları (@Model.Item2.Count())</h3>
-          </div>
-        </div>
-        <div class="row property-grid grid">
-          <div class="col-sm-12">
-            <div class="grid-option">
-              <form>
-                <select class="custom-select">
-                  <option selected>All</option>
-                  <option value="1">New to Old</option>
-                  <option value="2">For Rent</option>
-                  <option value="3">For Sale</option>
-                </select>
-              </form>
-            </div>
-          </div>
-          @foreach (var item in @Model.Item2)
-          {
-            <div class="col-md-4">
-              <div class="card-box-a card-shadow">
-                <div class="img-box-a">
-                  <img src="@item.BasePhotoPath" alt="" class="img-a img-fluid">
-                </div>
-                <div class="card-overlay">
-                  <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="/property/@item.Id">@item.Il / @item.Ilce
-                          <br /> @item.Title</a>
-                      </h2>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="agent-avatar-box">
+                            <img src="@Model.Item1.ProfilePhotoPath" alt="" class="agent-avatar img-fluid">
+                        </div>
                     </div>
-                    <div class="card-body-a">
-                      <div class="price-box d-flex">
-                        <span class="price-a">@item.Status | ₺ @item.Price</span>
-                      </div>
-                      <a href="/property/@item.Id" class="link-a">Detaylar için tıklayın...
-                        <span class="bi bi-chevron-right"></span>
-                      </a>
-                    </div>
-                    <div class="card-footer-a">
-                      <ul class="card-info d-flex justify-content-around">
-                        <li>
-                          <h4 class="card-info-title">Brüt Metre</h4>
-                          <span>@item.BrutMetre m
-                            <sup>2</sup>
-                          </span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Oda</h4>
-                          <span>@item.OdaSayisi + @item.SalonSayisi</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Banyo</h4>
-                          <span>@item.BanyoSayisi</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Otopark</h4>
-                          @if (@item.OtoparkSayisi == 0 || @item.OtoparkSayisi == null)
-                          {
-                            <span>Yok</span>
-                          }
-                          else
-                          {
-                            <span>@item.OtoparkSayisi</span>
-                          }
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          }
+                    <div class="col-md-5 section-md-t3">
+                        <div class="agent-info-box">
+                            <div class="agent-title">
+                                <div class="title-box-d">
+                                    <h3 class="title-d">
+                                        @Model.Item1.FirstName
+                                        <br> @Model.Item1.LastName
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="agent-content mb-3">
+                                <p class="content-d color-text-a">
+                                    @Model.Item1.Description
+                                </p>
+                                <div class="info-agents color-a">
+                                    @if (!string.IsNullOrEmpty(Model.Item1.PhoneNumber))
+                                    {
+                                        <p>
+                                            <strong>Phone: </strong>
+                                            <span class="color-text-a"> @Model.Item1.PhoneNumber </span>
+                                        </p>
+                                    }
 
+                                    <p>
+                                        <strong>Mobile: </strong>
+                                        <span class="color-text-a"> +90 @Model.Item1.MobileNumber </span>
+                                    </p>
+                                    <p>
+                                        <strong>Email: </strong>
+                                        <span class="color-text-a"> @Model.Item1.Email </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="socials-footer">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <a href="@Model.Item1.FacebookLink" class="link-one">
+                                            <i class="bi bi-facebook" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="@Model.Item1.TwitterLink" class="link-one">
+                                            <i class="bi bi-twitter" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="@Model.Item1.InstagramLink" class="link-one">
+                                            <i class="bi bi-instagram" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="@Model.Item1.LinkedinLink" class="link-one">
+                                            <i class="bi bi-linkedin" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 section-t8">
+                <div class="title-box-d">
+                    <h3 class="title-d">Tüm ilanları (@Model.Item2.Count())</h3>
+                </div>
+            </div>
+            <div class="row property-grid grid">
+                <div class="col-sm-12">
+                    <div class="grid-option">
+                        <form>
+                            <select class="custom-select">
+                                <option selected>All</option>
+                                <option value="1">New to Old</option>
+                                <option value="2">For Rent</option>
+                                <option value="3">For Sale</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                @foreach (var item in @Model.Item2)
+                {
+                    <div class="col-md-4">
+                        <div class="card-box-a card-shadow">
+                            <div class="img-box-a">
+                                <img src="@item.BasePhotoPath" alt="" class="img-a img-fluid">
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-overlay-a-content">
+                                    <div class="card-header-a">
+                                        <h2 class="card-title-a">
+                                            <a href="/property/@item.Id">
+                                                @item.Il / @item.Ilce
+                                                <br /> @item.Title
+                                            </a>
+                                        </h2>
+                                    </div>
+                                    <div class="card-body-a">
+                                        <div class="price-box d-flex">
+                                            <span class="price-a">@item.Status | ₺ @item.Price</span>
+                                        </div>
+                                        <a href="/property/@item.Id" class="link-a">
+                                            Detaylar için tıklayın...
+                                            <span class="bi bi-chevron-right"></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-footer-a">
+                                        <ul class="card-info d-flex justify-content-around">
+                                            <li>
+                                                <h4 class="card-info-title">Brüt Metre</h4>
+                                                <span>
+                                                    @item.BrutMetre m
+                                                    <sup>2</sup>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <h4 class="card-info-title">Oda</h4>
+                                                <span>@item.OdaSayisi + @item.SalonSayisi</span>
+                                            </li>
+                                            <li>
+                                                <h4 class="card-info-title">Emlak Tipi</h4>
+                                                <span>@item.Status @item.PropertyType</span>
+                                            </li>
+                                            <li>
+                                                <h4 class="card-info-title">Yaşı</h4>
+
+                                                <span>@item.BinaYasi</span>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
         </div>
-      </div>
     </div>
-  </section><!-- End Agent Single -->
-
+</section><!-- End Agent Single -->

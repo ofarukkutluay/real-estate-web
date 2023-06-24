@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using real_estate_web.Data.EntityFramework;
@@ -11,9 +12,11 @@ using real_estate_web.Data.EntityFramework;
 namespace real_estate_web.Migrations
 {
     [DbContext(typeof(RealEstateDbContext))]
-    partial class RealEstateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230519230607_scrap-added-fix")]
+    partial class scrapaddedfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,17 +57,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("About");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BodyContentA = "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.\r\n         Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Praesent sapien massa, convallis a pellentesque nec,\r\n          egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, \r\n          auctor sit amet aliquam vel, ullamcorper sit amet ligula.",
-                            BodyContentB = "Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, \r\n        convallis at tellus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. \r\n        Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.",
-                            BodyTitle = "Neden biz?",
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8231),
-                            Title = "Birlikte mutlu anılar biriktirebileceğiniz mülkler buluyoruz"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.Agent", b =>
@@ -277,18 +269,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contact");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Üsküdar/İstanbul",
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8256),
-                            Email = "contact@example.com",
-                            GoogleIFrameUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.665346984029!2d29.08746581564773!3d41.03257692587779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac8566285c3d7%3A0x60da11ebc95f76ce!2sTantavi%2C%20Estergon%20Cd.%20No%3A43%2C%2034764%20%C3%9Cmraniye%2F%C4%B0stanbul!5e0!3m2!1str!2str!4v1649872532554!5m2!1str!2str",
-                            HeaderDescription = "Aut voluptas consequatur unde sed omnis ex placeat quis eos. Aut natus officia corrupti qui autem fugit consectetur quo. Et ipsum eveniet laboriosam voluptas beatae possimus qui ducimus. Et voluptatem deleniti. Voluptatum voluptatibus amet. Et esse sed omnis inventore hic culpa.",
-                            PhoneNumber = "+54 356 945234"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.DeedStatus", b =>
@@ -312,32 +292,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DeedStatuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7997),
-                            Name = "Kat Mülkiyetli"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8000),
-                            Name = "Kat İrtifaklı"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8001),
-                            Name = "Arsa"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8003),
-                            Name = "Tarla"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.District", b =>
@@ -390,62 +344,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Fronts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7454),
-                            Name = "Kuzey"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7463),
-                            Name = "Kuzey Doğu"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7465),
-                            Name = "Doğu"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7466),
-                            Name = "Güney Doğu"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7467),
-                            Name = "Güney"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7468),
-                            Name = "Güney Batı"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7469),
-                            Name = "Batı"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7470),
-                            Name = "Kuzey Batı"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7472),
-                            Name = "Bilinmiyor"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.HeatingType", b =>
@@ -469,44 +367,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("HeatingTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8031),
-                            Name = "Doğalgaz Sobalı"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8033),
-                            Name = "Sobalı"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8034),
-                            Name = "Yerden Isıtma"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8035),
-                            Name = "Kombili"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8036),
-                            Name = "Merkezi Sistem"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8037),
-                            Name = "FuelOil"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.InternetType", b =>
@@ -530,26 +390,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("InternetTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8068),
-                            Name = "ADSL/VDSL"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8069),
-                            Name = "Fiber"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8070),
-                            Name = "Bilinmiyor"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.JobTitle", b =>
@@ -576,32 +416,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("JobTitles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8095),
-                            Name = "Broker"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8098),
-                            Name = "Danışman"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8099),
-                            Name = "Müdür"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8100),
-                            Name = "Asistan"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.Neighborhood", b =>
@@ -656,17 +470,17 @@ namespace real_estate_web.Migrations
                     b.Property<int?>("BanyoSayisi")
                         .HasColumnType("integer");
 
-                    b.Property<string>("BinaYasi")
-                        .HasColumnType("text");
+                    b.Property<int>("BinaYasi")
+                        .HasColumnType("integer");
 
                     b.Property<int>("BrutMetre")
                         .HasColumnType("integer");
 
-                    b.Property<string>("BulunduguKat")
-                        .HasColumnType("text");
+                    b.Property<int>("BulunduguKat")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Cephe")
-                        .HasColumnType("text");
+                    b.Property<int>("CepheId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -684,11 +498,11 @@ namespace real_estate_web.Migrations
                     b.Property<int>("IlceId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("InternetTipi")
-                        .HasColumnType("text");
+                    b.Property<int>("InternetTipiId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("IsitmaTipi")
-                        .HasColumnType("text");
+                    b.Property<int>("IsitmaTipiId")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("KirediyeUygunMu")
                         .HasColumnType("boolean");
@@ -697,8 +511,8 @@ namespace real_estate_web.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("KullanimDurumu")
-                        .HasColumnType("text");
+                    b.Property<int>("KullanimDurumuId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("LocationLat")
                         .HasColumnType("text");
@@ -727,8 +541,8 @@ namespace real_estate_web.Migrations
                     b.Property<string>("PropertyListiningId")
                         .HasColumnType("text");
 
-                    b.Property<string>("PropertyType")
-                        .HasColumnType("text");
+                    b.Property<int>("PropertyTypeId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("SalonSayisi")
                         .HasColumnType("integer");
@@ -742,18 +556,18 @@ namespace real_estate_web.Migrations
                     b.Property<int?>("SokakId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("TapuDurumu")
-                        .HasColumnType("text");
+                    b.Property<int>("TapuDurumuId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ToplamKat")
-                        .HasColumnType("text");
+                    b.Property<int>("ToplamKat")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -765,11 +579,25 @@ namespace real_estate_web.Migrations
 
                     b.HasIndex("AgentId");
 
+                    b.HasIndex("CepheId");
+
                     b.HasIndex("IlId");
 
                     b.HasIndex("IlceId");
 
+                    b.HasIndex("InternetTipiId");
+
+                    b.HasIndex("IsitmaTipiId");
+
+                    b.HasIndex("KullanimDurumuId");
+
                     b.HasIndex("MahalleId");
+
+                    b.HasIndex("PropertyTypeId");
+
+                    b.HasIndex("StatusId");
+
+                    b.HasIndex("TapuDurumuId");
 
                     b.ToTable("Properties");
                 });
@@ -973,9 +801,10 @@ namespace real_estate_web.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("PropertyListingDetailId")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("SortIndex")
+                    b.Property<int>("SortIndex")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -1009,86 +838,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PropertyTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8126),
-                            Name = "Daire"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8128),
-                            Name = "Rezidence"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8129),
-                            Name = "Müstakil Ev"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8130),
-                            Name = "Villa"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8131),
-                            Name = "Çiftlik Evi"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8132),
-                            Name = "Yazlık"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8133),
-                            Name = "Büro/Ofis"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8135),
-                            Name = "Depo/Antrepo"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8136),
-                            Name = "Dükkan/Mağaza"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8137),
-                            Name = "Plaza"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8138),
-                            Name = "Palaza Katı"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8139),
-                            Name = "Sağlık Merkezi"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8140),
-                            Name = "Spor Tesisi"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.Status", b =>
@@ -1112,32 +861,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8176),
-                            Name = "Satılık"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8178),
-                            Name = "Kiralık"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8179),
-                            Name = "Devren Satılık"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8180),
-                            Name = "Devren Kiralık"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.Street", b =>
@@ -1187,26 +910,6 @@ namespace real_estate_web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UseCases");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8205),
-                            Name = "Boş"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8207),
-                            Name = "Mülk Sahibi"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8208),
-                            Name = "Kiracılı"
-                        });
                 });
 
             modelBuilder.Entity("real_estate_web.Models.Database.Agent", b =>
@@ -1224,6 +927,12 @@ namespace real_estate_web.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("real_estate_web.Models.Database.Front", null)
+                        .WithMany()
+                        .HasForeignKey("CepheId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("real_estate_web.Models.Database.City", null)
                         .WithMany()
                         .HasForeignKey("IlId")
@@ -1236,9 +945,45 @@ namespace real_estate_web.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("real_estate_web.Models.Database.InternetType", null)
+                        .WithMany()
+                        .HasForeignKey("InternetTipiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("real_estate_web.Models.Database.HeatingType", null)
+                        .WithMany()
+                        .HasForeignKey("IsitmaTipiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("real_estate_web.Models.Database.UsingStatus", null)
+                        .WithMany()
+                        .HasForeignKey("KullanimDurumuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("real_estate_web.Models.Database.Neighborhood", null)
                         .WithMany()
                         .HasForeignKey("MahalleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("real_estate_web.Models.Database.PropertyType", null)
+                        .WithMany()
+                        .HasForeignKey("PropertyTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("real_estate_web.Models.Database.Status", null)
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("real_estate_web.Models.Database.DeedStatus", null)
+                        .WithMany()
+                        .HasForeignKey("TapuDurumuId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

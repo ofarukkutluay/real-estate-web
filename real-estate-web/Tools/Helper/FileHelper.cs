@@ -4,6 +4,8 @@ namespace real_estate_web.Tools.Helper
 {
     public class FileHelper
     {
+        public static string RootDirectory = Path.Combine("wwwroot");
+
         public static string Add(IFormFile file)
         {
             var sourcepath = Path.GetTempFileName();
@@ -32,6 +34,34 @@ namespace real_estate_web.Tools.Helper
             var result = newSubDirectoryPath(file,subDirectoryName);
             File.Move(sourcepath, @"wwwroot" + result);
             return result;
+        }
+
+        //public static string Upload(string directory,IFormFile file)
+        //{
+        //    var sourcepath = Path.GetTempFileName();
+        //    if (file.Length > 0)
+        //    {
+        //        using (var stream = new FileStream(sourcepath, FileMode.Create))
+        //        {
+        //            file.CopyTo(stream);
+        //        }
+        //    }
+
+        //    if (!Directory.Exists(Path.Combine(Environment.CurrentDirectory, RootDirectory, directory)))
+        //    {
+        //        Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, RootDirectory, directory));
+        //    }
+
+        //    string path = Path.Combine(RootDirectory,directory,file.FileName); 
+
+        //    File.Move(sourcepath, path);
+
+        //    return path;
+        //}
+
+        public static bool HasFile(string directory,string fileName)
+        {
+            return Directory.Exists(Path.Combine(directory, fileName));
         }
 
         public static async Task<List<string>> AddAllAsync(List<IFormFile> files,string subDirectoryName)
@@ -91,11 +121,12 @@ namespace real_estate_web.Tools.Helper
 
         public static string newPath(IFormFile file)
         {
-            FileInfo ff = new FileInfo(file.FileName);
-            string fileExtension = ff.Extension;
+            //FileInfo ff = new FileInfo(file.FileName);
+            //string fileExtension = ff.Extension;
 
             string path =  @"/upload-images"; //Environment.CurrentDirectory +
-            var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
+            //var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
+            string newPath = file.FileName;
 
             string result = $@"{path}/{newPath}";
             return result;
@@ -103,14 +134,15 @@ namespace real_estate_web.Tools.Helper
 
         public static string newSubDirectoryPath(IFormFile file,string subDirectoryName)
         {
-            FileInfo ff = new FileInfo(file.FileName);
-            string fileExtension = ff.Extension;
+            //FileInfo ff = new FileInfo(file.FileName);
+            //string fileExtension = ff.Extension;
             
             string path =  $@"/upload-images/{subDirectoryName}"; 
             if(!Directory.Exists($@"{Environment.CurrentDirectory}/wwwroot{path}")){
                 Directory.CreateDirectory($@"{Environment.CurrentDirectory}/wwwroot{path}");
             }
-            var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
+            //var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
+            var newPath = file.FileName;
 
             string result = $@"{path}/{newPath}";
             return result;

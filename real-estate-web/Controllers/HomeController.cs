@@ -37,6 +37,7 @@ namespace real_estate_web.Controllers
             return View(Tuple.Create<IEnumerable<AgentVM>, IEnumerable<PropertyVM>, IEnumerable<Blog>>(agentVMs, propertyVMs, blogs));
         }
 
+        [Route("privacy")]
         public IActionResult Privacy()
         {
             return View();

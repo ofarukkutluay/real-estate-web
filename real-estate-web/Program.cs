@@ -13,6 +13,7 @@ using real_estate_web.Data.Common;
 using real_estate_web.Data.EntityFramework;
 using real_estate_web.Tools.Logger;
 using real_estate_web.Tools.Middlewares;
+using real_estate_web.Tools.Scrapping;
 using Serilog;
 using Serilog.Context;
 using Serilog.Core;
@@ -48,12 +49,12 @@ builder.Services.AddScoped<IUsingStatusRepository, EfUsingStatusDal>();
 builder.Services.AddScoped<IAboutRepository, EfAboutDal>();
 builder.Services.AddScoped<IContactRepository, EfContactDal>();
 builder.Services.AddScoped<IBlogRepository, EfBlogDal>();
-builder.Services.AddScoped<ILogRepository, EfLogDal>();
+builder.Services.AddScoped<ScrappingService>();
 
 Logger log = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.File(Path.Combine("logs","log.txt"))
-    .WriteTo.PostgreSQL(builder.Configuration.GetConnectionString("PostgersSQL"),"logs",needAutoCreateTable:true,
+    .WriteTo.PostgreSQL(builder.Configuration.GetConnectionString("PostgresSQL"),"serilogs",needAutoCreateTable:true,
     columnOptions: new Dictionary<string, ColumnWriterBase>
         {
             {"message", new RenderedMessageColumnWriter(NpgsqlDbType.Text)},
@@ -71,10 +72,30 @@ Logger log = new LoggerConfiguration()
 
 builder.Host.UseSerilog(log);
 
+
+
+
 builder.Services.AddHttpLogging(logging =>
 {
     logging.LoggingFields = HttpLoggingFields.All;
     logging.RequestHeaders.Add("sec-ch-ua");
+    logging.RequestHeaders.Add("sec-ch-ua-mobile");
+    logging.RequestHeaders.Add("sec-ch-ua-platform");
+    logging.RequestHeaders.Add("sec-fetch-site");
+    logging.RequestHeaders.Add("sec-fetch-mode");
+    logging.RequestHeaders.Add("sec-fetch-user");
+    logging.RequestHeaders.Add("sec-fetch-dest");
+    logging.RequestHeaders.Add("Cookie");
+    logging.RequestHeaders.Add("Upgrade-Insecure-Requests");
+    logging.RequestHeaders.Add(":method");
+    logging.RequestHeaders.Add("Referer");
+    logging.RequestHeaders.Add("Origin");
+    logging.RequestHeaders.Add("Cache-Control");
+    logging.RequestHeaders.Add("Pragma");
+    logging.RequestHeaders.Add("Set-Cookie");
+    logging.RequestHeaders.Add("X-Frame-Options");
+    logging.RequestHeaders.Add("ETag");
+
     logging.MediaTypeOptions.AddText("application/javascript");
     logging.RequestBodyLogLimit = 4096;
     logging.ResponseBodyLogLimit = 4096;
@@ -95,20 +116,26 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+builder.Services.AddCors();
 
 var app = builder.Build();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //dateonly veri tipindeki datayý kaydederken -infinity veri olarak kaydetmesini önlemek için eklendi.
 AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    DataGenerator.Initialize(services);
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    DataGenerator.Initialize(services);
+//}
 
 //app.UseCustomExceptionMiddleware();
+app.UseCors(policy => policy.AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .SetIsOriginAllowed(origin => true)
+                            .AllowCredentials());
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

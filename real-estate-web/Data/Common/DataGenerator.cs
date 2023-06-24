@@ -22,7 +22,8 @@ namespace real_estate_web.Data.Common
                         new Front { Name = "Güney" },
                         new Front { Name = "Güney Batı" },
                         new Front { Name = "Batı" },
-                        new Front { Name = "Kuzey Batı" }
+                        new Front { Name = "Kuzey Batı" },
+                        new Front{Name= "Bilinmiyor"}
                     };
                     await context.Fronts.AddRangeAsync(fronts);
                 }
@@ -58,7 +59,8 @@ namespace real_estate_web.Data.Common
                     List<InternetType> internetTypes = new List<InternetType>
                     {
                         new InternetType { Name = "ADSL/VDSL" },
-                        new InternetType { Name = "Fiber" }
+                        new InternetType { Name = "Fiber" },
+                        new InternetType { Name = "Bilinmiyor"}
                     };
                     await context.InternetTypes.AddRangeAsync(internetTypes);
                 }

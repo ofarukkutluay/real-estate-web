@@ -16,7 +16,7 @@ namespace real_estate_web.Tools.Middlewares
             _next = requestDelegate;
         }
 
-        public async Task Invoke(HttpContext context, ILogRepository logRepository)
+        public async Task Invoke(HttpContext context)
         {
             var watch = Stopwatch.StartNew();
             try
@@ -34,12 +34,12 @@ namespace real_estate_web.Tools.Middlewares
             catch (Exception ex)
             {
                 watch.Stop();
-                await HandleException(context, ex, watch, logRepository);
+                await HandleException(context, ex, watch);
             }
 
         }
 
-        private async Task HandleException(HttpContext context, Exception ex, Stopwatch watch, ILogRepository logRepository)
+        private async Task HandleException(HttpContext context, Exception ex, Stopwatch watch)
         {
             await Task.Run(() =>
             {
@@ -48,8 +48,7 @@ namespace real_estate_web.Tools.Middlewares
                 string message = $"HTTP {context.Request.Method} - {context.Response.StatusCode} Error Message:  {ex.Message} inner ex message: {ex.InnerException} time: {watch.Elapsed.TotalMilliseconds} ms";
                 Console.WriteLine(message);
             });
-            //await logRepository.AddAsync(new Log() { LogType = LogType.Error,Message=message});
-            //return await logRepository.SaveAsync();
+
         }
     }
 

@@ -9,6 +9,8 @@ using real_estate_web.Tools.Hashing;
 using real_estate_web.Tools.Results;
 using real_estate_web.Tools.TokenOperations;
 using real_estate_web.Tools.TokenOperations.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace real_estate_web.Controllers
 {
@@ -77,12 +79,22 @@ namespace real_estate_web.Controllers
                 return Redirect(Request.Headers["Referer"].ToString());
             }
             HashingHelper.CreatePasswordHash(model.Password, out passSalt, out passHash);
+
+            model.MobileNumber = model.MobileNumber.Trim().Replace(" ", "");
+
+            if (!Regex.IsMatch(model.MobileNumber, @"^([5]{1})([0-9]{9})$"))
+            {
+                DangerAlert("Cep telefonunu hatalı girdiniz");
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+
+
             agent = new Agent()
             {
                 FirstName = model.FirstName.Trim(),
                 LastName = model.LastName.Trim(),
                 Email = model.Email.Trim(),
-                MobileNumber = "90"+model.MobileNumber.Trim(),
+                MobileNumber = model.MobileNumber,
                 JobTitle = model.JobTitleId,
                 PassHash = passHash,
                 PassSalt = passSalt,

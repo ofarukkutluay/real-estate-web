@@ -52,7 +52,7 @@
 
         var form = document.querySelector('form');
         form.onsubmit = function () {
-            var description = document.querySelector('input[name=description]');
+            //var description = document.querySelector('input[name=description]');
             description.value = quill.root.innerHTML;
         };
 
@@ -112,14 +112,14 @@
                             <div class="row mb-3">
                                 <label for="inputPropertyType" class="col-sm-2 col-form-label">Mülk Tipi : </label>
                                 <div class="col-md-2">
-                                    <select id="inputPropertyType" class="form-select" asp-for="PropertyTypeId"
+                                    <select id="inputPropertyType" class="form-select" asp-for="PropertyType"
                                         asp-items="@ViewData["PropertyTypes"] as IEnumerable<SelectListItem>" required>
                                         <option selected value="" disabled>Mülk Tipi</option>
                                     </select>
                                 </div>
                                 <label for="inputStatus" class="col-sm-1 col-form-label">Durum : </label>
                                 <div class="col-md-2">
-                                    <select id="inputStatus" class="form-select" asp-for="StatusId"
+                                    <select id="inputStatus" class="form-select" asp-for="Status"
                                         asp-items="@ViewData["Statuses"] as IEnumerable<SelectListItem>" required>
                                         <option selected value="" disabled>Durumu</option>
                                     </select>
@@ -141,7 +141,7 @@
                                 <label for="inputDescription" class="col-sm-2 col-form-label">Açıklama</label>
                                 <div class="col-sm-10">
                                     <input asp-for="Description" class="form-control" name="description"
-                                        id="description" hidden>
+                                       id="inputDescription" hidden>
 
                                     <div class="quill-editor-default" id="quill"></div>
 
@@ -221,19 +221,19 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="input-group md-3">
-                                                <input type="number" asp-for="BulunduguKat"
-                                                   class="form-control" placeholder="Katı" required>
+                                                <input type="text" asp-for="BulunduguKat"
+                                                   class="form-control" placeholder="Katı">
 
                                                 <span class="input-group-text">/</span>
-                                                <input type="number" asp-for="ToplamKat"
+                                                <input type="text" asp-for="ToplamKat"
                                                    class="form-control" placeholder="Top. kat" required>
 
                                             </div>
                                         </div>
                                         
                                         <div class="col-sm-2">
-                                            <input type="number" asp-for="BinaYasi"
-                                                   class="form-control" placeholder="Yaşı" required>
+                                            <input type="text" asp-for="BinaYasi"
+                                                   class="form-control" placeholder="Yaşı">
 
                                         </div>
 
@@ -250,13 +250,13 @@
                                                 placeholder="Manzara"></div>
 
                                         <div class="col-sm-2">
-                                            <select id="inputHeatingType" class="form-select" asp-for="IsitmaTipiId"
+                                            <select id="inputHeatingType" class="form-select" asp-for="IsitmaTipi"
                                                 asp-items="@ViewData["HeatingTypes"] as IEnumerable<SelectListItem>" required>
                                                 <option selected value="" disabled>Isıtma Tipi</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
-                                            <select id="inputInternetType" class="form-select" asp-for="InternetTipiId"
+                                            <select id="inputInternetType" class="form-select" asp-for="InternetTipi"
                                                 asp-items="@ViewData["InternetTypes"] as IEnumerable<SelectListItem>" required>
                                                 <option selected value="" disabled>İnternet Tipi</option>
                                             </select>
@@ -264,19 +264,19 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-2">
-                                            <select id="inputFlat" class="form-select" asp-for="CepheId"
+                                            <select id="inputFlat" class="form-select" asp-for="Cephe"
                                                 asp-items="@ViewData["Fronts"] as IEnumerable<SelectListItem>" required>
                                                 <option selected value="" disabled>Cephe</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
-                                            <select id="inputUseStatus" class="form-select" asp-for="KullanimDurumuId"
+                                            <select id="inputUseStatus" class="form-select" asp-for="KullanimDurumu"
                                                 asp-items="@ViewData["UsingStatus"] as IEnumerable<SelectListItem>" required>
                                                 <option selected value="" disabled>Kullanım Durumu</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
-                                            <select id="inputDeedStatus" class="form-select" asp-for="TapuDurumuId"
+                                            <select id="inputDeedStatus" class="form-select" asp-for="TapuDurumu"
                                                 asp-items="@ViewData["DeedStatus"] as IEnumerable<SelectListItem>" required>
                                                 <option selected value="" disabled>Tapu Durumu</option>
                                             </select>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using real_estate_web.Data.EntityFramework;
@@ -11,9 +12,11 @@ using real_estate_web.Data.EntityFramework;
 namespace real_estate_web.Migrations
 {
     [DbContext(typeof(RealEstateDbContext))]
-    partial class RealEstateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230520182301_property-entitiy-change")]
+    partial class propertyentitiychange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace real_estate_web.Migrations
                             BodyContentA = "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.\r\n         Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Praesent sapien massa, convallis a pellentesque nec,\r\n          egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, \r\n          auctor sit amet aliquam vel, ullamcorper sit amet ligula.",
                             BodyContentB = "Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, \r\n        convallis at tellus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. \r\n        Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.",
                             BodyTitle = "Neden biz?",
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8231),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(8035),
                             Title = "Birlikte mutlu anılar biriktirebileceğiniz mülkler buluyoruz"
                         });
                 });
@@ -283,7 +286,7 @@ namespace real_estate_web.Migrations
                         {
                             Id = 1,
                             Address = "Üsküdar/İstanbul",
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8256),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(8049),
                             Email = "contact@example.com",
                             GoogleIFrameUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.665346984029!2d29.08746581564773!3d41.03257692587779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac8566285c3d7%3A0x60da11ebc95f76ce!2sTantavi%2C%20Estergon%20Cd.%20No%3A43%2C%2034764%20%C3%9Cmraniye%2F%C4%B0stanbul!5e0!3m2!1str!2str!4v1649872532554!5m2!1str!2str",
                             HeaderDescription = "Aut voluptas consequatur unde sed omnis ex placeat quis eos. Aut natus officia corrupti qui autem fugit consectetur quo. Et ipsum eveniet laboriosam voluptas beatae possimus qui ducimus. Et voluptatem deleniti. Voluptatum voluptatibus amet. Et esse sed omnis inventore hic culpa.",
@@ -317,25 +320,25 @@ namespace real_estate_web.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7997),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7917),
                             Name = "Kat Mülkiyetli"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8000),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7918),
                             Name = "Kat İrtifaklı"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8001),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7919),
                             Name = "Arsa"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8003),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7919),
                             Name = "Tarla"
                         });
                 });
@@ -395,55 +398,55 @@ namespace real_estate_web.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7454),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7694),
                             Name = "Kuzey"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7463),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7698),
                             Name = "Kuzey Doğu"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7465),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7699),
                             Name = "Doğu"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7466),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7700),
                             Name = "Güney Doğu"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7467),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7700),
                             Name = "Güney"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7468),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7701),
                             Name = "Güney Batı"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7469),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7749),
                             Name = "Batı"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7470),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7750),
                             Name = "Kuzey Batı"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(7472),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7751),
                             Name = "Bilinmiyor"
                         });
                 });
@@ -474,37 +477,37 @@ namespace real_estate_web.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8031),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7936),
                             Name = "Doğalgaz Sobalı"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8033),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7937),
                             Name = "Sobalı"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8034),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7937),
                             Name = "Yerden Isıtma"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8035),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7938),
                             Name = "Kombili"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8036),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7938),
                             Name = "Merkezi Sistem"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8037),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7939),
                             Name = "FuelOil"
                         });
                 });
@@ -535,19 +538,19 @@ namespace real_estate_web.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8068),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7953),
                             Name = "ADSL/VDSL"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8069),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7954),
                             Name = "Fiber"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8070),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7955),
                             Name = "Bilinmiyor"
                         });
                 });
@@ -581,25 +584,25 @@ namespace real_estate_web.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8095),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7969),
                             Name = "Broker"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8098),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7970),
                             Name = "Danışman"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8099),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7970),
                             Name = "Müdür"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8100),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7971),
                             Name = "Asistan"
                         });
                 });
@@ -973,9 +976,10 @@ namespace real_estate_web.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("PropertyListingDetailId")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("SortIndex")
+                    b.Property<int>("SortIndex")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -1014,79 +1018,79 @@ namespace real_estate_web.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8126),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7983),
                             Name = "Daire"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8128),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7984),
                             Name = "Rezidence"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8129),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7985),
                             Name = "Müstakil Ev"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8130),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7985),
                             Name = "Villa"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8131),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7986),
                             Name = "Çiftlik Evi"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8132),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7986),
                             Name = "Yazlık"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8133),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7987),
                             Name = "Büro/Ofis"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8135),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7987),
                             Name = "Depo/Antrepo"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8136),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7988),
                             Name = "Dükkan/Mağaza"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8137),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7988),
                             Name = "Plaza"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8138),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7989),
                             Name = "Palaza Katı"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8139),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7989),
                             Name = "Sağlık Merkezi"
                         },
                         new
                         {
                             Id = 13,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8140),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(7990),
                             Name = "Spor Tesisi"
                         });
                 });
@@ -1117,25 +1121,25 @@ namespace real_estate_web.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8176),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(8007),
                             Name = "Satılık"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8178),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(8008),
                             Name = "Kiralık"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8179),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(8008),
                             Name = "Devren Satılık"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8180),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(8009),
                             Name = "Devren Kiralık"
                         });
                 });
@@ -1192,19 +1196,19 @@ namespace real_estate_web.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8205),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(8021),
                             Name = "Boş"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8207),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(8022),
                             Name = "Mülk Sahibi"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 5, 20, 18, 55, 40, 460, DateTimeKind.Utc).AddTicks(8208),
+                            CreatedDate = new DateTime(2023, 5, 20, 18, 23, 1, 559, DateTimeKind.Utc).AddTicks(8022),
                             Name = "Kiracılı"
                         });
                 });
