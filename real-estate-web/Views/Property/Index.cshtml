@@ -6,6 +6,7 @@
 }
 
 
+
 <!-- ======= Intro Single ======= -->
 <section class="intro-single">
     <div class="container">
@@ -95,10 +96,10 @@
                         <div class="property-price d-flex justify-content-center foo">
                             <div class="card-header-c d-flex">
                                 <div class="card-box-ico">
-                                    <span class="bi bi-cash">₺</span>
+                                    <span class="bi bi-cash"></span>
                                 </div>
                                 <div class="card-title-c align-self-center">
-                                    <h5 class="title-c">@Model.Price.ToString("##,#")</h5>
+                                    <h5 class="title-c">@Model.Price.ToString("##,#₺")</h5>
                                 </div>
                             </div>
                         </div>
@@ -266,9 +267,10 @@
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
-                        <iframe src="@Model.KonumIFrame"
-                                width="100%" height="460" frameborder="0" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                        @* <iframe src="@Model.KonumIFrame"
+                                width="100%" height="460" frameborder="0" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>*@ 
+                        <div id="mapdiv" style="height:460px;width:100%;"></div>
+                    </div> 
                     <div class="tab-pane fade " id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
                         <iframe src="@Model.YoutubeLink" width="100%" height="460" frameborder="0"
                                 webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -320,29 +322,29 @@
                                 <li class="d-flex justify-content-between">
                                     <strong>WhatsApp:</strong>
                                     <span class="color-text-a">
-                                        <a href="@wpHref">Tıklayınız</a>
+                                        <a href="@wpHref" target="_blank" rel="noopener noreferrer">Tıklayınız</a>
                                     </span>
                                 </li>
                             </ul>
                             <div class="socials-a">
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
-                                        <a href="@Model.AgentDto.FacebookLink">
+                                        <a href="@Model.AgentDto.FacebookLink" target="_blank" rel="noopener noreferrer">
                                             <i class="bi bi-facebook" aria-hidden="true"></i>
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
-                                        <a href="@Model.AgentDto.TwitterLink">
+                                        <a href="@Model.AgentDto.TwitterLink" target="_blank" rel="noopener noreferrer">
                                             <i class="bi bi-twitter" aria-hidden="true"></i>
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
-                                        <a href="@Model.AgentDto.InstagramLink">
+                                        <a href="@Model.AgentDto.InstagramLink" target="_blank" rel="noopener noreferrer">
                                             <i class="bi bi-instagram" aria-hidden="true"></i>
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
-                                        <a href="@Model.AgentDto.LinkedinLink">
+                                        <a href="@Model.AgentDto.LinkedinLink" target="_blank" rel="noopener noreferrer">
                                             <i class="bi bi-linkedin" aria-hidden="true"></i>
                                         </a>
                                     </li>
@@ -384,3 +386,25 @@
         </div>
     </div>
 </section><!-- End Property Single-->
+<script src="/lib/OpenLayers/OpenLayers.js"></script>
+<script>
+   map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+
+    var lonLat = new OpenLayers.LonLat( @Model.LocationLon ,@Model.LocationLat )
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+          
+    var zoom=17;
+
+    var markers = new OpenLayers.Layer.Markers( "Markers" );
+    map.addLayer(markers);
+    
+    markers.addMarker(new OpenLayers.Marker(lonLat));
+    
+    map.setCenter (lonLat, zoom);
+
+</script>
+

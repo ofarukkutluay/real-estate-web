@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Ana Sayfa";
 }
 @model Tuple<IEnumerable<AgentVM>,IEnumerable<PropertyVM>,IEnumerable<Blog>>
 
@@ -96,6 +96,10 @@
             </div>
         </div>
     </section><!-- End Services Section -->
+    @if (Model.Item1.Count()>0)
+    {
+        
+    
     <!-- ======= Latest Properties Section ======= -->
     <section class="section-property section-t8">
         <div class="container">
@@ -161,20 +165,15 @@
                                                     <span>@item.OdaSayisi + @item.SalonSayisi</span>
                                                 </li>
                                                 <li>
-                                                    <h4 class="card-info-title">Banyo</h4>
-                                                    <span>@item.BanyoSayisi</span>
-                                                </li>
-                                                <li>
-                                                    <h4 class="card-info-title">Otopark</h4>
-                                                    @if (@item.OtoparkSayisi == 0 || @item.OtoparkSayisi == null)
-                                                    {
-                                                        <span>Yok</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span>@item.OtoparkSayisi</span>
-                                                    }
-                                                </li>
+                                            <h4 class="card-info-title">Emlak Tipi</h4>
+                                            <span>@item.Status @item.PropertyType</span>
+                                        </li>
+                                        <li>
+                                            <h4 class="card-info-title">Yaşı</h4>
+
+                                            <span>@item.BinaYasi</span>
+
+                                        </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -190,6 +189,8 @@
 
         </div>
     </section><!-- End Latest Properties Section -->
+    }
+    @if(Model.Item2.Count()>0){
     <!-- ======= Agents Section ======= -->
     <section class="section-agents section-t8">
         <div class="container">
@@ -277,6 +278,9 @@
             </div>
         </div>
     </section><!-- End Agents Section -->
+    }
+
+    @if(Model.Item3.Count() > 0){
     <!-- ======= Latest News Section ======= -->
     <section class="section-news section-t8">
         <div class="container">
@@ -296,6 +300,7 @@
                 </div>
             </div>
 
+    
             <div id="news-carousel" class="swiper">
                 <div class="swiper-wrapper">
 
@@ -335,6 +340,7 @@
             <div class="news-carousel-pagination carousel-pagination"></div>
         </div>
     </section><!-- End Latest News Section -->
+    }
     @*<!-- ======= Testimonials Section ======= -->
     <section class="section-testimonials section-t8 nav-arrow-a">
         <div class="container">

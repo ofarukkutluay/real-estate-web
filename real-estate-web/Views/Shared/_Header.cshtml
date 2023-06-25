@@ -4,7 +4,7 @@
 <!--/ Form Search Star /-->
 <div class="box-collapse">
     <div class="title-box-d">
-        <h3 class="title-d">Search Property</h3>
+        <h3 class="title-d">Mülk Ara</h3>
     </div>
     <span class="close-box-collapse right-boxed bi bi-x"></span>
     <div class="box-collapse-wrap form">
@@ -12,13 +12,13 @@
             <div class="row">
                 <div class="col-md-12 mb-2">
                     <div class="form-group">
-                        <label class="pb-2" for="Type">Keyword</label>
+                        <label class="pb-2" for="Type">Başlık</label>
                         <input type="text" class="form-control form-control-lg form-control-a" placeholder="Keyword">
                     </div>
                 </div>
                 <div class="col-md-6 mb-2">
                     <div class="form-group mt-3">
-                        <label class="pb-2" for="Type">Type</label>
+                        <label class="pb-2" for="Type">Tipi</label>
                         <select class="form-control form-select form-control-a" id="Type">
                             <option>All Type</option>
                             <option>For Rent</option>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <div class="form-group mt-3">
-                        <label class="pb-2" for="city">City</label>
+                        <label class="pb-2" for="city">Şehir</label>
                         <select class="form-control form-select form-control-a" id="city">
                             <option>All City</option>
                             <option>Alabama</option>
@@ -41,41 +41,7 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <div class="form-group mt-3">
-                        <label class="pb-2" for="bedrooms">Bedrooms</label>
-                        <select class="form-control form-select form-control-a" id="bedrooms">
-                            <option>Any</option>
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <div class="form-group mt-3">
-                        <label class="pb-2" for="garages">Garages</label>
-                        <select class="form-control form-select form-control-a" id="garages">
-                            <option>Any</option>
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                            <option>04</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <div class="form-group mt-3">
-                        <label class="pb-2" for="bathrooms">Bathrooms</label>
-                        <select class="form-control form-select form-control-a" id="bathrooms">
-                            <option>Any</option>
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <div class="form-group mt-3">
-                        <label class="pb-2" for="price">Min Price</label>
+                        <label class="pb-2" for="price">En Az Fiyat</label>
                         <select class="form-control form-select form-control-a" id="price">
                             <option>Unlimite</option>
                             <option>$50,000</option>
@@ -86,7 +52,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-b">Search Property</button>
+                    <button type="submit" class="btn btn-b">Ara</button>
                 </div>
             </div>
         </form>
@@ -101,9 +67,7 @@
                 <span></span>
                 <span></span>
             </button>
-            @*<a class="navbar-brand text-brand" href="/">Kutluay<span class="color-b">Emlak</span></a>*@
-            <a class="navbar-brand" href="/"><img class="h-100" style="width:200px;" src="/img/kutluay-emlak.jpg" /></a>
-
+            <a class="navbar-brand text-brand" href="/"><img src="/img/favicon.jpg" width="80" />Kutluay<span class="color-b">Emlak</span></a>
             <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
                 <ul class="navbar-nav">
 
@@ -128,8 +92,8 @@
                     </li>
 
                     @{
-                        
-                        if (Context.User.IsInRole(Roles.User)|| Context.User.IsInRole(Roles.Admin))
+
+                        if (Context.User.IsInRole(Roles.User) || Context.User.IsInRole(Roles.Admin))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
@@ -144,7 +108,7 @@
 
                     }
 
-                    
+
                 </ul>
             </div>
 
