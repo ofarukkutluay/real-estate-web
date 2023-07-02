@@ -9,5 +9,6 @@ namespace real_estate_web.Data.Abstract
         IEnumerable<PropertyDto> GetListAgentIdPropertyDto(int agentId);
         PropertyDto GetPropertyDto(int id);
         IEnumerable<PropertyDto> GetListPropertyDto();
+        IEnumerable<PropertyDto> GetListPropertyDtoFromAdmin();
     }
 }

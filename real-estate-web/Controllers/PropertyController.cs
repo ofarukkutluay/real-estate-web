@@ -26,6 +26,10 @@ namespace real_estate_web.Controllers
         public async Task<IActionResult> Index(int id)
         {
             PropertyDto Property = _propertyRepository.GetPropertyDto(id);
+            if (Property is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             PropertyVM vm = _mapper.Map<PropertyVM>(Property);
             var photos = await _propertyPhotoRepository.GetListAsync(x=>x.PropertyId == id);
             vm.PropertyPhotoPaths = photos.Where(x=>x.BasePhoto==false).Select(x=>x.Path);

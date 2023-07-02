@@ -21,10 +21,6 @@ namespace real_estate_web.Tools.Helper
             {
                 File.Move(sourcepath, @"wwwroot" + result);
             }
-            else
-            {
-                File.Delete(sourcepath);
-            }
             return result;
         }
 
@@ -39,43 +35,14 @@ namespace real_estate_web.Tools.Helper
                 }
             }
             var result = newSubDirectoryPath(file, subDirectoryName);
-            if (!HasFile(Path.Combine(RootDirectory, result)))
-            {
-                File.Move(sourcepath, @"wwwroot" + result);
-            }
-            else
-            {
-                File.Delete(sourcepath);
-            }
+            File.Move(sourcepath, @"wwwroot" + result);
+       
             return result;
         }
 
-        //public static string Upload(string directory,IFormFile file)
-        //{
-        //    var sourcepath = Path.GetTempFileName();
-        //    if (file.Length > 0)
-        //    {
-        //        using (var stream = new FileStream(sourcepath, FileMode.Create))
-        //        {
-        //            file.CopyTo(stream);
-        //        }
-        //    }
-
-        //    if (!Directory.Exists(Path.Combine(Environment.CurrentDirectory, RootDirectory, directory)))
-        //    {
-        //        Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, RootDirectory, directory));
-        //    }
-
-        //    string path = Path.Combine(RootDirectory,directory,file.FileName); 
-
-        //    File.Move(sourcepath, path);
-
-        //    return path;
-        //}
-
         public static bool HasFile(string directory, string fileName)
         {
-            return Directory.Exists(Path.Combine(directory, fileName));
+            return File.Exists(Path.Combine(directory, fileName));
         }
 
         public static bool HasFile(string fullPath)

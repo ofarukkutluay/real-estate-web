@@ -13,7 +13,7 @@ using real_estate_web.Data.Common;
 using real_estate_web.Data.EntityFramework;
 using real_estate_web.Tools.Logger;
 using real_estate_web.Tools.Middlewares;
-using real_estate_web.Tools.Scrapping;
+using real_estate_web.Tools.Scraping;
 using Serilog;
 using Serilog.Context;
 using Serilog.Core;
@@ -49,7 +49,7 @@ builder.Services.AddScoped<IUsingStatusRepository, EfUsingStatusDal>();
 builder.Services.AddScoped<IAboutRepository, EfAboutDal>();
 builder.Services.AddScoped<IContactRepository, EfContactDal>();
 builder.Services.AddScoped<IBlogRepository, EfBlogDal>();
-builder.Services.AddScoped<ScrappingService>();
+builder.Services.AddScoped<ScrapingService>();
 
 Logger log = new LoggerConfiguration()
     .WriteTo.Console()
@@ -121,7 +121,7 @@ builder.Services.AddCors();
 var app = builder.Build();
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-//dateonly veri tipindeki datayý kaydederken -infinity veri olarak kaydetmesini önlemek için eklendi.
+//dateonly veri tipindeki datayï¿½ kaydederken -infinity veri olarak kaydetmesini ï¿½nlemek iï¿½in eklendi.
 AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 
 

@@ -37,7 +37,9 @@ namespace real_estate_web.Data.EntityFramework
                              JobTitleName = jt.Name,
                              ProfilePhotoPath = a.ProfilePhotoPath,
                              IsFavoritUser = a.IsFavoritUser,
-                            PropertyCount = (from p in Context.Properties where p.AgentId == a.Id select p).Count()
+                            PropertyCount = (from p in Context.Properties where p.AgentId == a.Id select p).Count(),
+                            IsActive = a.IsActive,
+                            IsDeleted =a.IsDeleted
                         };
 
             return result;
@@ -66,7 +68,9 @@ namespace real_estate_web.Data.EntityFramework
                              JobTitleName = jt.Name,
                              ProfilePhotoPath = a.ProfilePhotoPath,
                              IsFavoritUser = a.IsFavoritUser,
-                             PropertyCount = (from p in Context.Properties where p.AgentId == a.Id select p).Count()
+                             PropertyCount = (from p in Context.Properties where p.AgentId == a.Id select p).Count(),
+                             IsActive = a.IsActive,
+                             IsDeleted = a.IsDeleted
                          };
 
             return result;
@@ -98,7 +102,9 @@ namespace real_estate_web.Data.EntityFramework
                              JobTitleName = jt.Name,
                              ProfilePhotoPath = a.ProfilePhotoPath,
                              IsFavoritUser = a.IsFavoritUser,
-                            PropertyCount = (from p in Context.Properties where p.AgentId == a.Id select p).Count()
+                            PropertyCount = (from p in Context.Properties where p.AgentId == a.Id select p).Count(),
+                            IsActive = a.IsActive,
+                            IsDeleted = a.IsDeleted
                         };
 
             return result.FirstOrDefault();

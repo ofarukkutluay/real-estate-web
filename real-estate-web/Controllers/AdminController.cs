@@ -270,9 +270,10 @@ namespace real_estate_web.Controllers
                 return View("Contact", model);
             }
 
+
             Contact contact = await _contactRepository.GetAsync(x => x.Id == model.Id);
             contact.HeaderDescription = model.HeaderDescription;
-            contact.GoogleIFrameUrl = model.GoogleIFrameUrl;
+            contact.GoogleIFrameUrl = model.GoogleIFrameUrl.Contains("iframe") ? HtmlAgilityPack.HtmlNode.CreateNode(model.GoogleIFrameUrl).Attributes["src"].DeEntitizeValue : model.GoogleIFrameUrl;
             contact.Email = model.Email;
             contact.PhoneNumber = model.PhoneNumber;
             contact.InstagramUrl = model.InstagramUrl;
@@ -390,7 +391,7 @@ namespace real_estate_web.Controllers
         //Propety Mülk sayfası
         public IActionResult Property()
         {
-            IEnumerable<PropertyDto> properties = _propertyRepository.GetListPropertyDto().OrderByDescending(x => x.Id);
+            IEnumerable<PropertyDto> properties = _propertyRepository.GetListPropertyDtoFromAdmin().OrderByDescending(x => x.Id);
             IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM>>(properties);
             return View(vm);
         }
@@ -406,8 +407,6 @@ namespace real_estate_web.Controllers
         {
             // property add
             Property property = _mapper.Map<Property>(model);
-            if (model.KonumIFrame is null || model.KonumIFrame.Trim().Equals(""))
-                property.KonumIFrame = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192697.79327595135!2d28.8720964464606!3d41.00549580940238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1651089326725!5m2!1str!2str";
             if (model.YoutubeLink != null && !model.YoutubeLink.Trim().Equals(""))
             {
                 if (!model.YoutubeLink.Contains("embed"))
@@ -454,7 +453,7 @@ namespace real_estate_web.Controllers
             {
                 foreach (var item in photoPaths)
                 {
-                    FileHelper.Delete(item.Path);
+                    //FileHelper.Delete(item.Path);
                     await _propertyPhotoRepository.RemoveAsync(item.Id);
                     await _propertyPhotoRepository.SaveAsync();
                 }
@@ -542,9 +541,7 @@ namespace real_estate_web.Controllers
             property.KirediyeUygunMu = model.KirediyeUygunMu;
             property.AgentId = model.AgentId;
 
-            if (model.KonumIFrame is null || model.KonumIFrame.Trim().Equals(""))
-                property.KonumIFrame = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192697.79327595135!2d28.8720964464606!3d41.00549580940238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1651089326725!5m2!1str!2str";
-            
+        
             if (model.YoutubeLink != null && !model.YoutubeLink.Trim().Equals(""))
             {
                 if (!model.YoutubeLink.Contains("embed"))
@@ -559,6 +556,24 @@ namespace real_estate_web.Controllers
 
             await _propertyRepository.SaveAsync();
             SuccessAlert("Güncellendi");
+            return RedirectToAction("Property");
+        }
+
+        public async Task<IActionResult> ActivateProperty(int id)
+        {
+            var property = await _propertyRepository.GetAsync(x => x.Id == id);
+            property.IsActive = true;
+            await _propertyRepository.SaveAsync();
+            SuccessAlert("Aktif edildi");
+            return RedirectToAction("Property");
+        }
+
+        public async Task<IActionResult> DeactivateProperty(int id)
+        {
+            var property = await _propertyRepository.GetAsync(x => x.Id == id);
+            property.IsActive = false;
+            await _propertyRepository.SaveAsync();
+            SuccessAlert("Pasife alındı");
             return RedirectToAction("Property");
         }
 

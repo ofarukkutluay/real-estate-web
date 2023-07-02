@@ -20,5 +20,7 @@ namespace real_estate_web.Models.Database.Dtos
         public string? JobTitleName { get; set; }
         public bool IsFavoritUser { get; set; }
         public int PropertyCount { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

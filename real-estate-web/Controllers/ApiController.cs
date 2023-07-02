@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using real_estate_web.Data.Abstract;
+
 using real_estate_web.Data.EntityFramework;
 using real_estate_web.Models.Database;
 using real_estate_web.Models.ViewModel;
 using real_estate_web.Tools.Hashing;
-using real_estate_web.Tools.Logger;
-using real_estate_web.Tools.Scrapping;
+using real_estate_web.Tools.Scraping;
 using real_estate_web.Tools.TokenOperations;
 using real_estate_web.Tools.TokenOperations.Models;
 using System.Globalization;
@@ -22,12 +20,12 @@ namespace real_estate_web.Controllers
 
     public class ApiController : Controller
     {
-        private readonly ScrappingService _scrapingService;
+        private readonly ScrapingService _scrapingService;
         private readonly RealEstateDbContext _dbContext;
         private readonly IConfiguration _configuration;
-        public ApiController(ScrappingService scrappingService, RealEstateDbContext dbContext, IConfiguration configuration)
+        public ApiController(ScrapingService scrapingService, RealEstateDbContext dbContext, IConfiguration configuration)
         {
-            _scrapingService = scrappingService;
+            _scrapingService = scrapingService;
             _dbContext = dbContext;
             _configuration = configuration;
         }
@@ -55,7 +53,7 @@ namespace real_estate_web.Controllers
             var tmpNeigh = listingDetail.Neighborhood.Trim();
             listingDetail.Neighborhood = listingDetail.Neighborhood.Replace(tmpNeigh.Split(" ").Last(), "").Trim().ToUpper(CultureInfo.CreateSpecificCulture("tr-TR"));
             int userId = int.Parse(HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier)?.Value);
-            City? city = await _dbContext.Cities.SingleOrDefaultAsync(x => x.Name == listingDetail.City.ToUpper(CultureInfo.CreateSpecificCulture("tr-TR")));
+            City? city = await _dbContext.Cities.SingleOrDefaultAsync(x => x.Name.Trim() == listingDetail.City.ToUpper(CultureInfo.CreateSpecificCulture("tr-TR")));
             if (city is null)
             {
                 int newCityKey = _dbContext.Cities.OrderBy(x => x.Key).Last().Key + 1;
@@ -63,7 +61,7 @@ namespace real_estate_web.Controllers
                 await _dbContext.SaveChangesAsync();
                 city = resCity.Entity;
             }
-            District? district = await _dbContext.Districts.SingleOrDefaultAsync(x => x.IlKey == city.Key && x.Name == listingDetail.District.ToUpper(CultureInfo.CreateSpecificCulture("tr-TR")));
+            District? district = await _dbContext.Districts.SingleOrDefaultAsync(x => x.IlKey == city.Key && x.Name.Trim() == listingDetail.District.ToUpper(CultureInfo.CreateSpecificCulture("tr-TR")));
             if (district is null)
             {
                 int newDistrictKey = _dbContext.Districts.OrderBy(x => x.Key).Last().Key + 1;
@@ -71,7 +69,7 @@ namespace real_estate_web.Controllers
                 await _dbContext.SaveChangesAsync();
                 district = resDist.Entity;
             }
-            Neighborhood? neighborhood = await _dbContext.Neighborhoods.SingleOrDefaultAsync(x => x.IlceKey == district.Key && x.Name == listingDetail.Neighborhood);
+            Neighborhood? neighborhood = await _dbContext.Neighborhoods.SingleOrDefaultAsync(x => x.IlceKey == district.Key && x.Name.Trim() == listingDetail.Neighborhood.ToUpper(CultureInfo.CreateSpecificCulture("tr-TR")));
             if (neighborhood is null)
             {
                 int newNeighborhoodKey = _dbContext.Neighborhoods.OrderBy(x => x.Key).Last().Key + 1;

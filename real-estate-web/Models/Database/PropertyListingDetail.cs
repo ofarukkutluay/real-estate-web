@@ -59,12 +59,12 @@ namespace real_estate_web.Models.Database
         public bool AlcoholLicense { get; set; }
         public bool SoilSurvey { get; set; }
 
-        public string? Listinglink { get; set; }
+        public string? ListingLink { get; set; }
 
         public string PhotoLinks { get; set; } = string.Empty;
         public string PhotoPaths { get; set; } = string.Empty;
 
         [NotMapped]
-        public List<PropertyPhoto> PropertyPhotos { get; set; }
+        public List<PropertyPhoto> PropertyPhotos { get; set; } = new List<PropertyPhoto>();
     }
 }

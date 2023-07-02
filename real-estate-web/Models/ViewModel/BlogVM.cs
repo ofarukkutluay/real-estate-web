@@ -11,5 +11,7 @@
         public string Category { get; set; }
         public string Content { get; set; }
         public IFormFile BasePhoto { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

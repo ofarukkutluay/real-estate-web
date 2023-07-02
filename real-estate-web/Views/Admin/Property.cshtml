@@ -80,7 +80,7 @@
                                     <a href="#" class="dataTable-sorter">Linki</a>
                                 </th>
                                 <th scope="col" data-sortable="">
-                                    Edit / Delete
+                                    Edit / Pasif / Delete
                                 </th>
                             </tr>
                         </thead>
@@ -114,9 +114,20 @@
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group">
                                                 <a type="button" class="btn btn-info" asp-controller="Admin"
-                                                   asp-action="PropertyUpdate" asp-route-Id="@item.Id">Edit</a>
+                                                   asp-action="PropertyUpdate" asp-route-Id="@item.Id">Editle</a>
+                                                @if (item.IsActive)
+                                                {
+                                                    <a type="button" class="btn btn-warning" asp-controller="Admin"
+                                                       asp-action="DeactivateProperty" asp-route-Id="@item.Id">Pasif</a>
+                                                }
+                                                else
+                                                {
+                                                    <a type="button" class="btn btn-success" asp-controller="Admin"
+                                                       asp-action="ActivateProperty" asp-route-Id="@item.Id">Aktif</a>
+                                                }
+
                                                 <a type="button" class="btn btn-danger" asp-controller="Admin"
-                                                   asp-action="RemoveProperty" asp-route-Id="@item.Id">Delete</a>
+                                                   asp-action="RemoveProperty" asp-route-Id="@item.Id">Sil</a>
                                             </div>
                                         </td>
                                     </tr>

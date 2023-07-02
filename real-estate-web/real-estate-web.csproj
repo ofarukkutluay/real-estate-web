@@ -26,4 +26,9 @@
     <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ListingWebsiteScrapingLibrary">
+      <HintPath>..\..\ListingWebsiteScraping\ListingWebsiteScrapingLibrary\bin\Debug\net6.0\ListingWebsiteScrapingLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

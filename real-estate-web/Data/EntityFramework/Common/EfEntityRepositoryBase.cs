@@ -33,12 +33,18 @@ namespace real_estate_web.Data.EntityFramework.Common
         }
         public bool Remove(TEntity model)
         {
-            EntityEntry<TEntity> entityEntry = Table.Remove(model);
-            return entityEntry.State == EntityState.Deleted;
+            //EntityEntry<TEntity> entityEntry = Table.Remove(model);
+            //return entityEntry.State == EntityState.Deleted;
+            Context.Set<TEntity>().FirstOrDefault(x => x.Id == model.Id).IsDeleted = true;
+            int result = Context.SaveChanges();
+            return result > 0;
         }
         public bool RemoveRange(List<TEntity> datas)
         {
-            Table.RemoveRange(datas);
+            foreach (var item in datas)
+            {
+                Remove(item);
+            }
             return true;
         }
         public async Task<bool> RemoveAsync(int id)
@@ -60,23 +66,23 @@ namespace real_estate_web.Data.EntityFramework.Common
 
         public TEntity Get(Expression<Func<TEntity, bool>> expression)
         {
-            return Context.Set<TEntity>().FirstOrDefault(expression);
+            return Context.Set<TEntity>().Where(x=>!x.IsDeleted).FirstOrDefault(expression);
         }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)
         {
-            return await Context.Set<TEntity>().AsQueryable().FirstOrDefaultAsync(expression);
+            return await Context.Set<TEntity>().AsQueryable().Where(x => !x.IsDeleted).FirstOrDefaultAsync(expression);
         }
 
         public IEnumerable<TEntity> GetList(Expression<Func<TEntity, bool>> expression = null)
         {
-            return expression == null ? Context.Set<TEntity>().AsNoTracking() : Context.Set<TEntity>().Where(expression).AsNoTracking();
+            return expression == null ? Context.Set<TEntity>().Where(x => !x.IsDeleted).AsNoTracking() : Context.Set<TEntity>().Where(x => !x.IsDeleted).Where(expression).AsNoTracking();
         }
 
         public async Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> expression = null)
         {
-            return expression == null ? await Context.Set<TEntity>().ToListAsync() :
-                 await Context.Set<TEntity>().Where(expression).ToListAsync();
+            return expression == null ? await Context.Set<TEntity>().Where(x => !x.IsDeleted).ToListAsync() :
+                 await Context.Set<TEntity>().Where(x => !x.IsDeleted).Where(expression).ToListAsync();
         }
 
         public int SaveChanges()
@@ -143,17 +149,17 @@ namespace real_estate_web.Data.EntityFramework.Common
         public async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> expression = null)
         {
             if (expression == null)
-                return await Context.Set<TEntity>().CountAsync();
+                return await Context.Set<TEntity>().Where(x => !x.IsDeleted).CountAsync();
             else
-                return await Context.Set<TEntity>().CountAsync(expression);
+                return await Context.Set<TEntity>().Where(x => !x.IsDeleted).CountAsync(expression);
         }
 
         public int GetCount(Expression<Func<TEntity, bool>> expression = null)
         {
             if (expression == null)
-                return Context.Set<TEntity>().Count();
+                return Context.Set<TEntity>().Where(x => !x.IsDeleted).Count();
             else
-                return Context.Set<TEntity>().Count(expression);
+                return Context.Set<TEntity>().Where(x => !x.IsDeleted).Count(expression);
         }
     }
 }
