@@ -453,9 +453,9 @@ namespace real_estate_web.Controllers
             {
                 foreach (var item in photoPaths)
                 {
-                    //FileHelper.Delete(item.Path);
-                    await _propertyPhotoRepository.RemoveAsync(item.Id);
-                    await _propertyPhotoRepository.SaveAsync();
+                    FileHelper.Delete(item.Path);
+                    _propertyPhotoRepository.ForceDelete(item);
+                    _propertyPhotoRepository.SaveChanges();
                 }
             }
 

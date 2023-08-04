@@ -33,12 +33,10 @@ namespace real_estate_web.Data.EntityFramework.Common
         }
         public bool Remove(TEntity model)
         {
-            //EntityEntry<TEntity> entityEntry = Table.Remove(model);
-            //return entityEntry.State == EntityState.Deleted;
-            Context.Set<TEntity>().FirstOrDefault(x => x.Id == model.Id).IsDeleted = true;
-            int result = Context.SaveChanges();
-            return result > 0;
+            model.IsDeleted = true;
+            return Update(model);
         }
+
         public bool RemoveRange(List<TEntity> datas)
         {
             foreach (var item in datas)
@@ -47,11 +45,19 @@ namespace real_estate_web.Data.EntityFramework.Common
             }
             return true;
         }
+
         public async Task<bool> RemoveAsync(int id)
         {
             TEntity model = await Table.FirstOrDefaultAsync(data => data.Id == id);
             return Remove(model);
         }
+
+        public bool ForceDelete(TEntity model)
+        {
+            EntityEntry<TEntity> entityEntry = Table.Remove(model);
+            return entityEntry.State == EntityState.Deleted;
+        }
+
         public bool Update(TEntity model)
         {
             EntityEntry entityEntry = Table.Update(model);
