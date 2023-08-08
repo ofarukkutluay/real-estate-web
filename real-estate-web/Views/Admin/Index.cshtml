@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using real_estate_web.Tools.Helper;
 @{
     ViewData["Title"] = "Dashboard - Admin";
 }
@@ -109,9 +107,9 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <th scope="row"><a href="/property/@item.Id">#@item.Id</a></th>
+                                            <th scope="row"><a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})">#@item.Id</a></th>
                                             <td>@item.Il / @item.Ilce</td>
-                                            <td><a href="/property/@item.Id" class="text-primary">@item.Title</a></td>
+                                            <td><a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})" class="text-primary">@item.Title</a></td>
                                             <td>@item.PropertyType</td>
                                             <td>@item.Status</td>
                                             <td>@item.Price.ToString("₺##,#")</td>

@@ -23,5 +23,19 @@ namespace real_estate_web.Tools.Helper
 
             return newString;
         }
+
+        public static string TitleToUrl(this string str)
+        {
+            string newStr = string.Empty;
+            str = str.ToLower(CultureInfo.CreateSpecificCulture("en-US"));
+            newStr = str.Replace(" ", "-").Replace("+","").Replace("'","")
+                .Replace("ç","c")
+                .Replace("ş","s")
+                .Replace("ö","o")
+                .Replace("ü","u")
+                .Replace("ı","i")
+                .Replace("ğ","g");
+            return newStr;
+        }
     }
 }

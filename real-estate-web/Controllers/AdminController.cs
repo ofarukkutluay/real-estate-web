@@ -585,7 +585,7 @@ namespace real_estate_web.Controllers
                 foreach (var item in photoPaths)
                 {
                     FileHelper.Delete(item.Path);
-                    await _propertyPhotoRepository.RemoveAsync(item.Id);
+                    _propertyPhotoRepository.ForceDelete(item);
                     await _propertyPhotoRepository.SaveAsync();
                 }
             }

@@ -19,7 +19,7 @@ namespace real_estate_web.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("agent/{id}")]
+        [HttpGet("agent/{fullname}-{id}")]
         public IActionResult Index(int id)
         {
             AgentDto agent = _agentRepository.GetAgentDto(id);

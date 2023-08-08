@@ -15,7 +15,7 @@ namespace real_estate_web.Tools.Mapper
             CreateMap<PropertyVM,Property>();
             CreateMap<Blog,BlogVM>().ForMember(dest=>dest.Date,mem=>mem.MapFrom(src=>src.Date.ToDateTime(new TimeOnly(01,01))));
             CreateMap<BlogVM,Blog>().ForMember(dest => dest.Date, mem => mem.MapFrom(src => DateOnly.FromDateTime(src.Date)));
-            CreateMap<ListingWebsiteScrapingLibrary.PropertyListingDetail, PropertyListingDetail>();
+            CreateMap<ListingWebsiteScrapingLibrary.PropertyListingDetail, PropertyListingDetail>().ForMember(dest => dest.ListingLink , mem => mem.MapFrom(src=> src.ListiningLink));
         }
     }
 }

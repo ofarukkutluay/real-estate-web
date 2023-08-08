@@ -22,7 +22,7 @@ namespace real_estate_web.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("property/{id}")]
+        [HttpGet("{title}-{id}")]
         public async Task<IActionResult> Index(int id)
         {
             PropertyDto Property = _propertyRepository.GetPropertyDto(id);

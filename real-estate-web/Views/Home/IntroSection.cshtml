@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using real_estate_web.Tools.Helper;
 @model IEnumerable<PropertyVM>
 
 <div class="intro intro-carousel swiper position-relative">
@@ -25,7 +23,7 @@
                       <br> @item.Title.ToUpper()
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="/property/@item.Id"><span class="price-a">@item.Status | ₺ @item.Price.ToString("##,#")</span></a>
+                      <a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})"><span class="price-a">@item.Status | ₺ @item.Price.ToString("##,#")</span></a>
                     </p>
                   </div>
                 </div>

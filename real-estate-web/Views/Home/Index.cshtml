@@ -1,4 +1,5 @@
-﻿@{
+﻿@using real_estate_web.Tools.Helper;
+@{
     ViewData["Title"] = "Ana Sayfa";
 }
 @model Tuple<IEnumerable<AgentVM>,IEnumerable<PropertyVM>,IEnumerable<Blog>>
@@ -133,7 +134,7 @@
                                     <div class="card-overlay-a-content">
                                         <div class="card-header-a">
                                             <h2 class="card-title-a">
-                                                <a href="/property/@item.Id">
+                                                <a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})">
                                                     <p class="fs-6">
                                                         @item.Mahalle MH, @item.Ilce
                                                         <br> @item.Il
@@ -146,7 +147,7 @@
                                             <div class="price-box d-flex">
                                                 <span class="price-a">@item.Status | ₺ @item.Price.ToString("##,#")</span>
                                             </div>
-                                            <a href="/property/@item.Id" class="link-a">
+                                            <a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})" class="link-a">
                                                 Görüntülemek için Tıklayın
                                                 <span class="bi bi-chevron-right"></span>
                                             </a>
@@ -222,7 +223,7 @@
                                     <div class="card-header-d">
                                         <div class="card-title-d align-self-center">
                                             <h3 class="title-d">
-                                                <a href="/agent/@agent.Id" class="link-two">
+                                                <a href="@Url.Action("Index","Agent",new { id = agent.Id , fullname = $"{agent.FirstName} {agent.LastName}".TitleToUrl()})" class="link-two">
                                                     @agent.FirstName
                                                     <br> @agent.LastName
                                                 </a>
