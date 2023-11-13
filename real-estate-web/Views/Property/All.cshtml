@@ -58,7 +58,7 @@
                             <div class="card-overlay-a-content">
                                 <div class="card-header-a">
                                     <h2 class="card-title-a">
-                                        <a href="/property/@item.Id">
+                                        <a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})">
                                             <p class="fs-6">
                                                 @item.Mahalle MH, @item.Ilce
                                                 <br> @item.Il

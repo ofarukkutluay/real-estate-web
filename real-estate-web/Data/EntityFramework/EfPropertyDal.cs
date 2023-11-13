@@ -67,11 +67,10 @@ namespace real_estate_web.Data.EntityFramework
                              ListingUserName = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingUserName,
                              ListingPhoneNumbers = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingPhoneNumbers,
                              Listinglink = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingLink,
-                             KonumIFrame = p.KonumIFrame,
+                             BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).FirstOrDefault(x => x.BasePhoto).Path,
+
                              CreatedDate = p.CreatedDate,
                              UpdatedDate = p.UpdatedDate,
-                             BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x => x.BasePhoto).Path,
-                             PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count(),
                              IsActive = p.IsActive,
                              IsDeleted = p.IsDeleted
                          };
@@ -134,11 +133,10 @@ namespace real_estate_web.Data.EntityFramework
                              ListingUserName = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingUserName,
                              ListingPhoneNumbers = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingPhoneNumbers,
                              Listinglink = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingLink,
-                             KonumIFrame = p.KonumIFrame,
+                             BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).FirstOrDefault(x => x.BasePhoto).Path,
+
                              CreatedDate = p.CreatedDate,
                              UpdatedDate = p.UpdatedDate,
-                             BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x => x.BasePhoto).Path,
-                             PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count(),
                              IsActive = p.IsActive,
                              IsDeleted = p.IsDeleted
                          };
@@ -202,11 +200,10 @@ namespace real_estate_web.Data.EntityFramework
                              ListingUserName = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingUserName,
                              ListingPhoneNumbers = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingPhoneNumbers,
                              Listinglink = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingLink,
-                             KonumIFrame = p.KonumIFrame,
+                             BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).FirstOrDefault(x => x.BasePhoto).Path,
+
                              CreatedDate = p.CreatedDate,
                              UpdatedDate = p.UpdatedDate,
-                             BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x => x.BasePhoto).Path,
-                             PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count(),
                              IsActive = p.IsActive,
                              IsDeleted = p.IsDeleted
                          };
@@ -270,11 +267,9 @@ namespace real_estate_web.Data.EntityFramework
                              ListingUserName = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingUserName,
                              ListingPhoneNumbers = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingPhoneNumbers,
                              Listinglink = Context.PropertyListingDetails.FirstOrDefault(pl => pl.Id == p.PropertyListiningId).ListingLink,
-                             KonumIFrame = p.KonumIFrame,
+                             BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).FirstOrDefault(x=>x.BasePhoto).Path,
                              CreatedDate = p.CreatedDate,
                              UpdatedDate = p.UpdatedDate,
-                             BasePhotoPath = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).SingleOrDefault(x => x.BasePhoto).Path,
-                             PhotoCount = (from pp in Context.PropertyPhotos where pp.PropertyId == p.Id select pp).Count(),
                              IsActive = p.IsActive,
                              IsDeleted = p.IsDeleted
                          };

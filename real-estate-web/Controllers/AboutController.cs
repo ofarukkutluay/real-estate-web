@@ -25,7 +25,7 @@ namespace real_estate_web.Controllers
             var about = abouts.First();
             IEnumerable<AgentDto> agents = _agentRepository.GetListAgentDto();
             IEnumerable<AgentVM> agentVMs = _mapper.Map<IEnumerable<AgentVM>>(agents);
-
+            
             return View(Tuple.Create<About,IEnumerable<AgentVM>>(about,agentVMs));
         }
 

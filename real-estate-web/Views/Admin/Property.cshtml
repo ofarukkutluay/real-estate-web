@@ -59,9 +59,6 @@
                                     <a href="#" class="dataTable-sorter">Danışman</a>
                                 </th>
                                 <th scope="col" data-sortable="">
-                                    <a href="#" class="dataTable-sorter">Fotoğraf sayısı</a>
-                                </th>
-                                <th scope="col" data-sortable="">
                                     <a href="#" class="dataTable-sorter">Kaynak</a>
                                 </th>
                                 <th scope="col" data-sortable="">
@@ -96,10 +93,9 @@
                                         <td>@item.Status</td>
                                         <td>@item.Price.ToString("₺##,#")</td>
                                         <td>@item.Agent</td>
-                                        <td>@item.PhotoCount</td>
                                         @if (!string.IsNullOrEmpty(item.PropertyListiningId))
                                         {
-                                            <td>Sh</td>
+                                            <td>Remote</td>
                                         }
                                         else
                                         {

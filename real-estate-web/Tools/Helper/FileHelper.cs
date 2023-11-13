@@ -2,7 +2,7 @@
 
 namespace real_estate_web.Tools.Helper
 {
-    public class FileHelper
+    public static class FileHelper
     {
         public static string RootDirectory = Path.Combine(Environment.CurrentDirectory, "wwwroot");
 
@@ -78,7 +78,12 @@ namespace real_estate_web.Tools.Helper
         }
         public static void Delete(string path)
         {
-            File.Delete(Path.Combine(RootDirectory,path));
+            if (path.StartsWith(Path.DirectorySeparatorChar) || path.StartsWith(Path.AltDirectorySeparatorChar))
+            {
+                path = path.TrimStart(Path.DirectorySeparatorChar).TrimStart(Path.AltDirectorySeparatorChar);
+            }
+            var fullpath = Path.Combine(RootDirectory, path);
+            File.Delete(fullpath);
         }
         public static string Update(string oldSourcePath, IFormFile file)
         {

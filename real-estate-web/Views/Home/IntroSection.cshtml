@@ -4,37 +4,42 @@
 <div class="intro intro-carousel swiper position-relative">
 
     <div class="swiper-wrapper">
-@foreach (var item in Model)
-{
-  item.BasePhotoPath = item.BasePhotoPath != null ? item.BasePhotoPath.Replace("\\","/") : "/img/property-1.jpg" ;
-  <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(@item.BasePhotoPath)">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">@item.Mahalle MH, @item.Ilce
-                      <br> @item.Il
-                    </p>
-                    <h1 class="intro-title mb-4 ">
-                      <span class="color-b">@item.OdaSayisi+@item.SalonSayisi </span> @item.PropertyType
-                      <br> @item.Title.ToUpper()
-                    </h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})"><span class="price-a">@item.Status | ₺ @item.Price.ToString("##,#")</span></a>
-                    </p>
-                  </div>
+        @foreach (var item in Model)
+        {
+            item.BasePhotoPath = item.BasePhotoPath != null ? item.BasePhotoPath.Replace("\\", "/") : "/img/property-1.jpg";
+            <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(@item.BasePhotoPath)">
+                <div class="overlay overlay-a"></div>
+                <div class="intro-content display-table">
+                    <div class="table-cell">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="intro-body">
+                                        <p class="intro-title-top">
+                                            @item.Mahalle MH, @item.Ilce
+                                            <br> @item.Il
+                                        </p>
+                                        <h1 class="intro-title mb-4 ">
+
+                                            <span class="color-b">@item.OdaSayisi+@item.SalonSayisi </span><a class="color-w" href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})">
+                                                @item.PropertyType
+                                                <br>
+                                                @item.Title.ToUpper()
+                                            </a>
+                                        </h1>
+                                        <p class="intro-subtitle intro-price">
+                                            <a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})"><span class="price-a">@item.Status | ₺ @item.Price.ToString("##,#")</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-}
-      
-      
+        }
+
+
     </div>
     <div class="swiper-pagination"></div>
 </div><!-- End Intro Section -->

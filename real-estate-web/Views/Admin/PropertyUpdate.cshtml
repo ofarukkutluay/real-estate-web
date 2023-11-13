@@ -71,6 +71,15 @@
                 
             });
         }
+        
+        deletePhoto = function (id) {
+                    $.get("@Url.Action("RemovePropertyPhoto","Admin")", { propertyPhotoId: id }, function (data, status) {
+                        if(data.complete == true){
+                            location.reload();
+                        }
+                        
+                    });
+                }
 
 
     });
@@ -84,12 +93,31 @@
                         <h5 class="card-title">Mülk Güncelle</h5>
                         <form class="needs-validation" asp-action="UpdateProperty" method="post" enctype="multipart/form-data">
                             <input asp-for="Id" hidden>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Yüklü Toplam Fotoğraf sayısı</label>
-                                <div class="col-sm-4">
-                                    <p>@Model.PhotoCount</p>
-                                </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">Fotoğraflar</label>
+                            <div class="col-sm-2">
+                                <p>@Model.PhotoCount adet yüklü</p>
                             </div>
+                            <div class="col-sm-2">
+                                @if(@Model.PhotoCount > 0){
+                                    <a type="button" class="btn btn-danger" onclick="allDeletePhoto(@Model.Id)">Tümünü
+                                        Sil</a>
+                                }     
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row mb-3">
+                            @foreach (var item in Model.PropertyPhotos)
+                            {
+                                
+                                    <div class="col-sm-2">
+                                        <img src="@item.Path"  class="img-thumbnail">
+                                        <a type="button" class="btn btn-danger btn-sm" onclick="deletePhoto(@item.Id)"><i class="bi bi-trash"></i></a>
+                                    </div>
+                                
+                            }
+                        </div>
                             <div class="row mb-3">
                                 <label for="formBaseFile" class="col-sm-2 col-form-label">Baş Fotoğraf Yükle</label>
                                 <div class="col-sm-6">
@@ -102,12 +130,7 @@
                                     <input asp-for="PropertyPhotos" class="form-control" type="file" id="formFile"
                                         multiple>
                                 </div>
-                                <div class="col-sm-2">
-                                    @if(@Model.PhotoCount > 0){
-                                        <a type="button" class="btn btn-danger" onclick="allDeletePhoto(@Model.Id)">Tümünü
-                                        Sil</a>
-                                    }     
-                                </div>
+                                
                             </div>
                             <div class="row mb-3">
                                 <label for="inputPropertyType" class="col-sm-2 col-form-label">Mülk Tipi : </label>

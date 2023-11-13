@@ -134,7 +134,7 @@
                                 <div class="card-overlay-a-content">
                                     <div class="card-header-a">
                                         <h2 class="card-title-a">
-                                            <a href="/property/@item.Id">
+                                            <a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})">
                                                 @item.Il / @item.Ilce
                                                 <br /> @item.Title
                                             </a>

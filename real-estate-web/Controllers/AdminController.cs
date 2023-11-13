@@ -383,6 +383,14 @@ namespace real_estate_web.Controllers
             {
                 agent.IsFavoritUser = model.IsFavoritUser;
             }
+
+            if (model.NewPassword != null)
+            {
+                byte[] passHash, passSalt;
+                HashingHelper.CreatePasswordHash(model.NewPassword, out passSalt, out passHash);
+                agent.PassHash = passHash;
+                agent.PassSalt = passSalt;
+            }
             await _agentRepository.SaveAsync();
             SuccessAlert("Güncellendi");
             return RedirectToAction("Agent");
@@ -424,7 +432,7 @@ namespace real_estate_web.Controllers
             var save = await _propertyRepository.SaveAsync();
 
             // propety photos add
-            List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos, entity.Id.ToString());
+            List<string> paths = await FileHelper.AddAllAsync(model.AddPropertyPhotos, entity.Id.ToString());
             List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
             foreach (var item in paths)
             {
@@ -454,8 +462,8 @@ namespace real_estate_web.Controllers
                 foreach (var item in photoPaths)
                 {
                     FileHelper.Delete(item.Path);
-                    _propertyPhotoRepository.ForceDelete(item);
-                    _propertyPhotoRepository.SaveChanges();
+                    await _propertyPhotoRepository.RemoveAsync(item.Id);
+                    await _propertyPhotoRepository.SaveAsync();
                 }
             }
 
@@ -465,12 +473,14 @@ namespace real_estate_web.Controllers
             return RedirectToAction("Property");
         }
 
-        public IActionResult PropertyUpdate(int id)
+        public async Task<IActionResult> PropertyUpdate(int id)
         {
 
             SelectItemInitializeProperty();
             PropertyDto property = _propertyRepository.GetPropertyDto(id);
             PropertyVM vm = _mapper.Map<PropertyVM>(property);
+            vm.PropertyPhotos = await _propertyPhotoRepository.GetListAsync(x => x.PropertyId == id);
+            vm.PhotoCount = vm.PropertyPhotos.Count();
             return View(vm);
 
         }
@@ -481,10 +491,10 @@ namespace real_estate_web.Controllers
 
             Property property = await _propertyRepository.GetAsync(x => x.Id == model.Id);
 
-            if (model.PropertyPhotos != null)
+            if (model.AddPropertyPhotos != null)
             {
                 // propety photos add
-                List<string> paths = await FileHelper.AddAllAsync(model.PropertyPhotos, model.Id.ToString());
+                List<string> paths = await FileHelper.AddAllAsync(model.AddPropertyPhotos, model.Id.ToString());
                 List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
                 foreach (var item in paths)
                 {
@@ -585,10 +595,20 @@ namespace real_estate_web.Controllers
                 foreach (var item in photoPaths)
                 {
                     FileHelper.Delete(item.Path);
-                    _propertyPhotoRepository.ForceDelete(item);
+                    await _propertyPhotoRepository.RemoveAsync(item.Id);
                     await _propertyPhotoRepository.SaveAsync();
                 }
             }
+            return Ok(new { complete = true });
+        }
+        
+        public async Task<IActionResult> RemovePropertyPhoto(int propertyPhotoId)
+        {
+            var item = await _propertyPhotoRepository.GetAsync(x=> x.Id == propertyPhotoId); 
+            FileHelper.Delete(item.Path);
+            await _propertyPhotoRepository.RemoveAsync(item.Id);
+            await _propertyPhotoRepository.SaveAsync();
+     
             return Ok(new { complete = true });
         }
 

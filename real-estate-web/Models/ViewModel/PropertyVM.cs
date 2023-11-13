@@ -1,3 +1,4 @@
+using real_estate_web.Models.Database;
 using real_estate_web.Models.Database.Dtos;
 using System.ComponentModel.DataAnnotations;
 
@@ -58,9 +59,9 @@ namespace real_estate_web.Models.ViewModel
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
-        public IEnumerable<string> PropertyPhotoPaths { get; set; }
+        public IEnumerable<PropertyPhoto> PropertyPhotos { get; set; }
         public AgentDto AgentDto { get; set; }
-        public List<IFormFile> PropertyPhotos { get; set; }
+        public List<IFormFile> AddPropertyPhotos { get; set; }
         public IFormFile BasePhoto { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }

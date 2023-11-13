@@ -10,7 +10,6 @@ namespace real_estate_web.Data.Common
         bool Remove(T model);
         bool RemoveRange(List<T> datas);
         Task<bool> RemoveAsync(int id);
-        bool ForceDelete(T model);
         bool Update(T model);
         T Add(T entity);
         IEnumerable<T> GetList(Expression<Func<T, bool>> expression = null);

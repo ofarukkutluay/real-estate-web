@@ -50,8 +50,6 @@ namespace real_estate_web.Models.Database.Dtos
         public int? SokakId { get; set; }
         public int AgentId { get; set; }
         public string BasePhotoPath { get; set; }
-        public int PhotoCount { get; set; }
-        public string KonumIFrame { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? CreatedDate { get; set; }

@@ -33,8 +33,8 @@ namespace real_estate_web.Data.EntityFramework.Common
         }
         public bool Remove(TEntity model)
         {
-            model.IsDeleted = true;
-            return Update(model);
+            EntityEntry<TEntity> entityEntry = Table.Remove(model);
+            return entityEntry.State == EntityState.Deleted;
         }
 
         public bool RemoveRange(List<TEntity> datas)
@@ -50,12 +50,6 @@ namespace real_estate_web.Data.EntityFramework.Common
         {
             TEntity model = await Table.FirstOrDefaultAsync(data => data.Id == id);
             return Remove(model);
-        }
-
-        public bool ForceDelete(TEntity model)
-        {
-            EntityEntry<TEntity> entityEntry = Table.Remove(model);
-            return entityEntry.State == EntityState.Deleted;
         }
 
         public bool Update(TEntity model)

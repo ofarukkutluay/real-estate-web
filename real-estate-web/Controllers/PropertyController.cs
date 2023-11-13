@@ -31,8 +31,7 @@ namespace real_estate_web.Controllers
                 return RedirectToAction("Index", "Home");
             }
             PropertyVM vm = _mapper.Map<PropertyVM>(Property);
-            var photos = await _propertyPhotoRepository.GetListAsync(x=>x.PropertyId == id);
-            vm.PropertyPhotoPaths = photos.Where(x=>x.BasePhoto==false).Select(x=>x.Path);
+            vm.PropertyPhotos = await _propertyPhotoRepository.GetListAsync(x => x.PropertyId == id);
             vm.AgentDto = _agentRepository.GetAgentDto(vm.AgentId);
             return View(vm);
         }
