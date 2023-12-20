@@ -117,19 +117,15 @@
                                 <span class="bi bi-chevron-left"></span>
                             </a>
                         </li>
-                        <li class="page-item">
-                            <a class="page-link" asp-action="All" asp-route-page="0">1</a>
-                        </li>
-                        @if (ViewBag.SumPage > 1)
-                        {
-                            @for (var i = 1; i < ViewBag.SumPage; i++)
+                        
+                            @for (var i = 0; i < Convert.ToInt32(ViewBag.SumPage); i++)
                             {
                                 int a = i + 1;
                                 <li class="page-item">
                                     <a class="page-link" asp-action="All" asp-route-page="@i">@a</a>
                                 </li>
                             }
-                        }
+                        
 
                         <li class="page-item next">
                             <a class="page-link">

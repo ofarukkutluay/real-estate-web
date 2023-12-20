@@ -4,15 +4,20 @@ using real_estate_web.Tools.Helper;
 using real_estate_web.Models.Database;
 using ListingWebsiteScrapingLibrary;
 using AutoMapper;
+using real_estate_web.Tools.ImageRemake;
+using Microsoft.AspNetCore.Http.Metadata;
+using SixLabors.ImageSharp.Formats.Jpeg;
 
 namespace real_estate_web.Tools.Scraping
 {
     public class ScrapingService
     {
         private IMapper _mapper;
-        public ScrapingService(IMapper mapper)
+        private WatermarkService _watermarkService;
+        public ScrapingService(IMapper mapper, WatermarkService watermarkService)
         {
             _mapper = mapper;
+            _watermarkService = watermarkService;
         }
 
 
@@ -25,7 +30,7 @@ namespace real_estate_web.Tools.Scraping
             Models.Database.PropertyListingDetail listingDetail = _mapper.Map<Models.Database.PropertyListingDetail>(result);
 
             List<object> photoPaths = new List<object>();
-           
+
             int thmbImgIndex = 0;
             foreach (var megaLink in result.PhotoLinks)
             {
@@ -52,10 +57,11 @@ namespace real_estate_web.Tools.Scraping
                     using (HttpClient httpClient = new HttpClient())
                     {
                         var imageBytes = await httpClient.GetByteArrayAsync(uri);
-
-                        using (Stream stream = new MemoryStream(imageBytes))
+                        var preImageBytes = _watermarkService.ApplyWatermark(imageBytes);
+                        using (Stream stream = new MemoryStream(preImageBytes))
                         {
-                            IFormFile formFile = new FormFile(stream, 0, imageBytes.Length, Path.GetFileNameWithoutExtension(fileNameAndExtension), finalFileName);
+                            IFormFile formFile = new FormFile(stream, 0, preImageBytes.Length, Path.GetFileNameWithoutExtension(fileNameAndExtension), finalFileName);
+
 
                             var fileResult = FileHelper.Add(formFile, datePath);
                             listingDetail.PropertyPhotos.Add(new PropertyPhoto
@@ -142,6 +148,7 @@ namespace real_estate_web.Tools.Scraping
                         using (Stream stream = new MemoryStream(imageBytes))
                         {
                             IFormFile formFile = new FormFile(stream, 0, imageBytes.Length, Path.GetFileNameWithoutExtension(fileNameAndExtension), finalFileName);
+
 
                             var fileResult = FileHelper.Add(formFile, datePath);
                             listingDetail.PropertyPhotos.Add(new PropertyPhoto

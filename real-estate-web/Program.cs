@@ -11,9 +11,11 @@ using NpgsqlTypes;
 using real_estate_web.Data.Abstract;
 using real_estate_web.Data.Common;
 using real_estate_web.Data.EntityFramework;
+using real_estate_web.Tools.ImageRemake;
 using real_estate_web.Tools.Logger;
 using real_estate_web.Tools.Middlewares;
 using real_estate_web.Tools.Scraping;
+using real_estate_web.Tools.Services;
 using Serilog;
 using Serilog.Context;
 using Serilog.Core;
@@ -50,6 +52,8 @@ builder.Services.AddScoped<IAboutRepository, EfAboutDal>();
 builder.Services.AddScoped<IContactRepository, EfContactDal>();
 builder.Services.AddScoped<IBlogRepository, EfBlogDal>();
 builder.Services.AddScoped<ScrapingService>();
+builder.Services.AddSingleton<WatermarkService>();
+builder.Services.AddScoped<ZipService>();
 
 Logger log = new LoggerConfiguration()
     .WriteTo.Console()

@@ -12,7 +12,7 @@
             var val = $(this).val();
             console.log("City : " + val)
             var subItems = "";
-            $.get("@Url.Action("SelectItemDistrict","Admin")", { id: val }, function (data, status) {
+            $.get("@Url.Action("SelectItemDistrict", "Admin")", { id: val }, function (data, status) {
                 $.each(data, function (index, item) {
                     subItems += "<option value='" + item.value + "'>" + item.text + "</option>"
                 });
@@ -23,7 +23,7 @@
             var val = $(this).val();
             console.log("District : " + val)
             var subItems = "";
-            $.get("@Url.Action("SelectItemNeighborhood","Admin")", { id: val }, function (data, status) {
+            $.get("@Url.Action("SelectItemNeighborhood", "Admin")", { id: val }, function (data, status) {
                 $.each(data, function (index, item) {
                     subItems += "<option value='" + item.value + "'>" + item.text + "</option>"
                 });
@@ -34,7 +34,7 @@
             var val = $(this).val();
             console.log("Neighborhood : " + val)
             var subItems = "<option></option>";
-            $.get("@Url.Action("SelectItemStreet","Admin")", { id: val }, function (data, status) {
+            $.get("@Url.Action("SelectItemStreet", "Admin")", { id: val }, function (data, status) {
                 $.each(data, function (index, item) {
                     subItems += "<option value='" + item.value + "'>" + item.text + "</option>"
                 });
@@ -64,308 +64,317 @@
         }
 
         allDeletePhoto = function (id) {
-            $.get("@Url.Action("RemoveAllPorpertyPhoto","Admin")", { propertyId: id }, function (data, status) {
-                if(data.complete == true){
+            $.get("@Url.Action("RemoveAllPorpertyPhoto", "Admin")", { propertyId: id }, function (data, status) {
+                if (data.complete == true) {
                     location.reload();
                 }
-                
+
             });
         }
-        
+
         deletePhoto = function (id) {
-                    $.get("@Url.Action("RemovePropertyPhoto","Admin")", { propertyPhotoId: id }, function (data, status) {
-                        if(data.complete == true){
-                            location.reload();
-                        }
-                        
-                    });
+            $.get("@Url.Action("RemovePropertyPhoto", "Admin")", { propertyPhotoId: id }, function (data, status) {
+                if (data.complete == true) {
+                    location.reload();
                 }
 
+            });
+        }
 
     });
 </script>
 
-    <section class="section dashboard">
-        <div class="container">
-            <div class="row">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Mülk Güncelle</h5>
-                        <form class="needs-validation" asp-action="UpdateProperty" method="post" enctype="multipart/form-data">
-                            <input asp-for="Id" hidden>
+<section class="section dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Mülk Güncelle</h5>
+                    <form class="needs-validation" asp-action="UpdateProperty" method="post"
+                        enctype="multipart/form-data">
+                        <input asp-for="Id" hidden>
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label">Fotoğraflar</label>
                             <div class="col-sm-2">
                                 <p>@Model.PhotoCount adet yüklü</p>
                             </div>
                             <div class="col-sm-2">
-                                @if(@Model.PhotoCount > 0){
+                                @if (@Model.PhotoCount > 0)
+                                {
                                     <a type="button" class="btn btn-danger" onclick="allDeletePhoto(@Model.Id)">Tümünü
                                         Sil</a>
-                                }     
+                                }
                             </div>
-                            
+                            <div class="col-sm-2">
+
+                                @if (@Model.PhotoCount > 0)
+                                {
+                                    string photoDirectory = System.IO.Path.GetDirectoryName(Model.BasePhotoPath);
+                                    <a type="button" class="btn btn-success" target="_blank" rel="noopener noreferrer"
+                                        asp-action="DownloadFiles" asp-controller="Download"
+                                        asp-route-folderPath="@photoDirectory">Tümünü
+                                        İndir</a>
+                                }
+                            </div>
+
                         </div>
-                        
+
                         <div class="row mb-3">
                             @foreach (var item in Model.PropertyPhotos)
                             {
-                                
-                                    <div class="col-sm-2">
-                                        <img src="@item.Path"  class="img-thumbnail">
-                                        <a type="button" class="btn btn-danger btn-sm" onclick="deletePhoto(@item.Id)"><i class="bi bi-trash"></i></a>
-                                    </div>
-                                
+
+                                <div class="col-sm-2">
+                                    <img src="@item.Path" class="img-thumbnail">
+                                    <a type="button" class="btn btn-danger btn-sm" onclick="deletePhoto(@item.Id)"><i
+                                            class="bi bi-trash"></i></a>
+                                </div>
+
                             }
                         </div>
-                            <div class="row mb-3">
-                                <label for="formBaseFile" class="col-sm-2 col-form-label">Baş Fotoğraf Yükle</label>
-                                <div class="col-sm-6">
-                                    <input asp-for="BasePhoto" class="form-control" type="file" id="formBaseFile">
-                                </div>
+                        <div class="row mb-3">
+                            <label for="formBaseFile" class="col-sm-2 col-form-label">Baş Fotoğraf Yükle</label>
+                            <div class="col-sm-6">
+                                <input asp-for="BasePhoto" class="form-control" type="file" id="formBaseFile">
                             </div>
-                            <div class="row mb-3">
-                                <label for="formFile" class="col-sm-2 col-form-label">Diğer Fotoğrafları Yükle</label>
-                                <div class="col-sm-6">
-                                    <input asp-for="PropertyPhotos" class="form-control" type="file" id="formFile"
-                                        multiple>
-                                </div>
-                                
+                        </div>
+                        <div class="row mb-3">
+                            <label for="formFile" class="col-sm-2 col-form-label">Diğer Fotoğrafları Yükle</label>
+                            <div class="col-sm-6">
+                                <input asp-for="PropertyPhotos" class="form-control" type="file" id="formFile" multiple>
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputPropertyType" class="col-sm-2 col-form-label">Mülk Tipi : </label>
-                                <div class="col-md-2">
-                                    <select id="inputPropertyType" class="form-select" asp-for="PropertyType"
-                                        asp-items="@ViewData["PropertyTypes"] as IEnumerable<SelectListItem>" required>
-                                        <option selected value="" disabled>Mülk Tipi</option>
-                                    </select>
-                                </div>
-                                <label for="inputStatus" class="col-sm-1 col-form-label">Durum : </label>
-                                <div class="col-md-2">
-                                    <select id="inputStatus" class="form-select" asp-for="Status"
-                                        asp-items="@ViewData["Statuses"] as IEnumerable<SelectListItem>" required>
-                                        <option selected value="" disabled>Durumu</option>
-                                    </select>
-                                </div>
-                                <label for="inputPrice" class="col-sm-1 col-form-label">Fiyat :</label>
-                                <div class="col-md-2">
-                                    <input type="number" asp-for="Price" class="form-control" placeholder="Fiyat" required>
-                                </div>
-                                <label for="inputAidat" class="col-sm-1 col-form-label">Aidat :</label>
-                                <div class="col-md-1">
-                                    <input type="number" asp-for="Aidat" class="form-control" placeholder="Aidat">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputTitle" class="col-sm-2 col-form-label">Başlık</label>
-                                <div class="col-sm-10"> <input type="text" asp-for="Title" class="form-control" required></div>
-                            </div>
-                            <div class="row mb-5">
-                                <label for="inputDescription" class="col-sm-2 col-form-label">Açıklama</label>
-                                <div class="col-sm-10">
-                                    <input asp-for="Description" class="form-control" name="description"
-                                       id="inputDescription" hidden>
 
-                                    <div class="quill-editor-default" id="quill"></div>
-
-                                </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPropertyType" class="col-sm-2 col-form-label">Mülk Tipi : </label>
+                            <div class="col-md-2">
+                                <select id="inputPropertyType" class="form-select" asp-for="PropertyType"
+                                    asp-items="@ViewData["PropertyTypes"] as IEnumerable<SelectListItem>" required>
+                                    <option selected value="" disabled>Mülk Tipi</option>
+                                </select>
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputAddress" class="col-sm-2 col-form-label">Adresi</label>
-                                <div class="col-sm-10">
-                                    <div id="labelFullAdress" class="row mb-3">
-                                        <div class="col-md-8">
-                                            <p>@Model.Il ili / @Model.Ilce ilçesi / @Model.Mahalle mahallesi /
-                                                @Model.Sokak
-                                                sokak </p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a type="button" class="btn btn-danger"
-                                                onclick="adressChange()">Değiştir</a>
-                                        </div>
+                            <label for="inputStatus" class="col-sm-1 col-form-label">Durum : </label>
+                            <div class="col-md-2">
+                                <select id="inputStatus" class="form-select" asp-for="Status"
+                                    asp-items="@ViewData["Statuses"] as IEnumerable<SelectListItem>" required>
+                                    <option selected value="" disabled>Durumu</option>
+                                </select>
+                            </div>
+                            <label for="inputPrice" class="col-sm-1 col-form-label">Fiyat :</label>
+                            <div class="col-md-2">
+                                <input type="number" asp-for="Price" class="form-control" placeholder="Fiyat" required>
+                            </div>
+                            <label for="inputAidat" class="col-sm-1 col-form-label">Aidat :</label>
+                            <div class="col-md-1">
+                                <input type="number" asp-for="Aidat" class="form-control" placeholder="Aidat">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputTitle" class="col-sm-2 col-form-label">Başlık</label>
+                            <div class="col-sm-10"> <input type="text" asp-for="Title" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <label for="inputDescription" class="col-sm-2 col-form-label">Açıklama</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Description" class="form-control" name="description"
+                                    id="inputDescription" hidden>
+
+                                <div class="quill-editor-default" id="quill"></div>
+
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputAddress" class="col-sm-2 col-form-label">Adresi</label>
+                            <div class="col-sm-10">
+                                <div id="labelFullAdress" class="row mb-3">
+                                    <div class="col-md-8">
+                                        <p>@Model.Il ili / @Model.Ilce ilçesi / @Model.Mahalle mahallesi /
+                                            @Model.Sokak
+                                            sokak </p>
                                     </div>
-                                    <div id="selectAdress" class="row mb-8" hidden>
-                                        <div class="col-md-2">
-                                            <select id="inputCity" class="form-select" asp-for="IlId"
-                                                asp-items="@ViewData["Cities"] as IEnumerable<SelectListItem>">
-                                                <option selected disabled>İl Seçiniz</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <select id="inputDistrict" class="form-select" asp-for="IlceId">
-                                                <option selected disabled>İlçe Seçiniz</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select id="inputNeighborhood" class="form-select" asp-for="MahalleId">
-                                                <option selected disabled>Mahalle Seçiniz</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select id="inputStreet" class="form-select" asp-for="SokakId">
-                                                <option selected disabled>Sokak Seçiniz</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <a type="button" class="btn btn-danger" onclick="adressChange()">Değiştir</a>
+                                    </div>
+                                </div>
+                                <div id="selectAdress" class="row mb-8" hidden>
+                                    <div class="col-md-2">
+                                        <select id="inputCity" class="form-select" asp-for="IlId"
+                                            asp-items="@ViewData["Cities"] as IEnumerable<SelectListItem>">
+                                            <option selected disabled>İl Seçiniz</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select id="inputDistrict" class="form-select" asp-for="IlceId">
+                                            <option selected disabled>İlçe Seçiniz</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select id="inputNeighborhood" class="form-select" asp-for="MahalleId">
+                                            <option selected disabled>Mahalle Seçiniz</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select id="inputStreet" class="form-select" asp-for="SokakId">
+                                            <option selected disabled>Sokak Seçiniz</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputSite" class="col-sm-2 col-form-label">Site Özellikleri</label>
-                                <div class="col-sm-2">
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="siteIciMi"> Site
-                                            İçerisinde mi? </label>
-                                        <input class="form-check-input" type="checkbox" id="siteIciMi"
-                                            asp-for="SiteIcerisindeMi">
-                                    </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputSite" class="col-sm-2 col-form-label">Site Özellikleri</label>
+                            <div class="col-sm-2">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="siteIciMi"> Site
+                                        İçerisinde mi? </label>
+                                    <input class="form-check-input" type="checkbox" id="siteIciMi"
+                                        asp-for="SiteIcerisindeMi">
                                 </div>
-                                <div class="col-sm-4">
-                                    <input type="text" asp-for="SiteAdi" class="form-control" placeholder="Site adı">
-                                </div>
-
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputDaireProperties" class="col-sm-2 col-form-label">Daire
-                                    Özellikleri</label>
-                                <div class="col-sm-10">
-                                    <div class="row mb-3">
-                                        <div class="col-sm-2"> <input type="number" asp-for="BrutMetre"
-                                                class="form-control" placeholder="Brüt Metre" required></div>
-                                        <div class="col-sm-2"> <input type="number" asp-for="NetMetre"
-                                                class="form-control" placeholder="Net Metre" required></div>
-                                        <div class="col-sm-3">
-                                            <div class="input-group md-3">
-                                                <input type="number" asp-for="OdaSayisi" class="form-control"
-                                                    placeholder="Oda" required>
-                                                <span class="input-group-text">+</span>
-                                                <input type="number" asp-for="SalonSayisi" class="form-control"
-                                                    placeholder="Salon" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="input-group md-3">
-                                                <input type="text" asp-for="BulunduguKat"
-                                                   class="form-control" placeholder="Katı">
+                            <div class="col-sm-4">
+                                <input type="text" asp-for="SiteAdi" class="form-control" placeholder="Site adı">
+                            </div>
 
-                                                <span class="input-group-text">/</span>
-                                                <input type="text" asp-for="ToplamKat"
-                                                   class="form-control" placeholder="Top. kat" required>
-
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-2">
-                                            <input type="text" asp-for="BinaYasi"
-                                                   class="form-control" placeholder="Yaşı">
-
-                                        </div>
-
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-2"> <input type="number" asp-for="BanyoSayisi"
-                                                class="form-control" placeholder="Banyo"></div>
-                                        <div class="col-sm-2"> <input type="number" asp-for="BalkonSayisi"
-                                                class="form-control" placeholder="Balkon"></div>
-                                        <div class="col-sm-2"> <input type="number" asp-for="OtoparkSayisi"
-                                                class="form-control" placeholder="Otopark"></div>
-
-                                        <div class="col-sm-2"> <input type="text" asp-for="Manzara" class="form-control"
-                                                placeholder="Manzara"></div>
-
-                                        <div class="col-sm-2">
-                                            <select id="inputHeatingType" class="form-select" asp-for="IsitmaTipi"
-                                                asp-items="@ViewData["HeatingTypes"] as IEnumerable<SelectListItem>" required>
-                                                <option selected value="" disabled>Isıtma Tipi</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <select id="inputInternetType" class="form-select" asp-for="InternetTipi"
-                                                asp-items="@ViewData["InternetTypes"] as IEnumerable<SelectListItem>" required>
-                                                <option selected value="" disabled>İnternet Tipi</option>
-                                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputDaireProperties" class="col-sm-2 col-form-label">Daire
+                                Özellikleri</label>
+                            <div class="col-sm-10">
+                                <div class="row mb-3">
+                                    <div class="col-sm-2"> <input type="number" asp-for="BrutMetre" class="form-control"
+                                            placeholder="Brüt Metre" required></div>
+                                    <div class="col-sm-2"> <input type="number" asp-for="NetMetre" class="form-control"
+                                            placeholder="Net Metre" required></div>
+                                    <div class="col-sm-3">
+                                        <div class="input-group md-3">
+                                            <input type="number" asp-for="OdaSayisi" class="form-control"
+                                                placeholder="Oda" required>
+                                            <span class="input-group-text">+</span>
+                                            <input type="number" asp-for="SalonSayisi" class="form-control"
+                                                placeholder="Salon" required>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-2">
-                                            <select id="inputFlat" class="form-select" asp-for="Cephe"
-                                                asp-items="@ViewData["Fronts"] as IEnumerable<SelectListItem>" required>
-                                                <option selected value="" disabled>Cephe</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <select id="inputUseStatus" class="form-select" asp-for="KullanimDurumu"
-                                                asp-items="@ViewData["UsingStatus"] as IEnumerable<SelectListItem>" required>
-                                                <option selected value="" disabled>Kullanım Durumu</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <select id="inputDeedStatus" class="form-select" asp-for="TapuDurumu"
-                                                asp-items="@ViewData["DeedStatus"] as IEnumerable<SelectListItem>" required>
-                                                <option selected value="" disabled>Tapu Durumu</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" id="esyaliMi" asp-for="EsyaliMi">
-                                                <label class="form-check-label" for="esyaliMi">Eşyalı mı? </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" id="KrediyeUygun"
-                                                    asp-for="KirediyeUygunMu">
-                                                <label class="form-check-label" for="KrediyeUygun">Krediye Uygun
-                                                </label>
-                                            </div>
+                                    <div class="col-sm-3">
+                                        <div class="input-group md-3">
+                                            <input type="text" asp-for="BulunduguKat" class="form-control"
+                                                placeholder="Katı">
+
+                                            <span class="input-group-text">/</span>
+                                            <input type="text" asp-for="ToplamKat" class="form-control"
+                                                placeholder="Top. kat" required>
+
                                         </div>
                                     </div>
 
+                                    <div class="col-sm-2">
+                                        <input type="text" asp-for="BinaYasi" class="form-control" placeholder="Yaşı">
+
+                                    </div>
+
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputKonumIFrame" class="col-sm-2 col-form-label">Konum</label>
-                                <div class="col-sm-5">
-                                    <input type="text" asp-for="KonumIFrame" class="form-control"
-                                           placeholder="Google iFrame Url">
-                                </div>
-                                <div class="col-sm-1"> Veya </div>
-                                <div class="col-sm-4">
-                                    <div class="input-group md-3">
-                                        <input type="text" asp-for="LocationLat" class="form-control"
-                                               placeholder="Lat" required>
-                                        <span class="input-group-text">/</span>
-                                        <input type="text" asp-for="LocationLon" class="form-control"
-                                               placeholder="Lon" required>
+                                <div class="row mb-3">
+                                    <div class="col-sm-2"> <input type="number" asp-for="BanyoSayisi"
+                                            class="form-control" placeholder="Banyo"></div>
+                                    <div class="col-sm-2"> <input type="number" asp-for="BalkonSayisi"
+                                            class="form-control" placeholder="Balkon"></div>
+                                    <div class="col-sm-2"> <input type="number" asp-for="OtoparkSayisi"
+                                            class="form-control" placeholder="Otopark"></div>
+
+                                    <div class="col-sm-2"> <input type="text" asp-for="Manzara" class="form-control"
+                                            placeholder="Manzara"></div>
+
+                                    <div class="col-sm-2">
+                                        <select id="inputHeatingType" class="form-select" asp-for="IsitmaTipi"
+                                            asp-items="@ViewData["HeatingTypes"] as IEnumerable<SelectListItem>"
+                                            required>
+                                            <option selected value="" disabled>Isıtma Tipi</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="inputInternetType" class="form-select" asp-for="InternetTipi"
+                                            asp-items="@ViewData["InternetTypes"] as IEnumerable<SelectListItem>">
+                                            <option selected value="" disabled>İnternet Tipi</option>
+                                        </select>
                                     </div>
                                 </div>
-                                
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputYoutubeIFrame" class="col-sm-2 col-form-label">Youtube iFrame Url</label>
-                                <div class="col-sm-10">
-                                    <input type="text" asp-for="YoutubeLink" class="form-control"
-                                        placeholder="Youtube iFrame Url">
+                                <div class="row mb-3">
+                                    <div class="col-sm-2">
+                                        <select id="inputFlat" class="form-select" asp-for="Cephe"
+                                            asp-items="@ViewData["Fronts"] as IEnumerable<SelectListItem>">
+                                            <option selected value="" disabled>Cephe</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="inputUseStatus" class="form-select" asp-for="KullanimDurumu"
+                                            asp-items="@ViewData["UsingStatus"] as IEnumerable<SelectListItem>"
+                                            required>
+                                            <option selected value="" disabled>Kullanım Durumu</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="inputDeedStatus" class="form-select" asp-for="TapuDurumu"
+                                            asp-items="@ViewData["DeedStatus"] as IEnumerable<SelectListItem>">
+                                            <option selected value="" disabled>Tapu Durumu</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="esyaliMi" asp-for="EsyaliMi">
+                                            <label class="form-check-label" for="esyaliMi">Eşyalı mı? </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="KrediyeUygun" asp-for="KirediyeUygunMu">
+                                            <label class="form-check-label" for="KrediyeUygun">Krediye Uygun
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputDaireProperties" class="col-sm-2 col-form-label">İlan Sahibi</label>
-                                <div class="col-sm-2">
-                                    <select id="inputAgent" class="form-select" asp-for="AgentId"
-                                        asp-items="@ViewData["Agents"] as IEnumerable<SelectListItem>" required>
-                                        <option selected value="" disabled>Danışman</option>
 
-                                    </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputKonumIFrame" class="col-sm-2 col-form-label">Konum</label>
+                            <div class="col-sm-5">
+                                <input type="text" asp-for="KonumIFrame" class="form-control"
+                                    placeholder="Google iFrame Url">
+                            </div>
+                            <div class="col-sm-1"> Veya </div>
+                            <div class="col-sm-4">
+                                <div class="input-group md-3">
+                                    <input type="text" asp-for="LocationLat" class="form-control" placeholder="Lat">
+                                    <span class="input-group-text">/</span>
+                                    <input type="text" asp-for="LocationLon" class="form-control" placeholder="Lon">
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-10"> <button type="submit" class="btn btn-primary">Güncelle</button>
-                                </div>
 
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputYoutubeIFrame" class="col-sm-2 col-form-label">Youtube iFrame Url</label>
+                            <div class="col-sm-10">
+                                <input type="text" asp-for="YoutubeLink" class="form-control"
+                                    placeholder="Youtube iFrame Url">
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputDaireProperties" class="col-sm-2 col-form-label">İlan Sahibi</label>
+                            <div class="col-sm-2">
+                                <select id="inputAgent" class="form-select" asp-for="AgentId"
+                                    asp-items="@ViewData["Agents"] as IEnumerable<SelectListItem>" required>
+                                    <option selected value="" disabled>Danışman</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-10"> <button type="submit" class="btn btn-primary">Güncelle</button>
+                            </div>
+
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
+</section>

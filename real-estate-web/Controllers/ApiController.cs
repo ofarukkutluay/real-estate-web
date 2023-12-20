@@ -111,6 +111,7 @@ namespace real_estate_web.Controllers
                 TapuDurumu = listingDetail.DeedStatus,
                 Title = listingDetail.Title,
                 ToplamKat = listingDetail.BuildingTotalFloor,
+                IsActive = false
             });
 
             await _dbContext.SaveChangesAsync();
@@ -214,6 +215,7 @@ namespace real_estate_web.Controllers
                 TapuDurumu = listingDetail.DeedStatus,
                 Title = listingDetail.Title,
                 ToplamKat = listingDetail.BuildingTotalFloor,
+                IsActive = false
             });
 
             await _dbContext.SaveChangesAsync();

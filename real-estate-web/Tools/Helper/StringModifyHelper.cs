@@ -6,6 +6,7 @@ namespace real_estate_web.Tools.Helper
     {
         public static string FirstCharUpper(this string str)
         {
+
             string newString = string.Empty;
             foreach (var item in str.Split(" "))
             {
@@ -18,17 +19,18 @@ namespace real_estate_web.Tools.Helper
                     }
                     newString += item[i].ToString().ToLower(CultureInfo.CreateSpecificCulture("tr-TR"));
                 }
+                newString += " ";
             }
 
 
-            return newString;
+            return newString.Trim();
         }
 
         public static string TitleToUrl(this string str)
         {
             string newStr = string.Empty;
             str = str.ToLower(CultureInfo.CreateSpecificCulture("en-US"));
-            newStr = str.Replace(" ", "-").Replace("+","").Replace("'","")
+            newStr = str.Replace(" ", "-").Replace("+","").Replace("'","").Replace(".","").Replace(",","")
                 .Replace("ç","c")
                 .Replace("ş","s")
                 .Replace("ö","o")

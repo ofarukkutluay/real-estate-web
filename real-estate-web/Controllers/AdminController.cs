@@ -477,7 +477,7 @@ namespace real_estate_web.Controllers
         {
 
             SelectItemInitializeProperty();
-            PropertyDto property = _propertyRepository.GetPropertyDto(id);
+            PropertyDto property = _propertyRepository.GetPropertyDtoFromAdmin(id);
             PropertyVM vm = _mapper.Map<PropertyVM>(property);
             vm.PropertyPhotos = await _propertyPhotoRepository.GetListAsync(x => x.PropertyId == id);
             vm.PhotoCount = vm.PropertyPhotos.Count();
