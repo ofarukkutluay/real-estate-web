@@ -44,7 +44,7 @@ namespace real_estate_web.Controllers
             decimal sumPage = (decimal)properties.Count()/(decimal)pageSize;
             ViewBag.SumPage = Math.Ceiling(sumPage);
             IEnumerable<PropertyDto> sizedProperties = properties.Skip(page * pageSize).Take(pageSize);
-            IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM> >(sizedProperties);
+            IEnumerable<PropertyVM> vm = _mapper.Map<IEnumerable<PropertyVM>>(sizedProperties);
             
             return View(vm);
         }

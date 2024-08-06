@@ -13,6 +13,7 @@ using real_estate_web.Data.Common;
 using real_estate_web.Data.EntityFramework;
 using real_estate_web.Tools.ImageRemake;
 using real_estate_web.Tools.Logger;
+using real_estate_web.Tools.Mapper;
 using real_estate_web.Tools.Middlewares;
 using real_estate_web.Tools.Scraping;
 using real_estate_web.Tools.Services;
@@ -20,6 +21,7 @@ using Serilog;
 using Serilog.Context;
 using Serilog.Core;
 using Serilog.Sinks.PostgreSQL;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +30,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<RealEstateDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQL")));
 
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddAutoMapper(typeof(AutoMapperHelper));
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
@@ -119,6 +121,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ClockSkew = TimeSpan.Zero
     };
 });
+// .AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
+// {
+//     opt.LoginPath = "/Auth/Login";
+//     opt.LogoutPath = "/Auth/Logout";
+//     opt.AccessDeniedPath = "/Home/Forbidden";
+//     opt.Cookie.HttpOnly = true;
+//     opt.Cookie.SameSite = SameSiteMode.Strict;
+//     opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+//     opt.Cookie.Name = "REToken";
+// });
 
 builder.Services.AddCors();
 
@@ -154,6 +166,7 @@ app.UseSerilogRequestLogging();
 app.UseHttpLogging();
 
 app.UseSession();
+
 app.Use(async (context, next) =>
 {
     var token = context.Session.GetString("Token");

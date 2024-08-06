@@ -66,19 +66,6 @@
                         <h5 class="card-title">Mülk ekle</h5>
                         <form class="needs-validation" asp-action="AddProperty" method="post" enctype="multipart/form-data">
                             <div class="row mb-3">
-                                <label for="formBaseFile" class="col-sm-2 col-form-label">Baş Fotğraf Yükle</label>
-                                <div class="col-sm-6">
-                                    <input asp-for="BasePhoto" class="form-control" type="file" id="formBaseFile">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="fromfile" class="col-sm-2 col-form-label">Diğer Fotoğrafları Yükle</label>
-                                <div class="col-sm-6">
-                                    <input asp-for="PropertyPhotos" class="form-control" type="file" id="formFile"
-                                           multiple>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
                                 <label for="inputPropertyType" class="col-sm-2 col-form-label">Mülk Tipi : </label>
                                 <div class="col-md-2">
                                     <select id="inputPropertyType" class="form-select" asp-for="PropertyType"

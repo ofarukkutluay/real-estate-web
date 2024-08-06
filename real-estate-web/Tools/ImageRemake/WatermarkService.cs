@@ -1,7 +1,9 @@
 
 
 using System;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Processing;
 
 namespace real_estate_web.Tools.ImageRemake
 {
@@ -13,17 +15,25 @@ namespace real_estate_web.Tools.ImageRemake
             using var image = Image.Load(imageByte);
             using var watermarkStream = File.OpenRead("wwwroot/img/watermark.png"); // Watermark resmini yükleyin
             using var watermark = Image.Load(watermarkStream);
- 
+
             // Watermarkı boyutunu 207*170 olarak ayarla
             //watermark.Mutate(x => x.Resize(new ResizeOptions { Size = new Size(210, 210), Mode = ResizeMode.Max }));
-            
-            
+
+            // Watermark'ı fotoğraf boyutuna oranlı olarak ölçekle
+            float scaleFactor = (float)image.Width / 1600 ; //Math.Min((float)watermark.Width / image.Width, (float)watermark.Height / image.Height);
+            var scaledWatermark = watermark.Clone(x => x.Resize(new ResizeOptions
+            {
+                Size = new Size((int)(watermark.Width * scaleFactor), (int)(watermark.Height * scaleFactor)),
+                Mode = ResizeMode.Max
+            }));
+
+
             // Üstten bir kısımı kırpma
             var cropRectangle = new Rectangle(0, 20, image.Width, image.Height - 20); // İlk parametre soldan kırpmak için başlangıç konumu
             image.Mutate(x => x.Crop(cropRectangle));
 
             // Watermark resmini ana resmin üzerine ekleyin
-            image.Mutate(x => x.DrawImage(watermark, new Point(10, image.Height - watermark.Height - 10), 1f)); // Konumu ve ölçeği ayarlayabilirsiniz
+            image.Mutate(x => x.DrawImage(scaledWatermark, new Point(10, image.Height - scaledWatermark.Height - 10), 1f)); // Konumu ve ölçeği ayarlayabilirsiniz
 
 
             // İsteğe bağlı olarak diğer işlemleri de uygulayabilirsiniz (boyutlandırma, döndürme, kırpma, vb.).
@@ -43,7 +53,7 @@ namespace real_estate_web.Tools.ImageRemake
             //watermarkStream.Close();
             //watermarkStream.Dispose();
             //watermark.Dispose();
-            
+
             // MemoryStream'i IFormFile'a dönüştürme
             //var outputFormFile = new FormFile(outputStream, 0, outputStream.Length, name, filename);
             //outputStream.Dispose();

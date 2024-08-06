@@ -8,23 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
-    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
     <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.54" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.60" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,5 +36,36 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="logs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\0_x16_1103467831d28.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\1_x16_1103467831394.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\2_x16_11034678310tp.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\3_big_1103467831076.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\4_big_1103467831r08.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\5_big_11034678311jk.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\6_big_11034678317nz.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\7_big_1103467831kvm.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\8_big_1103467831j4n.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\9_big_1103467831cgg.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\10_big_1103467831kbn.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\11_big_1103467831kgs.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\12_big_11034678319vp.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\13_big_1103467831z5m.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\14_big_1103467831459.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\15_big_1103467831r5p.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\16_big_1103467831rt4.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\17_big_1103467831zgd.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\18_big_1103467831eae.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\19_big_1103467831b4j.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\20_big_1103467831bsc.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\21_big_1103467831ndz.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\22_big_1103467831l11.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\23_big_11034678319yu.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\24_big_1103467831rnd.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\25_big_11034678313n3.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\26_x16_1103467831eth.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\27_x5_11034678310xp.jpg" />
+    <Content Remove="wwwroot\upload-images\Outsource\05-12-2023\1103467831\28_big_1103467831pxh.jpg" />
   </ItemGroup>
 </Project>

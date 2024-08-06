@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using real_estate_web.Data.Abstract;
@@ -10,6 +12,8 @@ using real_estate_web.Tools.Results;
 using real_estate_web.Tools.TokenOperations;
 using real_estate_web.Tools.TokenOperations.Models;
 using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 
 namespace real_estate_web.Controllers
@@ -55,7 +59,7 @@ namespace real_estate_web.Controllers
             agent.RefresTokenExpireDate = token.Expiration.AddMinutes(5);
             _agentRepository.Update(agent);
             _agentRepository.SaveChanges();
-
+            
             HttpContext.Session.SetString("Token",token.AccessToken);
 
             return RedirectToAction("Index","Admin");
@@ -118,7 +122,8 @@ namespace real_estate_web.Controllers
         
 
         public IActionResult Logout(){
-            HttpContext.Session.Remove("Token");
+            HttpContext.SignOutAsync();
+            //HttpContext.Session.Remove("Token");
             return Redirect(Request.Headers["Referer"].ToString());
         }
     }

@@ -24,7 +24,7 @@ namespace real_estate_web.Tools.Scraping
         public async Task<Models.Database.PropertyListingDetail> GetSHListingDetail(string url, string document, string directoryPath)
         {
             ShScraping shScraping = new ShScraping();
-            ListingWebsiteScrapingLibrary.PropertyListingDetail result = await shScraping.GetListingDetail(document);
+            ListingWebsiteScrapingLibrary.Models.v3.PropertyListing result = await shScraping.GetListingDetail(document);
             string datePath = Path.Combine(directoryPath, result.ListingDate?.ToString("dd-MM-yyyy"), result.Id.ToString());
 
             Models.Database.PropertyListingDetail listingDetail = _mapper.Map<Models.Database.PropertyListingDetail>(result);
@@ -111,7 +111,7 @@ namespace real_estate_web.Tools.Scraping
         public async Task<Models.Database.PropertyListingDetail> GetHEListingDetail(string url, string document, string directoryPath)
         {
             HeScraping heScraping = new HeScraping();
-            ListingWebsiteScrapingLibrary.PropertyListingDetail result = await heScraping.GetListingDetail(document);
+            ListingWebsiteScrapingLibrary.Models.v1.PropertyListingDetail result = await heScraping.GetListingDetail(document);
             string datePath = Path.Combine(directoryPath, result.ListingDate?.ToString("dd-MM-yyyy"), result.Id.ToString());
 
             Models.Database.PropertyListingDetail listingDetail = _mapper.Map<Models.Database.PropertyListingDetail>(result);

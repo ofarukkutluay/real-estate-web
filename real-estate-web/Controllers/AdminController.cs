@@ -11,6 +11,7 @@ using System.Security.Claims;
 using real_estate_web.Tools.Hashing;
 using real_estate_web.Models.HelperEntities;
 using System.Text.RegularExpressions;
+using System.Text.Json.Serialization;
 
 namespace real_estate_web.Controllers
 {
@@ -432,28 +433,65 @@ namespace real_estate_web.Controllers
             var save = await _propertyRepository.SaveAsync();
 
             // propety photos add
-            List<string> paths = await FileHelper.AddAllAsync(model.AddPropertyPhotos, entity.Id.ToString());
-            List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
+            // List<string> paths = await FileHelper.AddAllAsync(model.AddPropertyPhotos, entity.Id.ToString());
+            // List<PropertyPhoto> propertyPhotos = new List<PropertyPhoto>();
+            // foreach (var item in paths)
+            // {
+            //     int i = 1;
+            //     PropertyPhoto propertyPhoto = new PropertyPhoto()
+            //     {
+            //         PropertyId = entity.Id,
+            //         Path = item,
+            //         SortIndex = i
+            //     };
+            //     propertyPhotos.Add(propertyPhoto);
+            //     i++;
+            // }
+            // string basePath = FileHelper.Add(model.BasePhoto, entity.Id.ToString());
+            // propertyPhotos.Add(new PropertyPhoto() { PropertyId = entity.Id, Path = basePath, BasePhoto = true, SortIndex =0 });
+
+            // await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
+            // await _propertyPhotoRepository.SaveAsync();
+            SuccessAlert("Mülk eklendi");
+            return RedirectToAction("PropertyPhotoAdd",new PropertyPhotoVM(){PropertyId = entity.Id});
+        }
+
+        public IActionResult PropertyPhotoAdd(PropertyPhotoVM propertyPhotoVM){
+            return View(propertyPhotoVM);
+        }
+
+        public async Task<IActionResult> AddPropertyPhoto(PropertyPhotoVM propertyPhotoVM){
+            
+            List<string> paths = await FileHelper.AddAllAsync(propertyPhotoVM.FormFiles, propertyPhotoVM.PropertyId.ToString());
+            propertyPhotoVM.PropertyPhotos = new List<PropertyPhoto>();
+            int i = 0;
             foreach (var item in paths)
             {
-                int i = 1;
+                
                 PropertyPhoto propertyPhoto = new PropertyPhoto()
                 {
-                    PropertyId = entity.Id,
+                    PropertyId = propertyPhotoVM.PropertyId,
                     Path = item,
-                    SortIndex = i
-                };
-                propertyPhotos.Add(propertyPhoto);
+                    SortIndex = i,
+                    BasePhoto = i==0?true:false
+                }; 
+                propertyPhotoVM.PropertyPhotos.Add(propertyPhoto);
                 i++;
             }
-            string basePath = FileHelper.Add(model.BasePhoto, entity.Id.ToString());
-            propertyPhotos.Add(new PropertyPhoto() { PropertyId = entity.Id, Path = basePath, BasePhoto = true, SortIndex =0 });
+            
+            SuccessAlert("Fotoğraflar Yüklendi");
+            return RedirectToAction("PropertyPhotoAdd",propertyPhotoVM);
+        }
 
+         public async Task<IActionResult> AddDbPropertyPhoto(List<PropertyPhoto> propertyPhotos ){
+            
             await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
             await _propertyPhotoRepository.SaveAsync();
-            SuccessAlert("Mülk eklendi");
+            SuccessAlert("Fotoğraflar eklendi");
             return RedirectToAction("Property");
         }
+
+
         public async Task<IActionResult> RemoveProperty(int id)
         {
             var photoPaths = await _propertyPhotoRepository.GetListAsync(x => x.PropertyId == id);
@@ -501,15 +539,15 @@ namespace real_estate_web.Controllers
                     PropertyPhoto propertyPhoto = new PropertyPhoto()
                     {
                         PropertyId = model.Id,
-                        Path = item
+                        Path = item,
                     };
                     propertyPhotos.Add(propertyPhoto);
                 }
-                if (await _propertyPhotoRepository.GetCountAsync(x => x.PropertyId == model.Id && x.BasePhoto == true) == 0)
-                {
-                    string basePath = FileHelper.Add(model.BasePhoto, model.Id.ToString());
-                    propertyPhotos.Add(new PropertyPhoto() { PropertyId = model.Id, Path = basePath, BasePhoto = true });
-                }
+                // if (await _propertyPhotoRepository.GetCountAsync(x => x.PropertyId == model.Id && x.BasePhoto == true) == 0)
+                // {
+                //     string basePath = FileHelper.Add(model.BasePhoto, model.Id.ToString());
+                //     propertyPhotos.Add(new PropertyPhoto() { PropertyId = model.Id, Path = basePath, BasePhoto = true });
+                // }
 
                 await _propertyPhotoRepository.AddRangeAsync(propertyPhotos);
                 await _propertyPhotoRepository.SaveAsync();

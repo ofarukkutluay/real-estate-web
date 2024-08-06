@@ -104,7 +104,7 @@
                                     <a type="button" class="btn btn-danger" onclick="allDeletePhoto(@Model.Id)">Tümünü
                                         Sil</a>
                                 }
-                            </div>
+                            </div> 
                             <div class="col-sm-2">
 
                                 @if (@Model.PhotoCount > 0)
@@ -132,17 +132,10 @@
                             }
                         </div>
                         <div class="row mb-3">
-                            <label for="formBaseFile" class="col-sm-2 col-form-label">Baş Fotoğraf Yükle</label>
+                            <label for="formFile" class="col-sm-2 col-form-label">Fotoğraf Yükle</label>
                             <div class="col-sm-6">
-                                <input asp-for="BasePhoto" class="form-control" type="file" id="formBaseFile">
+                                <input asp-for="AddPropertyPhotos" class="form-control" type="file" id="formFile" multiple>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="formFile" class="col-sm-2 col-form-label">Diğer Fotoğrafları Yükle</label>
-                            <div class="col-sm-6">
-                                <input asp-for="PropertyPhotos" class="form-control" type="file" id="formFile" multiple>
-                            </div>
-
                         </div>
                         <div class="row mb-3">
                             <label for="inputPropertyType" class="col-sm-2 col-form-label">Mülk Tipi : </label>
