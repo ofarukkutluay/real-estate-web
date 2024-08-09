@@ -5,8 +5,7 @@ using real_estate_web.Models.Database;
 using ListingWebsiteScrapingLibrary;
 using AutoMapper;
 using real_estate_web.Tools.ImageRemake;
-using Microsoft.AspNetCore.Http.Metadata;
-using SixLabors.ImageSharp.Formats.Jpeg;
+
 
 namespace real_estate_web.Tools.Scraping
 {
