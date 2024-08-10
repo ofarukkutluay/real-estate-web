@@ -168,7 +168,7 @@
                                     </div>
                                     <div class="card-body-a">
                                         <div class="price-box d-flex">
-                                            <span class="price-a">@item.Status | ₺ @item.Price</span>
+                                            <span class="price-a">@item.Status | ₺ @item.Price.ToString("##,#")</span>
                                         </div>
                                         <a href="@Url.Action("Index","Property",new { id = item.Id , title = item.Title.TitleToUrl()})"
                                             class="link-a">

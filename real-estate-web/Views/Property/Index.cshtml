@@ -70,12 +70,12 @@
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="@Model.BasePhotoPath" class="d-block w-100" alt="...">
+                            <img src="@Model.BasePhotoPath" class="d-block img-fluid img-contain" alt="...">
                         </div>
                         @foreach (var item in Model.PropertyPhotos.Where(x => !x.BasePhoto))
                         {
                             <div class="carousel-item">
-                                <img src="@item.Path" class="d-block w-100" alt="...">
+                                <img src="@item.Path" class="d-block img-fluid img-contain" alt="...">
                             </div>
                         }
                     </div>

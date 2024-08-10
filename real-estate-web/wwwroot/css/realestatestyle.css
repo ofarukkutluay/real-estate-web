@@ -1315,6 +1315,18 @@ a:hover {
     margin-bottom: 2.5rem;
 }
 
+.img-cover {
+  width: 100%; /* Konteynırın genişliğini kullanır */
+  height: 400px; /* Sabit bir yükseklik belirleyin */
+  object-fit: cover; /* Resmi kapsayıcı olarak yerleştirir */
+}
+
+.img-contain {
+  width: 100%; /* Konteynırın genişliğini kullanır */
+  height: 80vh; /* Sabit bir yükseklik belirleyin */
+  object-fit: contain; /* Resmi sığdırarak yerleştirir */
+}
+
 /*======================================
 //--//-->   NEWS - CARD-B
 ======================================*/
